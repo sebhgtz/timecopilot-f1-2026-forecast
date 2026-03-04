@@ -358,7 +358,7 @@ def build_index(races: list[dict]) -> None:
   Jolpica-F1 (championship standings). Strategy data from OpenF1 API.
 </p>
 <p style="color:#888; font-size:0.85rem;">
-  Source code: <a href="https://github.com/anthropics/timecopilot">GitHub</a>
+  Source code: <a href="https://github.com/sebhgtz/timecopilot-f1-2026-forecast">GitHub</a>
 </p>
 """
 
