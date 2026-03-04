@@ -77,13 +77,11 @@ jobs:
           cache: 'pip'
 
       # ── Install dependencies ─────────────────────────────────────────────
+      # uv resolves TimeCopilot's deep dependency tree (pip errors with resolution-too-deep)
       - name: Install pipeline dependencies
         run: |
-          pip install --upgrade pip
-          pip install fastf1 pandas numpy requests plotly "kaleido==0.2.1"
-          pip install timecopilot openai
-          # Optional: install all TimeCopilot foundation models
-          # pip install timecopilot[all]
+          pip install uv
+          uv pip install --system fastf1 pandas numpy requests plotly "kaleido==0.2.1" timecopilot openai
 
       # ── Restore caches ───────────────────────────────────────────────────
       - name: Restore FastF1 cache
