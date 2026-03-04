@@ -53,7 +53,8 @@ CSS = """
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
        background: #0f0f1a; color: #e0e0e0; margin: 0; padding: 0; }
 header { background: #1a1a2e; border-bottom: 2px solid #e10600; padding: 16px 32px;
-         display: flex; align-items: center; gap: 16px; }
+         display: flex; align-items: center; gap: 16px;
+         position: sticky; top: 0; z-index: 100; }
 header h1 { margin: 0; font-size: 1.4rem; color: #fff; }
 header .subtitle { color: #aaa; font-size: 0.85rem; }
 main { max-width: 1100px; margin: 32px auto; padding: 0 24px; }
