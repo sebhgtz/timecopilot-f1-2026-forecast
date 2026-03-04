@@ -187,7 +187,7 @@ def _page_html(title: str, body: str) -> str:
     </div>
   </div>
   <div style="margin-left:auto; font-size:0.8rem; color:#888;">
-    <a href="/" style="color:#aaa">← Home</a>
+    <a href="https://github.com/sebhgtz/timecopilot-f1-2026-forecast" style="color:#aaa">GitHub ↗</a>
   </div>
 </header>
 <main>
