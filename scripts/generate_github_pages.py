@@ -169,7 +169,8 @@ def _inline(text: str) -> str:
     return text
 
 
-def _page_html(title: str, body: str) -> str:
+def _page_html(title: str, body: str, show_home: bool = False) -> str:
+    home_link = ' · <a href="/" style="color:#aaa">← Home</a>' if show_home else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,7 +188,7 @@ def _page_html(title: str, body: str) -> str:
     </div>
   </div>
   <div style="margin-left:auto; font-size:0.8rem; color:#888;">
-    <a href="https://github.com/sebhgtz/timecopilot-f1-2026-forecast" style="color:#aaa">GitHub ↗</a>
+    <a href="https://github.com/sebhgtz/timecopilot-f1-2026-forecast" style="color:#aaa">GitHub ↗</a>{home_link}
   </div>
 </header>
 <main>
@@ -331,7 +332,7 @@ def build_race_page(race: dict) -> None:
 {content_html}
 """
 
-    html = _page_html(f"{race['name']} {race['year']} — F1 TimeCopilot", body)
+    html = _page_html(f"{race['name']} {race['year']} — F1 TimeCopilot", body, show_home=True)
     (out_dir / "index.html").write_text(html, encoding="utf-8")
     print(f"  ✓ {race['dir'].name}/index.html")
 
