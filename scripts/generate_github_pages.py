@@ -19,6 +19,7 @@ Deployed automatically via GitHub Actions → GitHub Pages.
 
 from __future__ import annotations
 
+import csv
 import re
 import sys
 import shutil
@@ -170,7 +171,7 @@ def _inline(text: str) -> str:
 
 
 def _page_html(title: str, body: str, show_home: bool = False) -> str:
-    home_link = ' · <a href="/" style="color:#aaa">← Home</a>' if show_home else ""
+    home_link = ' · <a href="/timecopilot-f1-2026-forecast/" style="color:#aaa">← Home</a>' if show_home else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,6 +203,38 @@ def _page_html(title: str, body: str, show_home: bool = False) -> str:
 </body>
 </html>
 """
+
+
+def _load_accuracy_log() -> dict[tuple[str, int], dict]:
+    """Load accuracy_log.csv keyed by (slug, year). Returns best (latest) row per race."""
+    log_path = REPORTS_DIR / "accuracy_log.csv"
+    results: dict[tuple[str, int], dict] = {}
+    if not log_path.exists():
+        return results
+    with open(log_path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            key = (row["race_slug"], int(row["year"]))
+            results[key] = row  # later rows overwrite earlier ones (most recent stage wins)
+    return results
+
+
+def _result_banner_html(accuracy: dict) -> str:
+    """Render a result banner from an accuracy_log row."""
+    predicted = accuracy["predicted_winner"]
+    actual = accuracy["actual_winner"]
+    correct = accuracy["correct"].lower() == "true"
+    stage = STAGE_LABELS.get(accuracy["session_stage"], accuracy["session_stage"].upper())
+    icon = "✅" if correct else "❌"
+    verdict = "Correct" if correct else "Wrong"
+    color = "#1a3a1a" if correct else "#3a1a1a"
+    border = "#2a6a2a" if correct else "#6a2a2a"
+    pos = accuracy.get("actual_position_of_predicted", "")
+    pos_note = f" (finished P{pos})" if pos and pos != "1" else ""
+    return f"""<div style="background:{color}; border:1px solid {border}; border-radius:8px;
+  padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
+  {icon} <strong>Result ({stage}):</strong>
+  Predicted <strong>{predicted}</strong> · Actual winner <strong>{actual}</strong>{pos_note} · {verdict}
+</div>"""
 
 
 def _get_round(slug: str, year: int) -> int:
@@ -268,7 +301,7 @@ def _discover_races() -> list[dict]:
     return races
 
 
-def build_race_page(race: dict) -> None:
+def build_race_page(race: dict, accuracy_log: dict) -> None:
     """Generate the race detail page."""
     out_dir = RACES_DIR / race["dir"].name
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -324,11 +357,14 @@ def build_race_page(race: dict) -> None:
 </section>
 """
 
+    result_key = (race["dir"].name.rsplit("_", 1)[0], race["year"])
+    result_html = _result_banner_html(accuracy_log[result_key]) if result_key in accuracy_log else ""
+
     body = f"""
 <h2 style="font-size:1.6rem; border:none; color:#fff;">
   🏁 {race['name']} <span style="color:#888;font-size:1rem;">{race['year']}</span>
 </h2>
-{tabs_html}
+{result_html}{tabs_html}
 {content_html}
 """
 
@@ -418,8 +454,10 @@ def main() -> None:
         print("  ⚠️  No reports found in reports/ — nothing to generate.")
         return
 
+    accuracy_log = _load_accuracy_log()
+
     for race in races:
-        build_race_page(race)
+        build_race_page(race, accuracy_log)
 
     build_index(races)
     print(f"\n✅ Site generated → {DOCS_DIR}/index.html ({len(races)} races)")
