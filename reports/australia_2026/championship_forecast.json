@@ -1,0 +1,54 @@
+{
+  "entity": "driver",
+  "race_name": "Pre-Season",
+  "remaining_races": 25,
+  "timestamp": "2026-02-26T00:06:18.941200",
+  "predicted_champion": {
+    "name": "VER",
+    "predicted_points": 110.99888151891514,
+    "current_points": 87.0
+  },
+  "top5": [
+    {
+      "unique_id": "driver_VER",
+      "current_points": 87.0,
+      "championship_position": 3,
+      "current_position": 5,
+      "predicted_points": 110.99888151891514,
+      "predicted_position": 1
+    },
+    {
+      "unique_id": "driver_PER",
+      "current_points": 103.0,
+      "championship_position": 2,
+      "current_position": 1,
+      "predicted_points": 109.3711025333083,
+      "predicted_position": 2
+    },
+    {
+      "unique_id": "driver_ROS",
+      "current_points": 100.0,
+      "championship_position": 1,
+      "current_position": 2,
+      "predicted_points": 100.0,
+      "predicted_position": 3
+    },
+    {
+      "unique_id": "driver_PIA",
+      "current_points": 99.0,
+      "championship_position": 1,
+      "current_position": 3,
+      "predicted_points": 99.0,
+      "predicted_position": 4
+    },
+    {
+      "unique_id": "driver_NOR",
+      "current_points": 89.0,
+      "championship_position": 2,
+      "current_position": 4,
+      "predicted_points": 89.0,
+      "predicted_position": 5
+    }
+  ],
+  "narrative": "AutoARIMA forecasts Verstappen to lead the championship with a total points tally of approximately 110.99, with Norris and Perez being realistic challengers due to closer next-best forecasted points. Based on recent trajectory and anomaly analysis, Verstappen maintains a subtle but secure lead with little substantial challenge, given his consistent race outcome trends."
+}

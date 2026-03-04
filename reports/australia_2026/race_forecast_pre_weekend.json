@@ -1,0 +1,35 @@
+{
+  "stage": "pre_weekend",
+  "race_name": "2026 Australia Grand Prix",
+  "circuit_slug": "australia",
+  "year": 2026,
+  "timestamp": "2026-02-26T00:04:20.462162",
+  "predicted_winner": {
+    "driver_code": "ALB",
+    "constructor": "Williams",
+    "win_probability": 0.04545454545454544,
+    "predicted_position": 10.0
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "ALB",
+      "constructor": "Williams",
+      "probability": 0.04545454545454544
+    },
+    {
+      "position": 2,
+      "driver_code": "VER",
+      "constructor": "Red Bull",
+      "probability": 0.04545454545454544
+    },
+    {
+      "position": 3,
+      "driver_code": "TSU",
+      "constructor": "RB F1 Team",
+      "probability": 0.04545454545454544
+    }
+  ],
+  "key_insight": "ALB predicted winner at 5% based on historical circuit performance.",
+  "narrative": "Given the lack of specific forecast data due to model limitations and data context (limited by NaNs and sparse results), it is challenging to predict an outright winner. However, drivers showing consistent upward trends without anomalies in historical data are strong podium candidates. Focus on drivers maintaining or enhancing performance trends across equivalent situations in historical context."
+}

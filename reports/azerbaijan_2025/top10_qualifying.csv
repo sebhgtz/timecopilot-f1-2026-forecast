@@ -1,0 +1,11 @@
+unique_id,ds,ZeroModel,predicted_position,driver_code,constructor,grid_position,predicted_rank,win_probability
+VER_azerbaijan,2026-01-01,0.0,1.0,VER,Red Bull Racing,1,1,0.22808771256747537
+NOR_azerbaijan,2024-01-01,0.0,1.65,NOR,McLaren,2,2,0.13823497731362144
+PIA_azerbaijan,2021-01-01,0.0,2.3000000000000003,PIA,McLaren,3,3,0.09916857068151101
+RUS_azerbaijan,2024-01-01,0.0,2.95,RUS,Mercedes,4,4,0.07731786866694079
+LEC_azerbaijan,2025-01-01,0.0,3.6,LEC,Ferrari,5,5,0.06335769793540982
+ANT_azerbaijan,2022-01-01,0.0,4.25,ANT,Mercedes,6,6,0.05366769707470009
+LAW_azerbaijan,2022-01-01,0.0,4.8999999999999995,LAW,Racing Bulls,7,7,0.04654851276887253
+SAI_azerbaijan,2026-01-01,0.0,5.55,SAI,Williams,8,8,0.041096885147292865
+HAD_azerbaijan,2022-01-01,0.0,6.2,HAD,Racing Bulls,9,9,0.03678834073668957
+TSU_azerbaijan,2023-01-01,0.0,6.85,TSU,Red Bull Racing,10,10,0.03329747628722268

@@ -1,0 +1,159 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[dependency-groups]
+dev = [
+  "mktestdocs>=0.2.5",
+  "pre-commit",
+  "pytest-asyncio>=1.1.0",
+  "pytest-cov",
+  "pytest-mock>=3.15.1",
+  "pytest-rerunfailures>=15.1",
+  "pytest-xdist>=3.8.0",
+  "pytest>=8.4.2",
+  "s3fs>=2025.3.0",
+  "sktime>=0.40.1",
+]
+docs = [
+  "mkdocs-include-markdown-plugin>=7.1.6",
+  "mkdocs-jupyter>=0.25.1",
+  "mkdocs-material>=9.6.14",
+  "mkdocs>=1.6.1",
+  "mkdocstrings[python]>=0.29.1",
+  "mktestdocs>=0.2.5",
+  "modal>=1.0.4",
+  "ruff>=0.12.1",
+]
+
+[project]
+authors = [
+  {email = "azul.garza.r@gmail.com", name = "Azul Garza"},
+]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python",
+  "Topic :: Internet",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+# NOTE: dependency version notes
+# - huggingface-hub can't bump to v1+ until transformers bumps to v5
+# - lightning and pytorch-lightning are the same library
+# NOTE: dependencies pinned for faster pip installs
+# versions chosen from uv's dependency resolution
+# list:
+# accelerate arch black datasets fsspec hydra-core lightning lightning-utilities matplotlib opentelemetry-api opentelemetry-instrumentation opentelemetry-sdk optuna plotly pytorch-lightning ray statsforecast tensorboard torchmetrics wandb
+dependencies = [
+  "accelerate>=1.10.1",
+  "arch>=7.2.0",
+  "black>=25.9.0",
+  "datasets>=4.1.1",
+  "fire",
+  "fsspec>=2025.9.0",
+  "gluonts[torch]",
+  "huggingface-hub>=0.36.2,<1.0",
+  "hydra-core>=1.3.2",
+  "lightgbm>=4.6.0",
+  "lightning-utilities>=0.15.2",
+  "lightning==2.4.0",
+  "logfire==4.11.0",
+  "matplotlib>=3.10.6",
+  "mlforecast>=1.0.2",
+  "neuralforecast>=3.0.2",
+  "nixtla>=0.7.0",
+  "openai>=1.99.7",
+  "opentelemetry-api==1.37.0",
+  "opentelemetry-instrumentation>=0.58b0",
+  "opentelemetry-sdk==1.37.0",
+  "optuna>=4.5.0",
+  "pandas>=2.2.0 ; python_full_version >= '3.13'",
+  "plotly>=6.3.1",
+  "prophet>=1.1.7",
+  "pydantic-ai>=0.7.0",
+  "pytorch-lightning==2.4.0",
+  "ray==2.49.2",
+  "scipy<=1.15.3",
+  "statsforecast>=2.0.2",
+  "tabpfn-time-series==1.0.3 ; python_full_version < '3.13'",
+  "tensorboard>=2.20.0",
+  "timecopilot-chronos-forecasting>=0.2.0",
+  "timecopilot-granite-tsfm>=0.1.1",
+  "timecopilot-timesfm>=0.2.1",
+  "timecopilot-tirex>=0.1.0 ; python_full_version >= '3.11'",
+  "timecopilot-toto>=0.1.5",
+  "timecopilot-uni2ts>=0.1.2 ; python_full_version < '3.14'",
+  "torchmetrics>=1.8.2",
+  "transformers==4.40.1 ; python_full_version < '3.13'",
+  "transformers>=4.48,<5 ; python_full_version >= '3.13'",
+  "tsfeatures>=0.4.5",
+  "utilsforecast[plotting]>=0.2.15",
+  "wandb==0.22.1",
+]
+description = "The GenAI Forecasting Agent · LLMs × Time Series Foundation Models"
+license = "MIT"
+name = "timecopilot"
+readme = "README.md"
+requires-python = ">=3.10"
+version = "0.0.23"
+
+[project.scripts]
+timecopilot = "timecopilot._cli:main"
+
+[tool.coverage]
+branch = true
+source = ["timecopilot"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.coverage.run]
+omit = [
+  "tests/*",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.mypy]
+disable_error_code = ["no-redef"] # for fasthtml
+
+[tool.pytest.ini_options]
+addopts = "-m 'not docs and not live and not gift_eval' -n auto"
+markers = [
+  "docs: marks tests related to documentation",
+  "flaky: rerun failures (provided by pytest-rerunfailures)",
+  "gift_eval: marks tests related to gift eval results replication",
+  "live: marks tests that require calls to llm providers",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+fix = true
+line-length = 88
+src = ["timecopilot"]
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 20
+
+[tool.ruff.lint]
+ignore = [
+  "F811", # redefined function, this is helpful for fasthtml
+]
+select = ["B", "E", "F", "I", "SIM", "UP"]
+
+[tool.ruff.lint.isort]
+known-local-folder = ["timecopilot"]
+no-lines-before = ["local-folder"]

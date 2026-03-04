@@ -1,0 +1,11 @@
+unique_id,ds,AutoETS,predicted_position,driver_code,constructor,predicted_rank,win_probability
+ALB_australia,2024-01-01,,10.0,ALB,Williams,1,0.04545454545454544
+VER_australia,2025-01-01,,10.0,VER,Red Bull,2,0.04545454545454544
+TSU_australia,2023-01-01,,10.0,TSU,RB F1 Team,3,0.04545454545454544
+STR_australia,2025-01-01,,10.0,STR,Aston Martin,4,0.04545454545454544
+SAI_australia,2025-01-01,,10.0,SAI,Williams,5,0.04545454545454544
+RUS_australia,2024-01-01,,10.0,RUS,Mercedes,6,0.04545454545454544
+RIC_australia,2023-01-01,,10.0,RIC,RB F1 Team,7,0.04545454545454544
+RAI_australia,2021-01-01,,10.0,RAI,Alfa Romeo,8,0.04545454545454544
+PIA_australia,2022-01-01,,10.0,PIA,McLaren,9,0.04545454545454544
+PER_australia,2024-01-01,,10.0,PER,Red Bull,10,0.04545454545454544

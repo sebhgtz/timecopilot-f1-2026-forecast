@@ -1,0 +1,267 @@
+name: F1 2026 TimeCopilot Predictions
+
+on:
+  # ── Scheduled triggers ────────────────────────────────────────────────────
+  # Runs every day at 09:00 UTC. The pipeline checks the calendar
+  # and only does work if a race weekend is active or upcoming.
+  schedule:
+    - cron: '0 9 * * *'     # Daily at 09:00 UTC — checks if pre-weekend or session update needed
+
+  # ── Push trigger — rebuild site when reports are committed ───────────────
+  push:
+    branches: [main]
+    paths: ['reports/**']
+
+  # ── Manual trigger ────────────────────────────────────────────────────────
+  # Trigger manually from the GitHub Actions UI or via:
+  #   gh workflow run f1_predictions.yml -f race=australia -f session=qualifying
+  workflow_dispatch:
+    inputs:
+      race:
+        description: 'Race slug (e.g. australia, china, bahrain). Leave blank for auto-detect.'
+        required: false
+        default: ''
+        type: string
+      session:
+        description: 'Session stage. Leave blank for auto-detect.'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - pre_weekend
+          - fp1
+          - fp2
+          - fp3
+          - qualifying
+          - sprint_qualifying
+          - sprint
+      force_refresh:
+        description: 'Force rebuild all cached data (slower but ensures freshness)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      dry_run:
+        description: 'Dry run — show what would happen without running forecasts'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+# Prevent concurrent runs (avoid duplicate predictions for same race)
+concurrency:
+  group: f1-predictions-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  predict:
+    name: Run F1 Prediction Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      # ── Checkout ────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Python setup ────────────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # ── Install dependencies ─────────────────────────────────────────────
+      - name: Install pipeline dependencies
+        run: |
+          pip install --upgrade pip
+          pip install fastf1 pandas numpy requests plotly "kaleido==0.2.1"
+          pip install timecopilot openai
+          # Optional: install all TimeCopilot foundation models
+          # pip install timecopilot[all]
+
+      # ── Restore caches ───────────────────────────────────────────────────
+      - name: Restore FastF1 cache
+        uses: actions/cache@v4
+        with:
+          path: .fastf1_cache
+          key: fastf1-cache-${{ github.run_id }}
+          restore-keys: |
+            fastf1-cache-
+
+      - name: Restore pipeline data cache
+        uses: actions/cache@v4
+        with:
+          path: .pipeline_cache
+          key: pipeline-cache-${{ github.run_id }}
+          restore-keys: |
+            pipeline-cache-
+
+      - name: Restore Jolpica API cache
+        uses: actions/cache@v4
+        with:
+          path: .jolpica_cache
+          key: jolpica-cache-${{ github.run_id }}
+          restore-keys: |
+            jolpica-cache-
+
+      - name: Restore OpenF1 API cache
+        uses: actions/cache@v4
+        with:
+          path: .openf1_cache
+          key: openf1-cache-${{ github.run_id }}
+          restore-keys: |
+            openf1-cache-
+
+      # ── Calendar check ───────────────────────────────────────────────────
+      - name: Check calendar for schedule changes
+        run: python run_f1_forecast.py --check-calendar
+        continue-on-error: true   # Don't fail pipeline if FastF1 is unavailable
+
+      # ── Timestamp marker — used later to find newly written report files ──
+      - name: Mark pipeline start time
+        run: touch /tmp/pipeline_start
+
+      # ── Run prediction pipeline ──────────────────────────────────────────
+      - name: Run F1 prediction pipeline
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          # Build CLI args based on inputs
+          RACE_ARG=""
+          SESSION_ARG=""
+          REFRESH_ARG=""
+          DRY_RUN_ARG=""
+
+          if [ -n "${{ github.event.inputs.race }}" ]; then
+            RACE_ARG="--race ${{ github.event.inputs.race }}"
+          fi
+
+          if [ -n "${{ github.event.inputs.session }}" ]; then
+            SESSION_ARG="--session ${{ github.event.inputs.session }}"
+          fi
+
+          if [ "${{ github.event.inputs.force_refresh }}" = "true" ]; then
+            REFRESH_ARG="--refresh"
+          fi
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            DRY_RUN_ARG="--dry-run"
+          fi
+
+          # If no race specified, use auto-detect
+          if [ -z "$RACE_ARG" ]; then
+            echo "No race specified — using auto-detect mode"
+            python run_f1_forecast.py --current $REFRESH_ARG $DRY_RUN_ARG
+          else
+            python run_f1_forecast.py $RACE_ARG $SESSION_ARG $REFRESH_ARG $DRY_RUN_ARG
+          fi
+
+      # ── Upload reports as artifacts ──────────────────────────────────────
+      - name: Upload prediction reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: f1-predictions-${{ github.run_number }}
+          path: reports/
+          retention-days: 30
+
+      # ── Generate GitHub Pages static site ────────────────────────────────
+      - name: Generate GitHub Pages site
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true'
+        run: python scripts/generate_github_pages.py
+
+      # ── Commit reports + generated site back to repo ─────────────────────
+      # This makes reports and the static site visible directly in the repo.
+      # GitHub Pages is served from /docs on the main branch.
+      - name: Commit and push reports + site
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true'
+        run: |
+          git config --global user.name "F1 Prediction Bot"
+          git config --global user.email "actions@github.com"
+          git add reports/ docs/ || true
+          # Only commit if there are changes
+          git diff --staged --quiet || git commit -m "chore: F1 predictions update — $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push || echo "Nothing to push"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── Collect generated report files for email ─────────────────────────
+      - name: Collect generated report files
+        id: reports
+        if: always()
+        run: |
+          # Find the most recently written social card (only exists when a race
+          # weekend is active and the pipeline actually generated predictions).
+          CARD=$(find reports/ -name "social_card_*.txt" -newer /tmp/pipeline_start 2>/dev/null | sort | tail -1)
+
+          if [ -z "$CARD" ]; then
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            echo "No new reports found — not a race weekend or dry run."
+            exit 0
+          fi
+
+          echo "generated=true" >> "$GITHUB_OUTPUT"
+
+          # Derive race slug and session name from the file path
+          # e.g. reports/australia_2026/social_card_qualifying.txt
+          RACE_DIR=$(dirname "$CARD")
+          RACE_SLUG=$(basename "$RACE_DIR")
+          SESSION=$(basename "$CARD" .txt | sed 's/social_card_//')
+          echo "race_slug=$RACE_SLUG" >> "$GITHUB_OUTPUT"
+          echo "session=$SESSION" >> "$GITHUB_OUTPUT"
+
+          # Single-line social card (≤280 chars) — safe for key=value output
+          echo "card_text=$(cat "$CARD")" >> "$GITHUB_OUTPUT"
+
+          # Multiline LinkedIn post — use heredoc syntax for GITHUB_OUTPUT
+          LINKEDIN="$RACE_DIR/linkedin_post_${SESSION}.md"
+          if [ -f "$LINKEDIN" ]; then
+            {
+              echo "linkedin_text<<BODY_EOF"
+              cat "$LINKEDIN"
+              echo "BODY_EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+          # PNG charts + CSV tables as email attachments (comma-separated paths)
+          ATTACHMENTS=$(find "$RACE_DIR" -newer /tmp/pipeline_start \
+            \( -name "*.png" -o -name "*.csv" \) 2>/dev/null | sort | tr '\n' ',')
+          echo "attachments=${ATTACHMENTS%,}" >> "$GITHUB_OUTPUT"
+
+      # ── Send Gmail notification ───────────────────────────────────────────
+      # Secrets required (add in repo Settings → Secrets → Actions):
+      #   GMAIL_USERNAME     — your Gmail address (e.g. you@gmail.com)
+      #   GMAIL_APP_PASSWORD — 16-char App Password from Google Account → Security
+      #   NOTIFY_EMAIL       — recipient address (can be the same as GMAIL_USERNAME)
+      - name: Send prediction email
+        if: steps.reports.outputs.generated == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "🏎️ F1 2026 — ${{ steps.reports.outputs.race_slug }} [${{ steps.reports.outputs.session }}] prediction ready"
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: "F1 Prediction Bot <${{ secrets.GMAIL_USERNAME }}>"
+          body: |
+            ${{ steps.reports.outputs.linkedin_text }}
+
+            ──────────────────────────────────────────
+            Twitter / X card:
+            ${{ steps.reports.outputs.card_text }}
+
+            ──────────────────────────────────────────
+            View on GitHub Pages (public site):
+            https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/races/${{ steps.reports.outputs.race_slug }}/
+
+            View raw reports on GitHub:
+            ${{ github.server_url }}/${{ github.repository }}/tree/main/reports/${{ steps.reports.outputs.race_slug }}
+          attachments: ${{ steps.reports.outputs.attachments }}
