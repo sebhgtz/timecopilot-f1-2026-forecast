@@ -307,7 +307,7 @@ def build_race_page(race: dict) -> None:
         # Charts for this stage
         chart_html = ""
         if charts_dst.exists():
-            chart_files = sorted(charts_dst.glob(f"*_{stage}.*"))
+            chart_files = sorted(charts_dst.glob(f"*_{stage}.png"))
             if chart_files:
                 chart_html = '<div class="chart-row">'
                 for cf in chart_files:
