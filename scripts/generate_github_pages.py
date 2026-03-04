@@ -447,7 +447,7 @@ def build_index(races: list[dict], accuracy_log: dict) -> None:
     all_correct = sum(1 for r in all_completed.values() if r["correct"].lower() == "true")
     global_banner = (
         f'<p style="color:#aaa; font-size:0.9rem; margin:0 0 16px;">'
-        f'🎯 <strong>{all_correct}/{all_total}</strong> race winners correctly predicted across all backtests</p>'
+        f'🎯 <strong>{all_correct}/{all_total}</strong> race winners correctly predicted</p>'
     ) if all_total else ""
 
     body = f"""
