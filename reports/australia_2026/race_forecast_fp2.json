@@ -3,7 +3,7 @@
   "race_name": "2026 Australia Grand Prix",
   "circuit_slug": "australia",
   "year": 2026,
-  "timestamp": "2026-03-06T18:07:45.935654",
+  "timestamp": "2026-03-06T18:56:42.308398",
   "predicted_winner": {
     "driver_code": "ALB",
     "constructor": "Williams",
@@ -31,5 +31,5 @@
     }
   ],
   "key_insight": "ALB predicted winner at 6% based on historical circuit performance.",
-  "narrative": ""
+  "narrative": "Forecasting success at the Australian circuit requires ongoing analysis based on real-time events, not just past performances. Future predictions could lean heavily on evaluating the current form of drivers, adapting strategies, and the grid positioning which often guides finishing outcomes."
 }

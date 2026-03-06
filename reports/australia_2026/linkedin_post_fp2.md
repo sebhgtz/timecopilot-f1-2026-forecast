@@ -52,11 +52,13 @@
 | pre_weekend | ALB | 5% |
 | FP2 | ALB | 6% |
 
+### 🤖 TimeCopilot Analysis — Race
+
+> Forecasting success at the Australian circuit requires ongoing analysis based on real-time events, not just past performances. Future predictions could lean heavily on evaluating the current form of drivers, adapting strategies, and the grid positioning which often guides finishing outcomes.
+
 ### 🤖 TimeCopilot Analysis — Championship
 
 > AutoARIMA forecasts Verstappen to lead the championship with a total points tally of approximately 110.99, with Norris and Perez being realistic challengers due to closer next-best forecasted points. Based on recent trajectory and anomaly analysis, Verstappen maintains a subtle but secure lead with little substantial challenge, given his consistent race outcome trends.
-
-> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---
