@@ -92,7 +92,7 @@ def run_pre_weekend_pipeline(
 
     cal = CalendarManager()
     race = cal.get_race(race_slug)
-    remaining_races = len(cal.remaining_races()) + 1  # include current race
+    remaining_races = len(cal.remaining_races())
 
     print(f"\n{'='*60}")
     print(f"  F1 PREDICTION PIPELINE — {race.name} {year}")
