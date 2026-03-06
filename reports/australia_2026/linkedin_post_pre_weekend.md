@@ -1,59 +1,57 @@
 ## 🏎️ 2026 Australia Grand Prix — Pre-Weekend Prediction
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | February 26, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 06, 2026*
 
 ---
 
 ### 🏁 Race Prediction
 
 **Predicted Podium:**
-🥇 P1: **ALB** (Williams) — 5% probability
-🥈 P2: **VER** (Red Bull) — 5% probability
-🥉 P3: **TSU** (RB F1 Team) — 5% probability
+🥇 P1: **ALB** (Williams) — 6% probability
+🥈 P2: **ALO** (Aston Martin) — 6% probability
+🥉 P3: **BOT** (Cadillac) — 6% probability
 
 **Full Top 10 Prediction:**
 
 | Pos | Driver | Team | Win Probability |
 |-----|--------|------|-----------------|
-| 1 | ALB | Williams | 5% |
-| 2 | VER | Red Bull | 5% |
-| 3 | TSU | RB F1 Team | 5% |
-| 4 | STR | Aston Martin | 5% |
-| 5 | SAI | Williams | 5% |
-| 6 | RUS | Mercedes | 5% |
-| 7 | RIC | RB F1 Team | 5% |
-| 8 | RAI | Alfa Romeo | 5% |
-| 9 | PIA | McLaren | 5% |
-| 10 | PER | Red Bull | 5% |
+| 1 | ALB | Williams | 6% |
+| 2 | ALO | Aston Martin | 6% |
+| 3 | BOT | Cadillac | 6% |
+| 4 | GAS | Alpine | 6% |
+| 5 | HAM | Ferrari | 6% |
+| 6 | HUL | Audi | 6% |
+| 7 | LEC | Ferrari | 6% |
+| 8 | LIN | Racing Bulls | 6% |
+| 9 | NOR | McLaren | 6% |
+| 10 | OCO | Haas | 6% |
 
-💡 **Key Insight:** ALB predicted winner at 5% based on historical circuit performance.
+💡 **Key Insight:** ALB predicted winner at 6% based on historical circuit performance.
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** VER (111 pts predicted final)
+**Predicted 2026 Driver Champion:** PIA (473 pts predicted final)
 
-**Predicted Final Driver Standings (Top 5):**
+**Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | VER | 87 | **111** |
-| 2 | PER | 103 | **109** |
-| 3 | ROS | 100 | **100** |
-| 4 | PIA | 99 | **99** |
-| 5 | NOR | 89 | **89** |
+| 1 | PIA | 0 | **473** |
+| 2 | NOR | 0 | **394** |
+| 3 | VER | 0 | **359** |
+| 4 | RUS | 0 | **244** |
+| 5 | LEC | 0 | **239** |
 
-**Predicted 2026 Constructor Champion:** red_bull (144 pts)
+**Predicted 2026 Constructor Champion:** red_bull_racing (415 pts)
 
-*25 races remaining in the season.*
-
-### 🤖 TimeCopilot Analysis — Race
-
-> Given the lack of specific forecast data due to model limitations and data context (limited by NaNs and sparse results), it is challenging to predict an outright winner. However, drivers showing consistent upward trends without anomalies in historical data are strong podium candidates. Focus on drivers maintaining or enhancing performance trends across equivalent situations in historical context.
+*24 races remaining in the season.*
 
 ### 🤖 TimeCopilot Analysis — Championship
 
-> AutoARIMA forecasts Verstappen to lead the championship with a total points tally of approximately 110.99, with Norris and Perez being realistic challengers due to closer next-best forecasted points. Based on recent trajectory and anomaly analysis, Verstappen maintains a subtle but secure lead with little substantial challenge, given his consistent race outcome trends.
+> The likely winner of the 2026 F1 World Championship may be NOR, given their consistent points accumulation, though strong performances from VER and LEC indicate they should not be underestimated. The margin of victory could realistically be within 10-20 points, reflecting the close nature of the competition.
+
+> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---

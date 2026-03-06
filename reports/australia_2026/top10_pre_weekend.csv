@@ -1,11 +1,11 @@
-unique_id,ds,AutoETS,predicted_position,driver_code,constructor,predicted_rank,win_probability
-ALB_australia,2024-01-01,,10.0,ALB,Williams,1,0.04545454545454544
-VER_australia,2025-01-01,,10.0,VER,Red Bull,2,0.04545454545454544
-TSU_australia,2023-01-01,,10.0,TSU,RB F1 Team,3,0.04545454545454544
-STR_australia,2025-01-01,,10.0,STR,Aston Martin,4,0.04545454545454544
-SAI_australia,2025-01-01,,10.0,SAI,Williams,5,0.04545454545454544
-RUS_australia,2024-01-01,,10.0,RUS,Mercedes,6,0.04545454545454544
-RIC_australia,2023-01-01,,10.0,RIC,RB F1 Team,7,0.04545454545454544
-RAI_australia,2021-01-01,,10.0,RAI,Alfa Romeo,8,0.04545454545454544
-PIA_australia,2022-01-01,,10.0,PIA,McLaren,9,0.04545454545454544
-PER_australia,2024-01-01,,10.0,PER,Red Bull,10,0.04545454545454544
+unique_id,ds,DynamicOptimizedTheta,predicted_position,driver_code,constructor,predicted_rank,win_probability
+ALB_australia,2024-01-01,,10.0,ALB,Williams,1,0.0625
+ALO_australia,2026-01-01,,10.0,ALO,Aston Martin,2,0.0625
+BOT_australia,2027-01-01,,10.0,BOT,Cadillac,3,0.0625
+GAS_australia,2025-01-01,,10.0,GAS,Alpine,4,0.0625
+HAM_australia,2028-01-01,,10.0,HAM,Ferrari,5,0.0625
+HUL_australia,2027-01-01,,10.0,HUL,Audi,6,0.0625
+LEC_australia,2025-01-01,,10.0,LEC,Ferrari,7,0.0625
+LIN_australia,2022-01-01,,10.0,LIN,Racing Bulls,8,0.0625
+NOR_australia,2024-01-01,,10.0,NOR,McLaren,9,0.0625
+OCO_australia,2025-01-01,,10.0,OCO,Haas,10,0.0625
