@@ -1,0 +1,35 @@
+{
+  "stage": "fp2",
+  "race_name": "2026 Australia Grand Prix",
+  "circuit_slug": "australia",
+  "year": 2026,
+  "timestamp": "2026-03-06T18:07:45.935654",
+  "predicted_winner": {
+    "driver_code": "ALB",
+    "constructor": "Williams",
+    "win_probability": 0.0625,
+    "predicted_position": 10.0
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "ALB",
+      "constructor": "Williams",
+      "probability": 0.0625
+    },
+    {
+      "position": 2,
+      "driver_code": "ALO",
+      "constructor": "Aston Martin",
+      "probability": 0.0625
+    },
+    {
+      "position": 3,
+      "driver_code": "BOT",
+      "constructor": "Cadillac",
+      "probability": 0.0625
+    }
+  ],
+  "key_insight": "ALB predicted winner at 6% based on historical circuit performance.",
+  "narrative": ""
+}
