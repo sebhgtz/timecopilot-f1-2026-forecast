@@ -131,6 +131,7 @@ class ChampionshipForecaster:
             race_name=race_name,
             entity_filter=driver_filter,
             query=self._driver_query(remaining_races, max_points_per_race, year=year),
+            year=year,
         )
 
     def forecast_constructors(
@@ -154,6 +155,7 @@ class ChampionshipForecaster:
             race_name=race_name,
             entity_filter=constructor_filter,
             query=self._constructor_query(remaining_races, year=year),
+            year=year,
         )
 
     # ── Core forecasting ──────────────────────────────────────────────────────
@@ -166,6 +168,7 @@ class ChampionshipForecaster:
         race_name: str,
         entity_filter: Optional[list[str]],
         query: str,
+        year: int = 2026,
     ) -> ChampionshipForecastResult:
         """Run TimeCopilot on the championship series."""
         # Filter to entity of interest
@@ -218,14 +221,22 @@ class ChampionshipForecaster:
         # the series compatible with freq="2W".
         tc_df = _normalize_to_biweekly(tc_df)
 
-        # Current standings snapshot
-        current_standings = (
-            df.groupby("unique_id")
-            .agg(current_points=("y", "last"), championship_position=("championship_position", "last"))
-            .reset_index()
-            .sort_values("current_points", ascending=False)
-            .reset_index(drop=True)
-        )
+        # Current standings snapshot — filter to current year only so Round 1
+        # doesn't inherit 2025 final standings when no 2026 races have run yet.
+        current_year_df = df[pd.to_datetime(df["ds"]).dt.year == year]
+        if current_year_df.empty:
+            # Season hasn't started — everyone is at 0 pts
+            current_standings = df.groupby("unique_id").last()[[]].reset_index()
+            current_standings["current_points"] = 0.0
+            current_standings["championship_position"] = 0
+        else:
+            current_standings = (
+                current_year_df.groupby("unique_id")
+                .agg(current_points=("y", "last"), championship_position=("championship_position", "last"))
+                .reset_index()
+                .sort_values("current_points", ascending=False)
+                .reset_index(drop=True)
+            )
         current_standings["current_position"] = range(1, len(current_standings) + 1)
 
         print(f"\n🔮 Running TimeCopilot championship forecast ({entity})...")

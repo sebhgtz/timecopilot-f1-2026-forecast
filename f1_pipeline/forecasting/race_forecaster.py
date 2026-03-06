@@ -479,6 +479,18 @@ class RaceForecaster:
                 result["predicted_position"].fillna(10) * 0.80 +
                 result["sq_rank"].fillna(result["predicted_position"].fillna(10)) * 0.20
             )
+        else:
+            # No qualifying/sprint data yet — blend FP pace as a light signal.
+            # Prefer FP2 (more representative of race pace) over FP1.
+            fp2_ranks = covariates.get("fp2_pace_ranks", {})
+            fp1_ranks = covariates.get("fp1_pace_ranks", {})
+            fp_ranks = fp2_ranks or fp1_ranks
+            if fp_ranks:
+                result["fp_pace_rank"] = result["driver_code"].map(fp_ranks)
+                result["predicted_position"] = (
+                    result["predicted_position"].fillna(10) * 0.80 +
+                    result["fp_pace_rank"].fillna(result["predicted_position"].fillna(10)) * 0.20
+                )
 
         result = result.sort_values("predicted_position").reset_index(drop=True)
         result["predicted_rank"] = range(1, len(result) + 1)
