@@ -217,6 +217,9 @@ def update_for_session(
     print(f"  SESSION UPDATE — {session_type.upper()} | {race_slug} {year}")
     print(f"{'='*60}\n")
 
+    DATA_CACHE_DIR.mkdir(exist_ok=True)
+    REPORTS_DIR.mkdir(exist_ok=True)
+
     cal = CalendarManager()
     race = cal.get_race(race_slug)
     jolpica = JolpicaCollector()
@@ -309,6 +312,9 @@ def post_race_championship_update(
     print(f"\n{'='*60}")
     print(f"  POST-RACE CHAMPIONSHIP UPDATE — {race_slug.upper()} {year}")
     print(f"{'='*60}\n")
+
+    DATA_CACHE_DIR.mkdir(exist_ok=True)
+    REPORTS_DIR.mkdir(exist_ok=True)
 
     cal = CalendarManager()
     race = cal.get_race(race_slug)
