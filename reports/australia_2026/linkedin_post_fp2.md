@@ -29,12 +29,32 @@
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
 
+### 🏆 Championship Prediction
+
+**Predicted 2026 Driver Champion:** PIA (473 pts predicted final)
+
+**Predicted Final 2026 Driver Standings (Top 5):**
+
+| Pos | Driver | Current Pts | Predicted Final |
+|-----|--------|-------------|-----------------|
+| 1 | PIA | 0 | **473** |
+| 2 | NOR | 0 | **394** |
+| 3 | VER | 0 | **359** |
+| 4 | RUS | 0 | **244** |
+| 5 | LEC | 0 | **239** |
+
+*24 races remaining in the season.*
+
 ### 🔄 Prediction Evolution This Weekend
 
 | Stage | Predicted Winner | Confidence |
 |-------|-----------------|------------|
-| pre_weekend | ALB | 5% |
+| pre_weekend | ALB | 6% |
 | FP2 | PIA | 8% |
+
+### 🤖 TimeCopilot Analysis — Championship
+
+> The likely winner of the 2026 F1 World Championship may be NOR, given their consistent points accumulation, though strong performances from VER and LEC indicate they should not be underestimated. The margin of victory could realistically be within 10-20 points, reflecting the close nature of the competition.
 
 > ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
