@@ -6,55 +6,35 @@
 ### 🏁 Race Prediction
 
 **Predicted Podium:**
-🥇 P1: **HAM** (Ferrari) — 12% probability
-🥈 P2: **NOR** (McLaren) — 10% probability
-🥉 P3: **PIA** (McLaren) — 10% probability
+🥇 P1: **PIA** (McLaren) — 8% probability
+🥈 P2: **RUS** (Mercedes) — 7% probability
+🥉 P3: **HAM** (Ferrari) — 7% probability
 
 **Full Top 10 Prediction:**
 
 | Pos | Driver | Team | Win Probability |
 |-----|--------|------|-----------------|
-| 1 | HAM | Ferrari | 12% |
-| 2 | NOR | McLaren | 10% |
-| 3 | PIA | McLaren | 10% |
+| 1 | PIA | McLaren | 8% |
+| 2 | RUS | Mercedes | 7% |
+| 3 | HAM | Ferrari | 7% |
 | 4 | LEC | Ferrari | 7% |
 | 5 | VER | Red Bull Racing | 7% |
-| 6 | HUL | Audi | 7% |
-| 7 | RUS | Mercedes | 6% |
-| 8 | BOT | Cadillac | 5% |
-| 9 | PER | Cadillac | 5% |
-| 10 | OCO | Haas | 5% |
+| 6 | NOR | McLaren | 7% |
+| 7 | LIN | Racing Bulls | 7% |
+| 8 | OCO | Haas | 6% |
+| 9 | HUL | Audi | 6% |
+| 10 | ALB | Williams | 6% |
 
-💡 **Key Insight:** HAM predicted winner at 12% based on historical circuit performance.
+💡 **Key Insight:** PIA predicted winner at 8% based on historical circuit performance.
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
-
-### 🏆 Championship Prediction
-
-**Predicted 2026 Driver Champion:** VER (111 pts predicted final)
-
-**Predicted Final 2026 Driver Standings (Top 5):**
-
-| Pos | Driver | Current Pts | Predicted Final |
-|-----|--------|-------------|-----------------|
-| 1 | VER | 87 | **111** |
-| 2 | PER | 103 | **109** |
-| 3 | ROS | 100 | **100** |
-| 4 | PIA | 99 | **99** |
-| 5 | NOR | 89 | **89** |
-
-*25 races remaining in the season.*
 
 ### 🔄 Prediction Evolution This Weekend
 
 | Stage | Predicted Winner | Confidence |
 |-------|-----------------|------------|
 | pre_weekend | ALB | 5% |
-| FP2 | HAM | 12% |
-
-### 🤖 TimeCopilot Analysis — Championship
-
-> AutoARIMA forecasts Verstappen to lead the championship with a total points tally of approximately 110.99, with Norris and Perez being realistic challengers due to closer next-best forecasted points. Based on recent trajectory and anomaly analysis, Verstappen maintains a subtle but secure lead with little substantial challenge, given his consistent race outcome trends.
+| FP2 | PIA | 8% |
 
 > ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 

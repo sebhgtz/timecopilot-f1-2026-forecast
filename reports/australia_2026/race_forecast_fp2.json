@@ -3,33 +3,33 @@
   "race_name": "2026 Australia Grand Prix",
   "circuit_slug": "australia",
   "year": 2026,
-  "timestamp": "2026-03-06T19:09:35.418901",
+  "timestamp": "2026-03-06T19:29:47.237933",
   "predicted_winner": {
-    "driver_code": "HAM",
-    "constructor": "Ferrari",
-    "win_probability": 0.12216490475160363,
-    "predicted_position": 4.622222222222223
+    "driver_code": "PIA",
+    "constructor": "McLaren",
+    "win_probability": 0.07733200649490295,
+    "predicted_position": 8.2
   },
   "podium": [
     {
       "position": 1,
-      "driver_code": "HAM",
-      "constructor": "Ferrari",
-      "probability": 0.12216490475160363
+      "driver_code": "PIA",
+      "constructor": "McLaren",
+      "probability": 0.07733200649490295
     },
     {
       "position": 2,
-      "driver_code": "NOR",
-      "constructor": "McLaren",
-      "probability": 0.09871911495079082
+      "driver_code": "RUS",
+      "constructor": "Mercedes",
+      "probability": 0.07373516898351211
     },
     {
       "position": 3,
-      "driver_code": "PIA",
-      "constructor": "McLaren",
-      "probability": 0.09735747198595232
+      "driver_code": "HAM",
+      "constructor": "Ferrari",
+      "probability": 0.07205936968843228
     }
   ],
-  "key_insight": "HAM predicted winner at 12% based on historical circuit performance.",
+  "key_insight": "PIA predicted winner at 8% based on historical circuit performance.",
   "narrative": ""
 }
