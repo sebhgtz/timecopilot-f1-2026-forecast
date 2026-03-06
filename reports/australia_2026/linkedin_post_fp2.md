@@ -6,26 +6,26 @@
 ### 🏁 Race Prediction
 
 **Predicted Podium:**
-🥇 P1: **ALB** (Williams) — 6% probability
-🥈 P2: **ALO** (Aston Martin) — 6% probability
-🥉 P3: **BOT** (Cadillac) — 6% probability
+🥇 P1: **HAM** (Ferrari) — 12% probability
+🥈 P2: **NOR** (McLaren) — 10% probability
+🥉 P3: **PIA** (McLaren) — 10% probability
 
 **Full Top 10 Prediction:**
 
 | Pos | Driver | Team | Win Probability |
 |-----|--------|------|-----------------|
-| 1 | ALB | Williams | 6% |
-| 2 | ALO | Aston Martin | 6% |
-| 3 | BOT | Cadillac | 6% |
-| 4 | GAS | Alpine | 6% |
-| 5 | HAM | Ferrari | 6% |
-| 6 | HUL | Audi | 6% |
-| 7 | LEC | Ferrari | 6% |
-| 8 | LIN | Racing Bulls | 6% |
-| 9 | NOR | McLaren | 6% |
-| 10 | OCO | Haas | 6% |
+| 1 | HAM | Ferrari | 12% |
+| 2 | NOR | McLaren | 10% |
+| 3 | PIA | McLaren | 10% |
+| 4 | LEC | Ferrari | 7% |
+| 5 | VER | Red Bull Racing | 7% |
+| 6 | HUL | Audi | 7% |
+| 7 | RUS | Mercedes | 6% |
+| 8 | BOT | Cadillac | 5% |
+| 9 | PER | Cadillac | 5% |
+| 10 | OCO | Haas | 5% |
 
-💡 **Key Insight:** ALB predicted winner at 6% based on historical circuit performance.
+💡 **Key Insight:** HAM predicted winner at 12% based on historical circuit performance.
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
 
@@ -50,15 +50,13 @@
 | Stage | Predicted Winner | Confidence |
 |-------|-----------------|------------|
 | pre_weekend | ALB | 5% |
-| FP2 | ALB | 6% |
-
-### 🤖 TimeCopilot Analysis — Race
-
-> Forecasting success at the Australian circuit requires ongoing analysis based on real-time events, not just past performances. Future predictions could lean heavily on evaluating the current form of drivers, adapting strategies, and the grid positioning which often guides finishing outcomes.
+| FP2 | HAM | 12% |
 
 ### 🤖 TimeCopilot Analysis — Championship
 
 > AutoARIMA forecasts Verstappen to lead the championship with a total points tally of approximately 110.99, with Norris and Perez being realistic challengers due to closer next-best forecasted points. Based on recent trajectory and anomaly analysis, Verstappen maintains a subtle but secure lead with little substantial challenge, given his consistent race outcome trends.
+
+> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---

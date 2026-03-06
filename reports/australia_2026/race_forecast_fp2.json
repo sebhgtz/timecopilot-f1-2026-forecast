@@ -3,33 +3,33 @@
   "race_name": "2026 Australia Grand Prix",
   "circuit_slug": "australia",
   "year": 2026,
-  "timestamp": "2026-03-06T18:56:42.308398",
+  "timestamp": "2026-03-06T19:09:35.418901",
   "predicted_winner": {
-    "driver_code": "ALB",
-    "constructor": "Williams",
-    "win_probability": 0.0625,
-    "predicted_position": 10.0
+    "driver_code": "HAM",
+    "constructor": "Ferrari",
+    "win_probability": 0.12216490475160363,
+    "predicted_position": 4.622222222222223
   },
   "podium": [
     {
       "position": 1,
-      "driver_code": "ALB",
-      "constructor": "Williams",
-      "probability": 0.0625
+      "driver_code": "HAM",
+      "constructor": "Ferrari",
+      "probability": 0.12216490475160363
     },
     {
       "position": 2,
-      "driver_code": "ALO",
-      "constructor": "Aston Martin",
-      "probability": 0.0625
+      "driver_code": "NOR",
+      "constructor": "McLaren",
+      "probability": 0.09871911495079082
     },
     {
       "position": 3,
-      "driver_code": "BOT",
-      "constructor": "Cadillac",
-      "probability": 0.0625
+      "driver_code": "PIA",
+      "constructor": "McLaren",
+      "probability": 0.09735747198595232
     }
   ],
-  "key_insight": "ALB predicted winner at 6% based on historical circuit performance.",
-  "narrative": "Forecasting success at the Australian circuit requires ongoing analysis based on real-time events, not just past performances. Future predictions could lean heavily on evaluating the current form of drivers, adapting strategies, and the grid positioning which often guides finishing outcomes."
+  "key_insight": "HAM predicted winner at 12% based on historical circuit performance.",
+  "narrative": ""
 }

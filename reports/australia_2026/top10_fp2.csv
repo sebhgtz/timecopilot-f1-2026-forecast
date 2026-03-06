@@ -1,11 +1,11 @@
-unique_id,ds,IMAPA,predicted_position,driver_code,constructor,predicted_rank,win_probability
-ALB_australia,2024-01-01,,10.0,ALB,Williams,1,0.0625
-ALO_australia,2026-01-01,,10.0,ALO,Aston Martin,2,0.0625
-BOT_australia,2027-01-01,,10.0,BOT,Cadillac,3,0.0625
-GAS_australia,2025-01-01,,10.0,GAS,Alpine,4,0.0625
-HAM_australia,2028-01-01,,10.0,HAM,Ferrari,5,0.0625
-HUL_australia,2027-01-01,,10.0,HUL,Audi,6,0.0625
-LEC_australia,2025-01-01,,10.0,LEC,Ferrari,7,0.0625
-LIN_australia,2022-01-01,,10.0,LIN,Racing Bulls,8,0.0625
-NOR_australia,2024-01-01,,10.0,NOR,McLaren,9,0.0625
-OCO_australia,2025-01-01,,10.0,OCO,Haas,10,0.0625
+unique_id,predicted_position,driver_code,constructor,fp_pace_rank,predicted_rank,win_probability
+HAM_australia,4.622222222222223,HAM,Ferrari,4,1,0.12216490475160363
+NOR_australia,5.720000000000001,NOR,McLaren,7,2,0.09871911495079082
+PIA_australia,5.800000000000001,PIA,McLaren,1,3,0.09735747198595232
+LEC_australia,7.533333333333333,LEC,Ferrari,5,4,0.07495663772369782
+VER_australia,8.044444444444444,VER,Red Bull Racing,6,5,0.07019419941528608
+HUL_australia,8.600000000000001,HUL,Audi,12,6,0.06565969040913064
+RUS_australia,9.72,RUS,Mercedes,3,7,0.05809396476528019
+BOT_australia,10.9,BOT,Cadillac,19,8,0.051804893350323254
+PER_australia,11.0,PER,Cadillac,22,9,0.05133393977441123
+OCO_australia,11.600000000000001,OCO,Haas,10,10,0.04867873599297616
