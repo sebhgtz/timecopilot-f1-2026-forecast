@@ -225,6 +225,7 @@ jobs:
             {
               echo "linkedin_text<<BODY_EOF"
               cat "$LINKEDIN"
+              echo ""
               echo "BODY_EOF"
             } >> "$GITHUB_OUTPUT"
           fi
