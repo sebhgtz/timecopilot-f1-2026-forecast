@@ -126,7 +126,7 @@ class RaceWeekendUpdater:
         self._validate_data_loaded()
 
         if remaining_races is None:
-            remaining_races = len(self.calendar.remaining_races()) + 1  # include current race
+            remaining_races = len(self.calendar.remaining_races())
 
         # Race forecast (historical only, no covariates yet)
         race_result = self.rf.forecast(

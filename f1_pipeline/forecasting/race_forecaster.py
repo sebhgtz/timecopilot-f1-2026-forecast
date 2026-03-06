@@ -423,6 +423,13 @@ class RaceForecaster:
             .last()
             .reset_index()[["unique_id", "driver_code", "constructor"]]
         )
+        # Override constructor with current 2026 team assignments so historical
+        # team names (e.g. PER as Red Bull) don't leak into the race prediction.
+        from ..collectors.calendar_manager import DRIVERS_2026 as _CURRENT_TEAMS
+        driver_meta["constructor"] = (
+            driver_meta["driver_code"].map(_CURRENT_TEAMS)
+            .fillna(driver_meta["constructor"])
+        )
 
         if not forecast_df.empty:
             # Extract predicted finishing position from forecast

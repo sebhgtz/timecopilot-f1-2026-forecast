@@ -113,8 +113,14 @@ def run_pre_weekend_pipeline(
 
     # ── Step 2: Append current-season standings ───────────────────────────────
     print("\n📊 Step 2: Appending current season standings...")
-    driver_champ_df = append_current_season(driver_champ_df, year, jolpica, entity="driver")
-    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica, entity="constructor")
+    # Use a no-cache collector for the current year so stale Jolpica cache entries
+    # (which may contain 2025 data retagged as 2026) don't pollute the series.
+    jolpica_fresh = JolpicaCollector(use_cache=False)
+    driver_champ_df = append_current_season(driver_champ_df, year, jolpica_fresh, entity="driver")
+    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica_fresh, entity="constructor")
+    # Defensive: restrict to active 2026 grid drivers only (guards against stale Jolpica data)
+    _allowed_driver_uids = {f"driver_{d}" for d in DRIVERS_2026.keys()}
+    driver_champ_df = driver_champ_df[driver_champ_df["unique_id"].isin(_allowed_driver_uids)]
 
     # Add placeholder row for current race in circuit series.
     # Pass the verified 2026 driver list so retired drivers are excluded,
@@ -232,8 +238,11 @@ def update_for_session(
     circuit_df = _load_or_build_circuit_series(jolpica, openf1, force_refresh=False)
     strategy_features = _load_or_build_strategy_features(openf1, jolpica, force_refresh=False)
 
-    driver_champ_df = append_current_season(driver_champ_df, year, jolpica, entity="driver")
-    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica, entity="constructor")
+    jolpica_fresh = JolpicaCollector(use_cache=False)
+    driver_champ_df = append_current_season(driver_champ_df, year, jolpica_fresh, entity="driver")
+    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica_fresh, entity="constructor")
+    _allowed_driver_uids = {f"driver_{d}" for d in DRIVERS_2026.keys()}
+    driver_champ_df = driver_champ_df[driver_champ_df["unique_id"].isin(_allowed_driver_uids)]
     testing_pace = _load_or_build_testing_pace(year)
     new_driver_entries = _build_new_driver_entries(testing_pace)
 
