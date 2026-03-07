@@ -1,0 +1,11 @@
+unique_id,ds,SeasonalNaive,predicted_position,driver_code,constructor,grid_position,predicted_rank,win_probability
+RUS_australia,2024-01-01,,4.15,RUS,Mercedes,1.0,1,0.14026009200672546
+LEC_australia,2025-01-01,,6.1,LEC,Ferrari,4.0,2,0.09542284947998537
+PIA_australia,2022-01-01,,6.75,PIA,McLaren,5.0,3,0.0862339824930238
+NOR_australia,2024-01-01,,7.4,NOR,McLaren,6.0,4,0.07865937592269062
+HAM_australia,2028-01-01,,8.05,HAM,Ferrari,7.0,5,0.0723079977425976
+LIN_australia,2022-01-01,,8.7,LIN,Racing Bulls,8.0,6,0.06690567607217365
+SAI_australia,2028-01-01,,10.0,SAI,Williams,,7,0.058207938182791075
+STR_australia,2026-01-01,,10.0,STR,Aston Martin,,8,0.058207938182791075
+HUL_australia,2027-01-01,,10.65,HUL,Audi,11.0,9,0.05465534101670523
+OCO_australia,2025-01-01,,11.950000000000001,OCO,Haas,13.0,10,0.048709571701080395
