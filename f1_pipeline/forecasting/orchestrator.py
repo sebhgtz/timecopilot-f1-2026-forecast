@@ -337,8 +337,12 @@ def post_race_championship_update(
     driver_champ_df, constructor_champ_df = _load_or_build_championship_series(
         jolpica, force_refresh=False
     )
-    driver_champ_df = append_current_season(driver_champ_df, year, jolpica, entity="driver")
-    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica, entity="constructor")
+    jolpica_fresh = JolpicaCollector(use_cache=False)
+    driver_champ_df = append_current_season(driver_champ_df, year, jolpica_fresh, entity="driver")
+    constructor_champ_df = append_current_season(constructor_champ_df, year, jolpica_fresh, entity="constructor")
+    # Defensive filter: drop retired/unknown drivers not in the 2026 grid
+    _allowed_driver_uids = {f"driver_{d}" for d in DRIVERS_2026.keys()}
+    driver_champ_df = driver_champ_df[driver_champ_df["unique_id"].isin(_allowed_driver_uids)]
 
     print(f"\n🔮 Running post-race championship forecasts ({remaining_races} races remaining)...")
     from .championship_forecaster import ChampionshipForecaster

@@ -248,13 +248,22 @@ class ChampionshipForecaster:
         tc = None
 
         try:
+            import concurrent.futures
             tc = self._get_timecopliot()
-            result = tc.forecast(
-                df=tc_df,
-                freq="2W",
-                h=h,
-                query=query,
-            )
+
+            def _run_forecast():
+                return tc.forecast(df=tc_df, freq="2W", h=h, query=query)
+
+            _TIMEOUT_S = 300  # 5 minutes max for TimeCopilot call
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as _pool:
+                _future = _pool.submit(_run_forecast)
+                try:
+                    result = _future.result(timeout=_TIMEOUT_S)
+                except concurrent.futures.TimeoutError:
+                    raise TimeoutError(
+                        f"TimeCopilot forecast timed out after {_TIMEOUT_S}s"
+                    )
+
             # Safely extract fcst_df (can't use `or` on DataFrames — truth-value ambiguity)
             raw = getattr(result, "fcst_df", None)
             if isinstance(raw, pd.DataFrame) and not raw.empty:
