@@ -2,7 +2,7 @@
   "entity": "driver",
   "race_name": "Pre-Season",
   "remaining_races": 23,
-  "timestamp": "2026-03-08T17:48:28.060914",
+  "timestamp": "2026-03-08T18:19:44.226706",
   "predicted_champion": {
     "name": "PIA",
     "predicted_points": 546.6678456233857,
@@ -50,5 +50,5 @@
       "predicted_position": 5
     }
   ],
-  "narrative": "In the 2026 F1 World Championship, the leading driver seems to be well-positioned to secure the championship title, with a projected gap over other competitors closely following. Forecast analysis indicates the likely margin of victory could exceed 70 points by the end of the season, contingent on maintaining performance consistency. Realistic challengers could include drivers who have shown recent upward trajectories, making them capable of gaining ground if the leading driver encounters any setbacks."
+  "narrative": "Based on the analysis of the drivers and their accumulated points across the remaining races, the current championship leader is likely to secure the championship with a healthy margin. Given recent performance trajectories, ALB and HAM are strong contenders, with RUS also positioned as a viable challenger."
 }
