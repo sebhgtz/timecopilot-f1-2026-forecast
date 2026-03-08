@@ -1,4 +1,4 @@
-unique_id,ds,DynamicOptimizedTheta,predicted_position,driver_code,constructor,predicted_rank,win_probability
+unique_id,ds,SeasonalNaive,predicted_position,driver_code,constructor,predicted_rank,win_probability
 ALB_australia,2024-01-01,,10.0,ALB,Williams,1,0.0625
 ALO_australia,2026-01-01,,10.0,ALO,Aston Martin,2,0.0625
 BOT_australia,2027-01-01,,10.0,BOT,Cadillac,3,0.0625

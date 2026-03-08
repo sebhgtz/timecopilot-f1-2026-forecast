@@ -1,5 +1,5 @@
 ## 🏎️ 2026 Australia Grand Prix — Pre-Weekend Prediction
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 06, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 08, 2026*
 
 ---
 
@@ -31,25 +31,25 @@
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** PIA (473 pts predicted final)
+**Predicted 2026 Driver Champion:** PIA (547 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | PIA | 0 | **473** |
-| 2 | NOR | 0 | **394** |
-| 3 | VER | 0 | **359** |
-| 4 | RUS | 0 | **244** |
-| 5 | LEC | 0 | **239** |
+| 1 | PIA | 0 | **547** |
+| 2 | NOR | 0 | **317** |
+| 3 | VER | 0 | **259** |
+| 4 | RUS | 0 | **241** |
+| 5 | LEC | 0 | **207** |
 
-**Predicted 2026 Constructor Champion:** red_bull_racing (415 pts)
+**Predicted 2026 Constructor Champion:** red_bull_racing (413 pts)
 
-*24 races remaining in the season.*
+*23 races remaining in the season.*
 
 ### 🤖 TimeCopilot Analysis — Championship
 
-> The likely winner of the 2026 F1 World Championship may be NOR, given their consistent points accumulation, though strong performances from VER and LEC indicate they should not be underestimated. The margin of victory could realistically be within 10-20 points, reflecting the close nature of the competition.
+> In the 2026 F1 World Championship, the leading driver seems to be well-positioned to secure the championship title, with a projected gap over other competitors closely following. Forecast analysis indicates the likely margin of victory could exceed 70 points by the end of the season, contingent on maintaining performance consistency. Realistic challengers could include drivers who have shown recent upward trajectories, making them capable of gaining ground if the leading driver encounters any setbacks.
 
 > ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
