@@ -59,13 +59,15 @@ class ReportGenerator:
         prediction_evolution: Optional[pd.DataFrame] = None,
         strategy_context: Optional[dict] = None,
         session_stage: str = "pre_weekend",
+        actual_race_results: Optional[pd.DataFrame] = None,
     ) -> None:
         """Generate all report formats for a given session stage."""
         print(f"  📝 Generating reports for stage: {session_stage}")
 
         # 1. Social card (Twitter/X)
         twitter_text = self.generate_twitter_card(
-            race_forecast, driver_champ_forecast, session_stage
+            race_forecast, driver_champ_forecast, session_stage,
+            actual_race_results=actual_race_results,
         )
         self._write(f"social_card_{session_stage}.txt", twitter_text)
         print(f"     ✓ Twitter card ({len(twitter_text)} chars)")
@@ -73,7 +75,8 @@ class ReportGenerator:
         # 2. LinkedIn post
         linkedin_text = self.generate_linkedin_post(
             race_forecast, driver_champ_forecast, constructor_champ_forecast,
-            prediction_evolution, strategy_context, session_stage
+            prediction_evolution, strategy_context, session_stage,
+            actual_race_results=actual_race_results,
         )
         self._write(f"linkedin_post_{session_stage}.md", linkedin_text)
         print(f"     ✓ LinkedIn post ({len(linkedin_text)} chars)")
@@ -96,6 +99,7 @@ class ReportGenerator:
         race_forecast,
         driver_champ_forecast,
         session_stage: str,
+        actual_race_results: Optional[pd.DataFrame] = None,
     ) -> str:
         """
         Generate ≤280 character Twitter/X post.
@@ -116,12 +120,19 @@ class ReportGenerator:
 
         # Championship-only card (post-race or when race forecast unavailable)
         if race_forecast is None:
+            # If we have actual race results, lead with the winner
+            winner_prefix = ""
+            if actual_race_results is not None and not actual_race_results.empty:
+                winner_row = actual_race_results.sort_values("finish_position").iloc[0]
+                winner_code = winner_row.get("driver_code", "?")
+                winner_prefix = f"{self.CHECKERED} {winner_code} wins! "
             if driver_champ_forecast:
                 champ = driver_champ_forecast.predicted_champion()
                 champ_name = champ.get("name", "?")
                 champ_pts = champ.get("predicted_points", 0)
                 base = (
                     f"{self.F1_FLAG} {self.year} {short_name} [{stage_label}]: "
+                    f"{winner_prefix}"
                     f"{self.TROPHY} Predicted Champion: {champ_name} "
                     f"({champ_pts:.0f} pts) #F1 #Formula1 #TimeCopilot"
                 )
@@ -171,6 +182,7 @@ class ReportGenerator:
         prediction_evolution: Optional[pd.DataFrame],
         strategy_context: Optional[dict],
         session_stage: str,
+        actual_race_results: Optional[pd.DataFrame] = None,
     ) -> str:
         """
         Generate a full LinkedIn post in markdown format.
@@ -197,6 +209,15 @@ class ReportGenerator:
             "---",
             "",
         ]
+
+        # Result badge — pre-race pick vs actual (shown on every stage)
+        badge = self._result_badge_lines(session_stage)
+        if badge:
+            lines += badge
+
+        # Actual race result section (post_race only)
+        if session_stage == "post_race" and actual_race_results is not None and not actual_race_results.empty:
+            lines += self._actual_race_result_section(actual_race_results)
 
         # Race prediction section
         if race_forecast and not race_forecast.predicted_top10.empty:
@@ -373,6 +394,166 @@ class ReportGenerator:
             f"> {truncated}",
             "",
         ]
+
+    def _result_badge_lines(self, session_stage: str) -> list[str]:
+        """
+        Compact one-liner showing the best pre-race prediction vs actual result.
+        Reads accuracy_log.csv (reports/accuracy_log.csv) for this race.
+        Falls back to reading race_forecast_qualifying.json if log has no entry yet.
+        Returns [] if no forecast data is available (e.g. very first pre_weekend run).
+        """
+        import json
+
+        accuracy_log = self.race_dir.parent / "accuracy_log.csv"
+        predicted_driver = None
+        predicted_prob = None
+        predicted_stage = None
+        actual_winner = None
+        correct = None
+        actual_pos = None
+
+        # Try accuracy_log first (has both predicted + actual after race)
+        if accuracy_log.exists():
+            try:
+                import csv
+                with accuracy_log.open(encoding="utf-8") as f:
+                    for row in csv.DictReader(f):
+                        if row.get("race_slug") == self.race_slug and str(row.get("year")) == str(self.year):
+                            predicted_driver = row.get("predicted_winner", "?")
+                            predicted_stage = row.get("session_stage", "qualifying")
+                            raw_prob = row.get("win_probability", "")
+                            predicted_prob = float(raw_prob) * 100 if raw_prob else None
+                            actual_w = row.get("actual_winner", "")
+                            if actual_w and actual_w not in ("?", ""):
+                                actual_winner = actual_w
+                                correct = row.get("correct", "").lower() == "true"
+                                raw_pos = row.get("actual_position_of_predicted", "")
+                                actual_pos = int(raw_pos) if raw_pos else None
+                            break
+            except Exception:
+                pass
+
+        # If no accuracy_log entry, fall back to race_forecast_qualifying.json
+        if predicted_driver is None:
+            for stage_name in ("qualifying", "sprint", "fp3", "fp2", "fp1", "pre_weekend"):
+                fc_path = self.race_dir / f"race_forecast_{stage_name}.json"
+                if fc_path.exists():
+                    try:
+                        fc = json.loads(fc_path.read_text(encoding="utf-8"))
+                        pw = fc.get("predicted_winner", {})
+                        predicted_driver = pw.get("driver_code")
+                        predicted_prob = (pw.get("win_probability") or 0) * 100
+                        predicted_stage = stage_name
+                    except Exception:
+                        pass
+                    if predicted_driver:
+                        break
+
+        if not predicted_driver:
+            return []
+
+        stage_label_map = {
+            "qualifying": "After Qualifying", "sprint": "After Sprint",
+            "fp3": "After FP3", "fp2": "After FP2",
+            "fp1": "After FP1", "pre_weekend": "Pre-Weekend",
+        }
+        stage_label = stage_label_map.get(predicted_stage or "", predicted_stage or "")
+        prob_str = f" · {predicted_prob:.0f}% win prob" if predicted_prob else ""
+
+        if actual_winner:
+            icon = "✅" if correct else "❌"
+            pos_str = f" · finished P{actual_pos}" if actual_pos else ""
+            result_str = f"🏁 **Winner: {actual_winner}** · {icon} {'Correct' if correct else 'Wrong'}{pos_str}"
+        else:
+            result_str = "🏁 *Race not yet run*"
+
+        return [
+            f"> 📊 **Pre-Race Pick ({stage_label}):** {predicted_driver}{prob_str} · {result_str}",
+            "",
+        ]
+
+    def _actual_race_result_section(self, results_df: pd.DataFrame) -> list[str]:
+        """
+        Render the actual race result for the post-race LinkedIn post.
+        Shows winner, full classified order, DNFs and DNSs.
+        Compares against the model's best pre-race prediction.
+        """
+        import json
+
+        lines = [f"### {self.CHECKERED} Race Result — {self.race_name}", ""]
+
+        # Split into classified (finish_position is a valid int) and non-classified
+        df = results_df.copy()
+        df["_pos_num"] = pd.to_numeric(df.get("finish_position", pd.Series(dtype=float)), errors="coerce")
+        classified = df[df["_pos_num"].notna()].sort_values("_pos_num")
+        dnf = df[(df["_pos_num"].isna()) & (df.get("status", pd.Series(dtype=str)).str.upper() != "DNS")]
+        dns = df[df.get("status", pd.Series(dtype=str)).str.upper() == "DNS"]
+
+        if not classified.empty:
+            winner_row = classified.iloc[0]
+            winner_code = winner_row.get("driver_code", "?")
+            winner_team = _normalize_constructor(str(winner_row.get("constructor", "")))
+            lines += [f"**Winner: {winner_code} ({winner_team})**", ""]
+            lines += [
+                "| Pos | Driver | Constructor | Pts |",
+                "|-----|--------|-------------|-----|",
+            ]
+            for _, row in classified.iterrows():
+                pos = int(row["_pos_num"])
+                driver = str(row.get("driver_code", "?"))
+                team = _normalize_constructor(str(row.get("constructor", "")))
+                pts = int(row.get("points", 0))
+                lines.append(f"| {pos} | {driver} | {team} | {pts} |")
+
+        for label, subset in [("DNF", dnf), ("DNS", dns)]:
+            for _, row in subset.iterrows():
+                driver = str(row.get("driver_code", "?"))
+                team = _normalize_constructor(str(row.get("constructor", "")))
+                lines.append(f"| {label} | {driver} | {team} | 0 |")
+        lines.append("")
+
+        # Comparison to model prediction
+        for stage_name in ("qualifying", "sprint", "fp3", "fp2", "fp1", "pre_weekend"):
+            fc_path = self.race_dir / f"race_forecast_{stage_name}.json"
+            if fc_path.exists():
+                try:
+                    fc = json.loads(fc_path.read_text(encoding="utf-8"))
+                    pw = fc.get("predicted_winner", {})
+                    pred_code = pw.get("driver_code", "?")
+                    pred_prob = (pw.get("win_probability") or 0) * 100
+                    stage_label_map = {
+                        "qualifying": "After Qualifying", "sprint": "After Sprint",
+                        "fp3": "After FP3", "fp2": "After FP2",
+                        "fp1": "After FP1", "pre_weekend": "Pre-Weekend",
+                    }
+                    stage_lbl = stage_label_map.get(stage_name, stage_name)
+                    if not classified.empty:
+                        actual_winner_code = classified.iloc[0].get("driver_code", "")
+                        if pred_code == actual_winner_code:
+                            verdict = "✅ Correct!"
+                            # Find where actual winner finished (already P1, but confirm)
+                            verdict += " *(finished P1)*"
+                        else:
+                            # Find where predicted driver actually finished
+                            pred_rows = df[df["driver_code"] == pred_code]
+                            if not pred_rows.empty:
+                                pred_finish = pred_rows.iloc[0]["_pos_num"]
+                                status = str(pred_rows.iloc[0].get("status", ""))
+                                if pd.isna(pred_finish):
+                                    verdict = f"❌ Wrong — {pred_code} {status}"
+                                else:
+                                    verdict = f"❌ Wrong — {pred_code} finished P{int(pred_finish)}"
+                            else:
+                                verdict = f"❌ Wrong"
+                        lines += [
+                            f"🔮 **Model predicted ({stage_lbl}): {pred_code}** ({pred_prob:.0f}% win prob) → {verdict}",
+                            "",
+                        ]
+                except Exception:
+                    pass
+                break
+
+        return lines
 
     # ── Charts ────────────────────────────────────────────────────────────────
 

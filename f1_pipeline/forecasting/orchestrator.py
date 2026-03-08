@@ -362,6 +362,15 @@ def post_race_championship_update(
         year=year,
     )
 
+    # Fetch actual race results for the result section
+    actual_race_results = None
+    try:
+        actual_race_results = jolpica_fresh.race_results(year, round=race.round)
+        if actual_race_results is not None and not actual_race_results.empty:
+            print(f"   ✓ Fetched actual race results ({len(actual_race_results)} finishers)")
+    except Exception as exc:
+        print(f"  ⚠️  Could not fetch actual race results: {exc}")
+
     print("\n📄 Generating post-race report...")
     rg = ReportGenerator(race_slug=race_slug, year=year, race_name=race.name)
     rg.generate_all(
@@ -371,6 +380,7 @@ def post_race_championship_update(
         prediction_evolution=None,
         strategy_context=None,
         session_stage="post_race",
+        actual_race_results=actual_race_results,
     )
 
     print(f"\n✅ Post-race championship update complete for {race.name} {year}")

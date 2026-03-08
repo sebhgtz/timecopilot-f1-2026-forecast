@@ -219,6 +219,78 @@ def _load_accuracy_log() -> dict[tuple[str, int], dict]:
     return results
 
 
+def _build_result_card_html(race_dir: Path, stage: str, accuracy_entry: dict | None) -> str:
+    """
+    Two-column card: left = this stage's prediction, right = actual race result.
+    Appears at the top of every session section tab.
+    """
+    import json
+
+    # Left column: read this stage's prediction from race_forecast_{stage}.json
+    pred_driver = None
+    pred_prob = None
+    fc_path = race_dir / f"race_forecast_{stage}.json"
+    if fc_path.exists():
+        try:
+            fc = json.loads(fc_path.read_text(encoding="utf-8"))
+            pw = fc.get("predicted_winner", {})
+            pred_driver = pw.get("driver_code")
+            pred_prob = (pw.get("win_probability") or 0) * 100
+        except Exception:
+            pass
+
+    # If post_race stage has no race_forecast (race already happened), skip left column
+    if pred_driver is None and stage == "post_race":
+        return ""
+    if pred_driver is None:
+        return ""
+
+    prob_html = f'<span style="color:#aaa; font-size:0.8rem;">{pred_prob:.0f}% win probability</span>' if pred_prob else ""
+    stage_label = STAGE_LABELS.get(stage, stage.upper())
+    left_html = f"""
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🔮 Predicted ({stage_label})
+      </div>
+      <strong style="font-size:1.05rem;">{pred_driver}</strong><br>
+      {prob_html}
+    </div>"""
+
+    # Right column: actual result from accuracy_entry
+    if accuracy_entry and accuracy_entry.get("actual_winner") not in (None, "", "?"):
+        actual = accuracy_entry["actual_winner"]
+        correct = accuracy_entry.get("correct", "").lower() == "true"
+        actual_pos = accuracy_entry.get("actual_position_of_predicted", "")
+        icon = "✅" if correct else "❌"
+        verdict = "Correct!" if correct else "Wrong"
+        pos_note = f" · finished P{actual_pos}" if actual_pos and str(actual_pos) != "1" else ""
+        bg = "#1a3a1a" if correct else "#3a1a1a"
+        right_html = f"""
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🏁 Actual Result
+      </div>
+      {icon} <strong style="font-size:1.05rem;">{actual}</strong><br>
+      <span style="color:#aaa; font-size:0.8rem;">{verdict}{pos_note}</span>
+    </div>"""
+    else:
+        bg = "#1a1a2e"
+        right_html = """
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🏁 Actual Result
+      </div>
+      <em style="color:#555;">Race not yet run</em>
+    </div>"""
+
+    return f"""<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  background:{bg}; border:1px solid #2a2a4e; border-radius:8px;
+  padding:14px 18px; margin:0 0 16px; font-size:0.9rem;">
+  {left_html}
+  {right_html}
+</div>"""
+
+
 def _result_banner_html(accuracy: dict) -> str:
     """Render a result banner from an accuracy_log row."""
     predicted = accuracy["predicted_winner"]
@@ -323,6 +395,10 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
         tabs_html += f'<a href="#{stage}" class="stage-tab{active}">{label}</a>'
     tabs_html += "</div>"
 
+    # Accuracy log entry for this race (used by per-stage result card)
+    result_key = (race["dir"].name.rsplit("_", 1)[0], race["year"])
+    accuracy_entry = accuracy_log.get(result_key)
+
     # Build content for each stage
     content_html = ""
     for stage in race["stages"]:
@@ -349,17 +425,20 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
                     chart_html += f'<img src="charts/{cf.name}" alt="{cf.stem}" loading="lazy">'
                 chart_html += "</div>"
 
+        # Per-stage prediction vs actual result card
+        result_card_html = _build_result_card_html(race["dir"], stage, accuracy_entry)
+
         content_html += f"""
 <section id="{stage}">
   <h2>{label}</h2>
+  {result_card_html}
   <div class="social-card">{social_text}</div>
   {chart_html}
   {linkedin_html}
 </section>
 """
 
-    result_key = (race["dir"].name.rsplit("_", 1)[0], race["year"])
-    result_html = _result_banner_html(accuracy_log[result_key]) if result_key in accuracy_log else ""
+    result_html = _result_banner_html(accuracy_entry) if accuracy_entry else ""
 
     body = f"""
 <h2 style="font-size:1.6rem; border:none; color:#fff;">
