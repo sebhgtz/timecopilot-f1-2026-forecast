@@ -1,5 +1,5 @@
 ## 🏎️ 2026 Australia Grand Prix — Pre-Weekend Prediction
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 08, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 09, 2026*
 
 ---
 
@@ -8,50 +8,50 @@
 ### 🏁 Race Prediction
 
 **Predicted Podium:**
-🥇 P1: **HAM** (Ferrari) — 12% probability
-🥈 P2: **NOR** (McLaren) — 10% probability
-🥉 P3: **PIA** (McLaren) — 8% probability
+🥇 P1: **ALB** (Williams) — 6% probability
+🥈 P2: **ALO** (Aston Martin) — 6% probability
+🥉 P3: **BOT** (Cadillac) — 6% probability
 
 **Full Top 10 Prediction:**
 
 | Pos | Driver | Team | Win Probability |
 |-----|--------|------|-----------------|
-| 1 | HAM | Ferrari | 12% |
-| 2 | NOR | McLaren | 10% |
-| 3 | PIA | McLaren | 8% |
-| 4 | HUL | Audi | 7% |
-| 5 | LEC | Ferrari | 7% |
-| 6 | PER | Cadillac | 7% |
-| 7 | VER | Red Bull Racing | 6% |
-| 8 | BOT | Cadillac | 6% |
-| 9 | STR | Aston Martin | 6% |
-| 10 | RUS | Mercedes | 5% |
+| 1 | ALB | Williams | 6% |
+| 2 | ALO | Aston Martin | 6% |
+| 3 | BOT | Cadillac | 6% |
+| 4 | GAS | Alpine | 6% |
+| 5 | HAM | Ferrari | 6% |
+| 6 | HUL | Audi | 6% |
+| 7 | LEC | Ferrari | 6% |
+| 8 | LIN | Racing Bulls | 6% |
+| 9 | NOR | McLaren | 6% |
+| 10 | OCO | Haas | 6% |
 
-💡 **Key Insight:** HAM predicted winner at 12% based on historical circuit performance.
+💡 **Key Insight:** ALB predicted winner at 6% based on historical circuit performance.
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** PIA (547 pts predicted final)
+**Predicted 2026 Driver Champion:** NOR (238 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | PIA | 0 | **547** |
-| 2 | NOR | 0 | **317** |
-| 3 | VER | 0 | **259** |
-| 4 | RUS | 0 | **241** |
-| 5 | LEC | 0 | **207** |
+| 1 | NOR | 10 | **238** |
+| 2 | VER | 8 | **200** |
+| 3 | RUS | 25 | **193** |
+| 4 | LEC | 15 | **177** |
+| 5 | PER | 0 | **162** |
 
-**Predicted 2026 Constructor Champion:** red_bull_racing (413 pts)
+**Predicted 2026 Constructor Champion:** red_bull_racing (388 pts)
 
 *23 races remaining in the season.*
 
 ### 🤖 TimeCopilot Analysis — Championship
 
-> Based on the analysis of the drivers and their accumulated points across the remaining races, the current championship leader is likely to secure the championship with a healthy margin. Given recent performance trajectories, ALB and HAM are strong contenders, with RUS also positioned as a viable challenger.
+> Based on the current points distributions and forecasts, the leading drivers are projected to maintain their trajectories with the championship leader winning by a likely margin in points of approximately 4-15 points, given competitive performance among top challengers. Drivers such as ALB, ALO, and HAM appear as realistic contenders to catch up given their recent form trends.
 
 > ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
