@@ -3,23 +3,54 @@
 
 ---
 
-> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 *Race not yet run*
+> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 **Winner: RUS** · ✅ Correct
+
+### 🏁 Race Result — Australian Grand Prix
+
+**Winner: RUS (Mercedes)**
+
+| Pos | Driver | Constructor | Pts |
+|-----|--------|-------------|-----|
+| 1 | RUS | Mercedes | 25 |
+| 2 | ANT | Mercedes | 18 |
+| 3 | LEC | Ferrari | 15 |
+| 4 | HAM | Ferrari | 12 |
+| 5 | NOR | McLaren | 10 |
+| 6 | VER | Red Bull Racing | 8 |
+| 7 | BEA | Haas | 6 |
+| 8 | LIN | RB F1 Team | 4 |
+| 9 | BOR | Audi | 2 |
+| 10 | GAS | Alpine | 1 |
+| 11 | OCO | Haas | 0 |
+| 12 | ALB | Williams | 0 |
+| 13 | LAW | RB F1 Team | 0 |
+| 14 | COL | Alpine | 0 |
+| 15 | SAI | Williams | 0 |
+| 16 | PER | Cadillac F1 Team | 0 |
+| 17 | STR | Aston Martin | 0 |
+| 18 | ALO | Aston Martin | 0 |
+| 19 | BOT | Cadillac F1 Team | 0 |
+| 20 | HAD | Red Bull Racing | 0 |
+| 21 | PIA | McLaren | 0 |
+| 22 | HUL | Audi | 0 |
+
+🔮 **Model predicted (After Qualifying): RUS** (14% win prob) → ✅ Correct! *(finished P1)*
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** ALB (0 pts predicted final)
+**Predicted 2026 Driver Champion:** RUS (25 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | ALB | 0 | **0** |
-| 12 | LAW | 0 | **0** |
-| 20 | STR | 0 | **0** |
-| 19 | SAI | 0 | **0** |
-| 18 | RUS | 0 | **0** |
+| 1 | RUS | 25 | **25** |
+| 2 | ANT | 18 | **18** |
+| 3 | LEC | 15 | **15** |
+| 4 | HAM | 12 | **12** |
+| 5 | NOR | 10 | **10** |
 
-**Predicted 2026 Constructor Champion:** red_bull_racing (413 pts)
+**Predicted 2026 Constructor Champion:** red_bull_racing (388 pts)
 
 *23 races remaining in the season.*
 
