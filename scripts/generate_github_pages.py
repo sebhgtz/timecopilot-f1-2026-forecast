@@ -310,6 +310,8 @@ def _build_race_comparison_html(race_dir: Path) -> str:
 
     predicted_set = {r["driver_code"] for r in predicted_rows}
     actual_by_driver = {r["driver_code"]: r for r in actual_classified}
+    dnf_drivers = {r["driver_code"] for r in actual_dnf}
+    dns_drivers = {r["driver_code"] for r in actual_dns}
 
     rows_html = ""
     max_rows = max(len(predicted_rows), len(actual_classified))
@@ -318,21 +320,30 @@ def _build_race_comparison_html(race_dir: Path) -> str:
         act = actual_classified[i] if i < len(actual_classified) else None
 
         pred_cell = ""
+        delta_cell = ""
         if pred:
-            act_for_pred = actual_by_driver.get(pred["driver_code"])
-            is_correct = act_for_pred and act_for_pred["position"] == pred["rank"]
-            match_icon = " ✅" if is_correct else ""
             pred_cell = (
                 f'P{pred["rank"]}: <strong>{pred["driver_code"]}</strong>'
-                f'<span style="color:#888; font-size:0.8rem;"> ({pred["prob"]:.0f}%){match_icon}</span>'
+                f'<span style="color:#888; font-size:0.8rem;"> ({pred["prob"]:.0f}%)</span>'
             )
+            act_for_pred = actual_by_driver.get(pred["driver_code"])
+            if act_for_pred:
+                delta = pred["rank"] - act_for_pred["position"]  # positive = beat prediction
+                if delta == 0:
+                    delta_cell = "✅"
+                elif delta > 0:
+                    delta_cell = f'<span style="color:#4aff9a;">⬆️ {delta}</span>'
+                else:
+                    delta_cell = f'<span style="color:#ff6b6b;">⬇️ {abs(delta)}</span>'
+            elif pred["driver_code"] in dns_drivers:
+                delta_cell = '<span style="color:#888;">❌ DNS</span>'
+            elif pred["driver_code"] in dnf_drivers:
+                delta_cell = '<span style="color:#888;">❌ DNF</span>'
 
         act_cell = ""
         if act:
             pts = int(act.get("points", 0))
             pts_str = f" · {pts}pts" if pts > 0 else ""
-            was_predicted = act["driver_code"] in predicted_set
-            color = "#e0e0e0"
             act_cell = (
                 f'P{act["position"]}: <strong>{act["driver_code"]}</strong>'
                 f'<span style="color:#888; font-size:0.8rem;">{pts_str}</span>'
@@ -342,6 +353,7 @@ def _build_race_comparison_html(race_dir: Path) -> str:
             f'<tr>'
             f'<td style="padding:5px 10px; vertical-align:top;">{pred_cell}</td>'
             f'<td style="padding:5px 10px; vertical-align:top; border-left:1px solid #2a2a4e;">{act_cell}</td>'
+            f'<td style="padding:5px 10px; text-align:center; vertical-align:top; border-left:1px solid #2a2a4e; white-space:nowrap;">{delta_cell}</td>'
             f'</tr>\n'
         )
 
@@ -349,13 +361,13 @@ def _build_race_comparison_html(race_dir: Path) -> str:
         rows_html += (
             f'<tr><td></td>'
             f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
-            f'DNF: {r["driver_code"]}</td></tr>\n'
+            f'DNF: {r["driver_code"]}</td><td style="border-left:1px solid #2a2a4e;"></td></tr>\n'
         )
     for r in actual_dns:
         rows_html += (
             f'<tr><td></td>'
             f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
-            f'DNS: {r["driver_code"]}</td></tr>\n'
+            f'DNS: {r["driver_code"]}</td><td style="border-left:1px solid #2a2a4e;"></td></tr>\n'
         )
 
     return f"""<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
@@ -367,6 +379,7 @@ def _build_race_comparison_html(race_dir: Path) -> str:
       <tr>
         <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">🔮 Predicted ({best_stage_label})</th>
         <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">🏁 Actual Result</th>
+        <th style="padding:5px 10px; text-align:center; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">Δ Pos</th>
       </tr>
     </thead>
     <tbody>{rows_html}</tbody>
