@@ -3,7 +3,7 @@
 
 ---
 
-> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 **Winner: RUS** · ✅ Correct
+> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 **Winner: RUS** · ✅ Correct · finished P1
 
 ### 🏁 Race Result — Australian Grand Prix
 
@@ -27,12 +27,12 @@
 | 14 | COL | Alpine | 0 |
 | 15 | SAI | Williams | 0 |
 | 16 | PER | Cadillac F1 Team | 0 |
-| 17 | STR | Aston Martin | 0 |
-| 18 | ALO | Aston Martin | 0 |
-| 19 | BOT | Cadillac F1 Team | 0 |
-| 20 | HAD | Red Bull Racing | 0 |
-| 21 | PIA | McLaren | 0 |
-| 22 | HUL | Audi | 0 |
+| DNF | STR | Aston Martin | 0 |
+| DNF | ALO | Aston Martin | 0 |
+| DNF | BOT | Cadillac F1 Team | 0 |
+| DNF | HAD | Red Bull Racing | 0 |
+| DNS | PIA | McLaren | 0 |
+| DNS | HUL | Audi | 0 |
 
 🔮 **Model predicted (After Qualifying): RUS** (14% win prob) → ✅ Correct! *(finished P1)*
 
@@ -50,11 +50,13 @@
 | 4 | HAM | 12 | **12** |
 | 5 | NOR | 10 | **10** |
 
-**Predicted 2026 Constructor Champion:** red_bull_racing (388 pts)
+**Predicted 2026 Constructor Champion:** Mercedes (43 pts)
 
 *23 races remaining in the season.*
 
-> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
+### 🤖 TimeCopilot Analysis — Championship
+
+> Considering these analyses, the likely championship winner is difficult to ascertain definitively due to potential race outcome variability. The forecasts suggest that the current leaders could maintain their trajectory barring any drastic changes. Potential challengers can include drivers exhibiting recent improvements or anomalies, specifically those capable of explosive performances. The final championship margin will heavily depend on race-to-race developments over the 23 remaining races, maintaining thus a competitive edge till the end.
 
 
 ---
