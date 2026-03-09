@@ -128,10 +128,26 @@ def _load_accuracy_log() -> dict[tuple[str, int], dict]:
     return results
 
 
+def _load_actual_podium(race_dir: Path) -> list[dict]:
+    """Load actual P1/P2/P3 from race_results_post_race.json if available."""
+    import json
+    path = race_dir / "race_results_post_race.json"
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        classified = [r for r in data.get("results", []) if r.get("position") is not None]
+        classified.sort(key=lambda r: r["position"])
+        return classified[:3]
+    except Exception:
+        return []
+
+
 def _build_result_card_html(race_dir: Path, stage: str, accuracy_entry: dict | None) -> str:
     """
-    Two-column card: left = this stage's predicted podium (P1/P2/P3), right = actual result.
-    Compares THIS stage's predicted winner against the actual winner for ✅/❌ verdict.
+    Two-column card: left = this stage's predicted podium (P1/P2/P3), right = actual podium.
+    Right column uses race_results_post_race.json when available (shows P1/P2/P3 actual).
+    Falls back to accuracy_log for P1 only if JSON not present.
     """
     import json
 
@@ -177,42 +193,56 @@ def _build_result_card_html(race_dir: Path, stage: str, accuracy_entry: dict | N
       {podium_lines}
     </div>"""
 
-    # Right column: compare THIS stage's predicted winner against actual winner
-    if accuracy_entry and accuracy_entry.get("actual_winner") not in (None, "", "?"):
-        actual = accuracy_entry["actual_winner"]
-        stage_correct = (pred_driver == actual)  # this stage's P1 vs actual winner
-        actual_pos = accuracy_entry.get("actual_position_of_predicted", "")
+    # Right column: actual podium from race_results_post_race.json (preferred)
+    actual_podium = _load_actual_podium(race_dir)
+    if actual_podium:
+        actual_p1 = actual_podium[0]["driver_code"]
+        stage_correct = (pred_driver == actual_p1)
         icon = "✅" if stage_correct else "❌"
-        if stage_correct:
-            verdict = "Correct!"
-        else:
-            verdict = f"Wrong (winner: {actual})"
-        pos_note = ""
-        # actual_position_of_predicted tracks where the QUALIFYING predicted driver finished.
-        # Only show it when this stage predicted the same driver as accuracy_log (qualifying).
-        log_predicted = accuracy_entry.get("predicted_winner", "")
-        if actual_pos and stage_correct and log_predicted == pred_driver:
-            try:
-                p = int(float(actual_pos))
-                if p > 1:
-                    pos_note = f" · finished P{p}"
-            except (ValueError, TypeError):
-                pass
+        verdict = "Correct!" if stage_correct else f"Wrong ({actual_p1} won)"
+        bg = "#1a3a1a" if stage_correct else "#3a1a1a"
+        pred_codes = {e.get("driver_code"): e.get("position") for e in podium_entries[:3]}
+        podium_rows = ""
+        for ap in actual_podium:
+            p = ap["position"]
+            code = ap["driver_code"]
+            pred_pos = pred_codes.get(code)
+            match = " ✓" if pred_pos == p else ""
+            podium_rows += (
+                f'<span style="display:block; margin-bottom:3px;">'
+                f'P{p}: <strong>{code}</strong>'
+                f'<span style="color:#5a5; font-size:0.78rem;">{match}</span>'
+                f'</span>'
+            )
+        right_html = f"""
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🏁 Actual Podium
+      </div>
+      {podium_rows}
+      <span style="color:#aaa; font-size:0.78rem; margin-top:4px; display:block;">{icon} {verdict}</span>
+    </div>"""
+    elif accuracy_entry and accuracy_entry.get("actual_winner") not in (None, "", "?"):
+        # Fallback: only P1 from accuracy_log (old races without race_results_post_race.json)
+        actual = accuracy_entry["actual_winner"]
+        stage_correct = (pred_driver == actual)
+        icon = "✅" if stage_correct else "❌"
+        verdict = "Correct!" if stage_correct else f"Wrong ({actual} won)"
         bg = "#1a3a1a" if stage_correct else "#3a1a1a"
         right_html = f"""
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🏁 Actual Result
       </div>
-      {icon} <strong style="font-size:1.05rem;">{actual}</strong> wins<br>
-      <span style="color:#aaa; font-size:0.8rem;">{verdict}{pos_note}</span>
+      <span style="display:block; margin-bottom:3px;">P1: <strong>{actual}</strong></span>
+      <span style="color:#aaa; font-size:0.78rem; margin-top:4px; display:block;">{icon} {verdict}</span>
     </div>"""
     else:
         bg = "#1a1a2e"
         right_html = """
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
-        🏁 Actual Result
+        🏁 Actual Podium
       </div>
       <em style="color:#555;">Race not yet run</em>
     </div>"""
@@ -222,6 +252,125 @@ def _build_result_card_html(race_dir: Path, stage: str, accuracy_entry: dict | N
   padding:14px 18px; margin:0 0 16px; font-size:0.9rem;">
   {left_html}
   {right_html}
+</div>"""
+
+
+def _build_race_comparison_html(race_dir: Path) -> str:
+    """
+    Side-by-side predicted vs actual finishing order for the post-race tab.
+    Left: predicted top 10 from top10_qualifying.csv (or best available stage).
+    Right: actual classified + DNF + DNS from race_results_post_race.json.
+    """
+    import json as _json
+    import csv as _csv
+
+    # Load predicted top 10 from best available stage CSV
+    predicted_rows = []
+    best_stage_label = "Qualifying"
+    for stage_name, label in (("qualifying", "After Qualifying"), ("sprint", "After Sprint"),
+                               ("fp3", "After FP3"), ("fp2", "After FP2"),
+                               ("fp1", "After FP1"), ("pre_weekend", "Pre-Weekend")):
+        top10_path = race_dir / f"top10_{stage_name}.csv"
+        if top10_path.exists():
+            try:
+                with top10_path.open(encoding="utf-8") as f:
+                    for row in _csv.DictReader(f):
+                        predicted_rows.append({
+                            "rank": int(float(row.get("predicted_rank", 99))),
+                            "driver_code": row.get("driver_code", "?"),
+                            "constructor": row.get("constructor", ""),
+                            "prob": float(row.get("win_probability", 0)) * 100,
+                        })
+                predicted_rows.sort(key=lambda r: r["rank"])
+                best_stage_label = label
+            except Exception:
+                pass
+            if predicted_rows:
+                break
+
+    # Load actual results
+    actual_classified, actual_dnf, actual_dns = [], [], []
+    actual_results_path = race_dir / "race_results_post_race.json"
+    if actual_results_path.exists():
+        try:
+            data = _json.loads(actual_results_path.read_text(encoding="utf-8"))
+            for r in data.get("results", []):
+                if r.get("position") is not None:
+                    actual_classified.append(r)
+                elif r.get("status", "").lower() == "did not start":
+                    actual_dns.append(r)
+                else:
+                    actual_dnf.append(r)
+            actual_classified.sort(key=lambda r: r["position"])
+        except Exception:
+            pass
+
+    if not predicted_rows and not actual_classified:
+        return ""
+
+    predicted_set = {r["driver_code"] for r in predicted_rows}
+    actual_by_driver = {r["driver_code"]: r for r in actual_classified}
+
+    rows_html = ""
+    max_rows = max(len(predicted_rows), len(actual_classified))
+    for i in range(max_rows):
+        pred = predicted_rows[i] if i < len(predicted_rows) else None
+        act = actual_classified[i] if i < len(actual_classified) else None
+
+        pred_cell = ""
+        if pred:
+            act_for_pred = actual_by_driver.get(pred["driver_code"])
+            is_correct = act_for_pred and act_for_pred["position"] == pred["rank"]
+            match_icon = " ✅" if is_correct else ""
+            pred_cell = (
+                f'P{pred["rank"]}: <strong>{pred["driver_code"]}</strong>'
+                f'<span style="color:#888; font-size:0.8rem;"> ({pred["prob"]:.0f}%){match_icon}</span>'
+            )
+
+        act_cell = ""
+        if act:
+            pts = int(act.get("points", 0))
+            pts_str = f" · {pts}pts" if pts > 0 else ""
+            was_predicted = act["driver_code"] in predicted_set
+            color = "#e0e0e0"
+            act_cell = (
+                f'P{act["position"]}: <strong>{act["driver_code"]}</strong>'
+                f'<span style="color:#888; font-size:0.8rem;">{pts_str}</span>'
+            )
+
+        rows_html += (
+            f'<tr>'
+            f'<td style="padding:5px 10px; vertical-align:top;">{pred_cell}</td>'
+            f'<td style="padding:5px 10px; vertical-align:top; border-left:1px solid #2a2a4e;">{act_cell}</td>'
+            f'</tr>\n'
+        )
+
+    for r in actual_dnf:
+        rows_html += (
+            f'<tr><td></td>'
+            f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
+            f'DNF: {r["driver_code"]}</td></tr>\n'
+        )
+    for r in actual_dns:
+        rows_html += (
+            f'<tr><td></td>'
+            f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
+            f'DNS: {r["driver_code"]}</td></tr>\n'
+        )
+
+    return f"""<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
+  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+    📊 Race Prediction vs Result
+  </div>
+  <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+    <thead>
+      <tr>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">🔮 Predicted ({best_stage_label})</th>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">🏁 Actual Result</th>
+      </tr>
+    </thead>
+    <tbody>{rows_html}</tbody>
+  </table>
 </div>"""
 
 
@@ -356,10 +505,16 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
         # Per-stage prediction vs actual result card
         result_card_html = _build_result_card_html(race["dir"], stage, accuracy_entry)
 
+        # Post-race comparison table (predicted vs actual finishing order)
+        comparison_html = ""
+        if stage == "post_race":
+            comparison_html = _build_race_comparison_html(race["dir"])
+
         content_html += f"""
 <section id="{stage}" style="display:{display};">
   <h2>{label}</h2>
   {result_card_html}
+  {comparison_html}
   {chart_html}
 </section>
 """

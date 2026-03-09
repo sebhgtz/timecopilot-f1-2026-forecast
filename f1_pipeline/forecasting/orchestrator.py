@@ -368,6 +368,34 @@ def post_race_championship_update(
         actual_race_results = jolpica_fresh.race_results(year, round=race.round)
         if actual_race_results is not None and not actual_race_results.empty:
             print(f"   ✓ Fetched actual race results ({len(actual_race_results)} finishers)")
+            # Persist results as JSON so the GitHub Pages generator can show actual podium
+            import json as _json
+            from pathlib import Path as _Path
+            import math as _math
+            results_payload = []
+            for _, row in actual_race_results.iterrows():
+                pos = row.get("finish_position")
+                pos_val = None
+                if pos is not None and pos == pos:  # not NaN
+                    try:
+                        pos_val = int(float(pos))
+                    except (ValueError, TypeError):
+                        pass
+                results_payload.append({
+                    "position": pos_val,
+                    "driver_code": str(row.get("driver_code", "")),
+                    "constructor": str(row.get("constructor", "")),
+                    "points": float(row.get("points", 0)),
+                    "status": str(row.get("status", "")),
+                })
+            race_out_dir = _Path(f"reports/{race_slug}_{year}")
+            race_out_dir.mkdir(parents=True, exist_ok=True)
+            (race_out_dir / "race_results_post_race.json").write_text(
+                _json.dumps({"race_name": race.name, "year": year, "round": race.round,
+                             "results": results_payload}, indent=2),
+                encoding="utf-8",
+            )
+            print(f"   ✓ Saved race_results_post_race.json ({len(results_payload)} drivers)")
     except Exception as exc:
         print(f"  ⚠️  Could not fetch actual race results: {exc}")
 
