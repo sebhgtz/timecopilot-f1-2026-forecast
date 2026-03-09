@@ -198,6 +198,8 @@ def main():
 
     if session == "pre_weekend":
         _run_pre_weekend(args.race, args.year, args.llm, args.refresh, args.last_race, False)
+    elif session == "post_race":
+        _run_post_race_championship(args.race, args.year, args.llm, False)
     else:
         # Map CLI session name to FastF1 session name
         session_map = {
