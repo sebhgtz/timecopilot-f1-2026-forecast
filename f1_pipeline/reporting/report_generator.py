@@ -428,7 +428,7 @@ class ReportGenerator:
                                 actual_winner = actual_w
                                 correct = row.get("correct", "").lower() == "true"
                                 raw_pos = row.get("actual_position_of_predicted", "")
-                                actual_pos = int(raw_pos) if raw_pos else None
+                                actual_pos = int(float(raw_pos)) if raw_pos else None
                             break
             except Exception:
                 pass
@@ -486,8 +486,8 @@ class ReportGenerator:
         df = results_df.copy()
         df["_pos_num"] = pd.to_numeric(df.get("finish_position", pd.Series(dtype=float)), errors="coerce")
         classified = df[df["_pos_num"].notna()].sort_values("_pos_num")
-        dnf = df[(df["_pos_num"].isna()) & (df.get("status", pd.Series(dtype=str)).str.upper() != "DNS")]
-        dns = df[df.get("status", pd.Series(dtype=str)).str.upper() == "DNS"]
+        dnf = df[(df["_pos_num"].isna()) & (df["status"].str.lower() != "did not start")]
+        dns = df[df["status"].str.lower() == "did not start"]
 
         if not classified.empty:
             winner_row = classified.iloc[0]

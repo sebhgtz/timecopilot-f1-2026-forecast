@@ -281,7 +281,7 @@ class JolpicaCollector:
                     "driver_name": f"{driver.get('givenName', '')} {driver.get('familyName', '')}".strip(),
                     "constructor": constructor.get("name", ""),
                     "grid": _safe_int(result.get("grid")) or 0,
-                    "finish_position": _safe_int(result.get("position")),
+                    "finish_position": _safe_int(result.get("positionText")),
                     "points": float(result.get("points", 0)),
                     "status": result.get("status", ""),
                     "fastest_lap_rank": _safe_int(
