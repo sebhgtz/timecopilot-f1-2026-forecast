@@ -38,23 +38,21 @@
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** RUS (25 pts predicted final)
+**Predicted 2026 Driver Champion:** VER (78 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | RUS | 25 | **25** |
-| 2 | ANT | 18 | **18** |
-| 3 | LEC | 15 | **15** |
-| 4 | HAM | 12 | **12** |
-| 5 | NOR | 10 | **10** |
+| 1 | VER | 8 | **78** |
+| 2 | PER | 0 | **69** |
+| 3 | NOR | 10 | **61** |
+| 4 | RUS | 25 | **61** |
+| 5 | LEC | 15 | **31** |
 
-**Predicted 2026 Constructor Champion:** red_bull_racing (388 pts)
+**Predicted 2026 Constructor Champion:** Mercedes (43 pts)
 
 *23 races remaining in the season.*
-
-> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---

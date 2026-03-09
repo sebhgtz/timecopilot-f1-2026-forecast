@@ -95,7 +95,7 @@ class ReportGenerator:
         # 3. Save top10 CSV (used by accuracy tracker)
         if race_forecast and not race_forecast.predicted_top10.empty:
             top10_path = self.race_dir / f"top10_{session_stage}.csv"
-            race_forecast.predicted_top10.head(10).to_csv(top10_path, index=False)
+            race_forecast.predicted_top10.to_csv(top10_path, index=False)
             print(f"     ✓ Top-10 CSV saved")
 
         # 4. Charts

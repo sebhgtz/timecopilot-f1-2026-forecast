@@ -362,6 +362,14 @@ def post_race_championship_update(
         year=year,
     )
 
+    # Save constructor championship standings CSV
+    if constructor_champ_fc is not None and not constructor_champ_fc.predicted_final.empty:
+        from pathlib import Path as _Path
+        cons_path = _Path(f"reports/{race_slug}_{year}") / "constructor_championship_standings.csv"
+        cons_path.parent.mkdir(parents=True, exist_ok=True)
+        constructor_champ_fc.predicted_final.to_csv(cons_path, index=False)
+        print(f"   ✓ Saved constructor_championship_standings.csv")
+
     # Fetch actual race results for the result section and accuracy logging
     actual_race_results = None
     try:

@@ -387,6 +387,92 @@ def _build_race_comparison_html(race_dir: Path) -> str:
 </div>"""
 
 
+_CONSTRUCTOR_SLUG_DISPLAY = {
+    "mercedes": "Mercedes",
+    "red_bull_racing": "Red Bull Racing",
+    "red_bull": "Red Bull Racing",
+    "ferrari": "Ferrari",
+    "mclaren": "McLaren",
+    "aston_martin": "Aston Martin",
+    "alpine": "Alpine",
+    "williams": "Williams",
+    "racing_bulls": "Racing Bulls",
+    "rb": "Racing Bulls",
+    "kick_sauber": "Audi",
+    "sauber": "Audi",
+    "audi": "Audi",
+    "haas": "Haas",
+    "haas_f1_team": "Haas",
+    "cadillac": "Cadillac",
+    "cadillac_f1": "Cadillac",
+}
+
+
+def _build_constructor_championship_html(race_dir: Path) -> str:
+    """Constructor predicted vs current standings table for post-race tab."""
+    path = race_dir / "constructor_championship_standings.csv"
+    if not path.exists():
+        return ""
+    rows = []
+    try:
+        with path.open(encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                slug = row.get("unique_id", "").replace("constructor_", "")
+                display = _CONSTRUCTOR_SLUG_DISPLAY.get(slug, slug.replace("_", " ").title())
+                rows.append({
+                    "name": display,
+                    "current": float(row.get("current_points", 0)),
+                    "predicted": float(row.get("predicted_points", 0)),
+                    "pred_pos": int(float(row.get("predicted_position", 99))),
+                })
+        rows.sort(key=lambda r: r["pred_pos"])
+    except Exception:
+        return ""
+    if not rows:
+        return ""
+
+    all_zero = all(r["current"] == 0 for r in rows)
+    th = "padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;"
+    th_num = th + " text-align:right;"
+    if all_zero:
+        header_html = (
+            f'<th style="{th}">Pos</th>'
+            f'<th style="{th}">Constructor</th>'
+            f'<th style="{th_num}">Predicted Final</th>'
+        )
+    else:
+        header_html = (
+            f'<th style="{th}">Pos</th>'
+            f'<th style="{th}">Constructor</th>'
+            f'<th style="{th_num}">Current Pts</th>'
+            f'<th style="{th_num}">Predicted Final</th>'
+        )
+
+    tbody = ""
+    td = "padding:5px 10px; vertical-align:top;"
+    td_num = td + " text-align:right;"
+    for r in rows:
+        curr_cell = f'<td style="{td_num}">{r["current"]:.0f}</td>' if not all_zero else ""
+        tbody += (
+            f'<tr>'
+            f'<td style="{td}">{r["pred_pos"]}</td>'
+            f'<td style="{td}"><strong>{r["name"]}</strong></td>'
+            f'{curr_cell}'
+            f'<td style="{td_num}">{r["predicted"]:.0f}</td>'
+            f'</tr>\n'
+        )
+
+    return f"""<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
+  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+    🏗️ Constructor Championship Prediction
+  </div>
+  <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+    <thead><tr>{header_html}</tr></thead>
+    <tbody>{tbody}</tbody>
+  </table>
+</div>"""
+
+
 def _result_banner_html(accuracy: dict) -> str:
     """Render a result banner from an accuracy_log row."""
     predicted = accuracy["predicted_winner"]
@@ -520,14 +606,17 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
 
         # Post-race comparison table (predicted vs actual finishing order)
         comparison_html = ""
+        constructor_html = ""
         if stage == "post_race":
             comparison_html = _build_race_comparison_html(race["dir"])
+            constructor_html = _build_constructor_championship_html(race["dir"])
 
         content_html += f"""
 <section id="{stage}" style="display:{display};">
   <h2>{label}</h2>
   {result_card_html}
   {comparison_html}
+  {constructor_html}
   {chart_html}
 </section>
 """

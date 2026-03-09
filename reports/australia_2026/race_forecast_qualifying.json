@@ -3,11 +3,11 @@
   "race_name": "2026 Australia Grand Prix",
   "circuit_slug": "australia",
   "year": 2026,
-  "timestamp": "2026-03-07T09:24:52.416253",
+  "timestamp": "2026-03-09T17:52:10.109741",
   "predicted_winner": {
     "driver_code": "RUS",
     "constructor": "Mercedes",
-    "win_probability": 0.14026009200672546,
+    "win_probability": 0.2659681162628188,
     "predicted_position": 4.15
   },
   "podium": [
@@ -15,21 +15,21 @@
       "position": 1,
       "driver_code": "RUS",
       "constructor": "Mercedes",
-      "probability": 0.14026009200672546
+      "probability": 0.2659681162628188
     },
     {
       "position": 2,
       "driver_code": "LEC",
       "constructor": "Ferrari",
-      "probability": 0.09542284947998537
+      "probability": 0.12310228117001877
     },
     {
       "position": 3,
       "driver_code": "PIA",
       "constructor": "McLaren",
-      "probability": 0.0862339824930238
+      "probability": 0.10053521826801422
     }
   ],
-  "key_insight": "RUS starts from pole \u2014 strong favourite at 14% win probability.",
-  "narrative": ""
+  "key_insight": "RUS starts from pole \u2014 strong favourite at 27% win probability.",
+  "narrative": "In summary, RUS is predicted as the most probable driver to win the 2026 race, with SAI and others as potential podium finishers based on recent qualifying data."
 }

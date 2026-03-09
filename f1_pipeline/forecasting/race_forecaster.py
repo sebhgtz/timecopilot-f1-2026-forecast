@@ -520,7 +520,7 @@ class RaceForecaster:
         scores = 1.0 / pos ** 2
         result["win_probability"] = scores / scores.sum()
 
-        return result.head(10)
+        return result
 
     def _empty_result(self, circuit_slug: str, year: int, session_stage: str) -> RaceForecastResult:
         return RaceForecastResult(
