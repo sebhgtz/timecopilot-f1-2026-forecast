@@ -4,9 +4,8 @@ GitHub Pages Static Site Generator
 Generates a public HTML site from the reports/ folder.
 
 Each race weekend gets its own page with:
-  - Social card (Twitter text)
+  - Prediction vs actual result card (per stage)
   - Embedded prediction charts (PNG)
-  - Full LinkedIn post rendered as HTML
 
 The index page lists all races with links to the latest prediction stage.
 
@@ -20,7 +19,6 @@ Deployed automatically via GitHub Actions → GitHub Pages.
 from __future__ import annotations
 
 import csv
-import re
 import sys
 import shutil
 from datetime import datetime, timezone
@@ -71,104 +69,15 @@ h3 { color: #fff; }
                            font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; }
 .race-card .sprint-badge { display: inline-block; margin-top: 4px; background: #ff8c00; color: #fff;
                             font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; margin-left: 4px; }
-.social-card { background: #1a1a2e; border-left: 4px solid #e10600; padding: 16px 20px;
-               border-radius: 0 8px 8px 0; font-family: monospace; font-size: 0.9rem;
-               white-space: pre-wrap; word-break: break-word; margin: 16px 0; }
 .stage-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .stage-tab { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; text-decoration: none;
              background: #2a2a4e; color: #aaa; border: 1px solid #3a3a6e; }
 .stage-tab.active { background: #e10600; color: #fff; border-color: #e10600; }
 .chart-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
 .chart-row img { max-width: 100%; border-radius: 8px; border: 1px solid #2a2a4e; }
-.linkedin-post { background: #1a1a2e; border: 1px solid #2a2a4e; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
-.linkedin-post h3 { color: #4a9eff; }
-.linkedin-post table { border-collapse: collapse; width: 100%; }
-.linkedin-post th, .linkedin-post td { border: 1px solid #3a3a5e; padding: 6px 12px; text-align: left; }
-.linkedin-post th { background: #2a2a4e; color: #aaa; }
-.linkedin-post blockquote { border-left: 3px solid #e10600; margin: 0; padding-left: 16px; color: #bbb; }
 footer { text-align: center; padding: 32px; color: #555; font-size: 0.8rem; border-top: 1px solid #1a1a2e; margin-top: 40px; }
 a { color: #4a9eff; }
 """
-
-
-def _markdown_to_html(md: str) -> str:
-    """
-    Very lightweight markdown → HTML converter (no external deps).
-    Handles: headers, bold, italic, tables, blockquotes, horizontal rules, links.
-    """
-    lines = md.split("\n")
-    html_lines = []
-    in_table = False
-
-    for line in lines:
-        # Horizontal rule
-        if re.match(r"^---+$", line.strip()):
-            if in_table:
-                html_lines.append("</table>")
-                in_table = False
-            html_lines.append("<hr>")
-            continue
-
-        # Headings
-        h_match = re.match(r"^(#{1,4})\s+(.*)", line)
-        if h_match:
-            if in_table:
-                html_lines.append("</table>")
-                in_table = False
-            level = len(h_match.group(1))
-            text = _inline(h_match.group(2))
-            html_lines.append(f"<h{level}>{text}</h{level}>")
-            continue
-
-        # Blockquote
-        if line.startswith("> "):
-            if in_table:
-                html_lines.append("</table>")
-                in_table = False
-            html_lines.append(f"<blockquote>{_inline(line[2:])}</blockquote>")
-            continue
-
-        # Table row
-        if line.startswith("|") and "|" in line[1:]:
-            cols = [c.strip() for c in line.strip("|").split("|")]
-            # Check if it's a separator row (|---|---|)
-            if all(re.match(r"^[-: ]+$", c) for c in cols if c):
-                continue  # skip separator
-            if not in_table:
-                html_lines.append('<table>')
-                in_table = True
-            row_html = "".join(f"<td>{_inline(c)}</td>" for c in cols)
-            html_lines.append(f"<tr>{row_html}</tr>")
-            continue
-
-        if in_table:
-            html_lines.append("</table>")
-            in_table = False
-
-        # Empty line → paragraph break
-        if not line.strip():
-            html_lines.append("<br>")
-            continue
-
-        html_lines.append(f"<p>{_inline(line)}</p>")
-
-    if in_table:
-        html_lines.append("</table>")
-
-    return "\n".join(html_lines)
-
-
-def _inline(text: str) -> str:
-    """Convert inline markdown: bold, italic, code, links."""
-    # Links [text](url)
-    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
-    # Bold **text**
-    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
-    # Italic *text* (don't match ** already consumed)
-    text = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", text)
-    # Inline code
-    text = re.sub(r"`(.+?)`", r"<code>\1</code>", text)
-    return text
 
 
 def _page_html(title: str, body: str, show_home: bool = False) -> str:
@@ -348,17 +257,17 @@ def _discover_races() -> list[dict]:
         slug = parts[0]
         year = int(parts[1])
 
-        # Find available stages
+        # Find available stages (prefer race_forecast_*.json, fall back to social_card_*.txt)
         stages_present = []
         for stage in STAGE_PRIORITY:
-            if (race_dir / f"social_card_{stage}.txt").exists():
+            if (race_dir / f"race_forecast_{stage}.json").exists() or \
+               (race_dir / f"social_card_{stage}.txt").exists():
                 stages_present.append(stage)
 
         if not stages_present:
             continue
 
         latest_stage = stages_present[0]  # highest priority = most recent
-        social_card = (race_dir / f"social_card_{latest_stage}.txt").read_text(encoding="utf-8").strip()
 
         races.append({
             "slug": slug,
@@ -368,7 +277,6 @@ def _discover_races() -> list[dict]:
             "name": slug.replace("_", " ").title() + " Grand Prix",
             "stages": stages_present,
             "latest_stage": latest_stage,
-            "social_card": social_card,
         })
 
     return races
@@ -404,17 +312,6 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
     for stage in race["stages"]:
         label = STAGE_LABELS.get(stage, stage.upper())
 
-        # Social card
-        social_file = race["dir"] / f"social_card_{stage}.txt"
-        social_text = social_file.read_text(encoding="utf-8").strip() if social_file.exists() else ""
-
-        # LinkedIn post
-        linkedin_file = race["dir"] / f"linkedin_post_{stage}.md"
-        linkedin_html = ""
-        if linkedin_file.exists():
-            linkedin_md = linkedin_file.read_text(encoding="utf-8")
-            linkedin_html = f'<div class="linkedin-post">{_markdown_to_html(linkedin_md)}</div>'
-
         # Charts for this stage
         chart_html = ""
         if charts_dst.exists():
@@ -432,9 +329,7 @@ def build_race_page(race: dict, accuracy_log: dict) -> None:
 <section id="{stage}">
   <h2>{label}</h2>
   {result_card_html}
-  <div class="social-card">{social_text}</div>
   {chart_html}
-  {linkedin_html}
 </section>
 """
 
@@ -460,13 +355,11 @@ def _race_cards_html(races: list[dict]) -> str:
         stage = race["latest_stage"]
         label = STAGE_LABELS.get(stage, stage.upper())
         href = f"races/{race['dir'].name}/"
-        snippet = race["social_card"][:120] + ("..." if len(race["social_card"]) > 120 else "")
         round_label = f"Rd {race['round']}" if race["round"] != 99 else str(race["year"])
         html += f"""
 <a href="{href}" class="race-card">
   <div class="round">{round_label}</div>
   <div class="name">{race['name']}</div>
-  <div class="date">{snippet}</div>
   <span class="stage-badge">{label}</span>
 </a>"""
     html += "</div>"
