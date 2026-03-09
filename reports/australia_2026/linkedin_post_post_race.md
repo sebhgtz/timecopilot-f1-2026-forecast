@@ -1,29 +1,29 @@
 ## 🏎️ Australian Grand Prix — Post-Race Championship Update
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 08, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 09, 2026*
 
 ---
 
+> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 *Race not yet run*
+
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** PIA (547 pts predicted final)
+**Predicted 2026 Driver Champion:** ALB (0 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | PIA | 0 | **547** |
-| 2 | NOR | 0 | **317** |
-| 3 | VER | 0 | **259** |
-| 4 | RUS | 0 | **241** |
-| 5 | LEC | 0 | **207** |
+| 1 | ALB | 0 | **0** |
+| 12 | LAW | 0 | **0** |
+| 20 | STR | 0 | **0** |
+| 19 | SAI | 0 | **0** |
+| 18 | RUS | 0 | **0** |
 
 **Predicted 2026 Constructor Champion:** red_bull_racing (413 pts)
 
 *23 races remaining in the season.*
 
-### 🤖 TimeCopilot Analysis — Championship
-
-> Based on the forecasts, Lewis Hamilton (HAM) appears to be on the cusp of clinching the championship considering his historical dominance and the current standings. However, drivers such as Charles Leclerc (LEC) and Fernando Alonso (ALO) are positioned as viable challengers, primarily if they can maintain their form and capitalize on any misfortunes of the leaders. The projected margin of victory could be around 20-30 points relative to competitors, accounting for consistent scoring over the next races.
+> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---
