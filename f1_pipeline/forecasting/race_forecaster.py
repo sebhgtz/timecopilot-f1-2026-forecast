@@ -465,12 +465,24 @@ class RaceForecaster:
             result["grid_position"] = result["driver_code"].map(grid_positions)
             # At qualifying stage, grid position is the dominant signal (~65% of race variance).
             # Earlier stages rely more on historical trend.
-            grid_weight = 0.65 if session_stage == "qualifying" else 0.30
-            hist_weight = 1.0 - grid_weight
+            base_grid_weight = 0.65 if session_stage == "qualifying" else 0.30
+            hist_weight = 1.0 - base_grid_weight
             result["predicted_position"] = (
                 result["predicted_position"].fillna(10) * hist_weight +
-                result["grid_position"].fillna(result["predicted_position"].fillna(10)) * grid_weight
+                result["grid_position"].fillna(result["predicted_position"].fillna(10)) * base_grid_weight
             )
+            # For qualifying: drivers predicted far back (>12) despite a good grid position
+            # are likely rookies with only synthetic circuit history. Trust the grid position more.
+            if session_stage == "qualifying":
+                grid_val = result["driver_code"].map(grid_positions)
+                back_of_grid = result["predicted_position"] > 12
+                has_good_grid = grid_val < 8  # qualified in top 7
+                correct_rookies = back_of_grid & has_good_grid
+                if correct_rookies.any():
+                    result.loc[correct_rookies, "predicted_position"] = (
+                        result.loc[correct_rookies, "predicted_position"] * 0.15 +
+                        grid_val[correct_rookies] * 0.85
+                    )
         elif sprint_results:
             # No qualifying yet, but sprint result available — use as strong positional signal
             result["sprint_position"] = result["driver_code"].map(sprint_results)
@@ -502,10 +514,10 @@ class RaceForecaster:
         result = result.sort_values("predicted_position").reset_index(drop=True)
         result["predicted_rank"] = range(1, len(result) + 1)
 
-        # Compute win probability (softmax on inverted positions)
-        # Fill NaN positions with a mid-field default (10) before scoring
+        # Compute win probability using steeper inverse-square curve.
+        # 1/pos² amplifies differences: P1 is 25× more likely than P5 (vs 5× with linear).
         pos = result["predicted_position"].fillna(10.0).replace(0, 0.1)
-        scores = 1.0 / pos
+        scores = 1.0 / pos ** 2
         result["win_probability"] = scores / scores.sum()
 
         return result.head(10)

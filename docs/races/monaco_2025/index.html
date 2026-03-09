@@ -26,21 +26,12 @@ h3 { color: #fff; }
                            font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; }
 .race-card .sprint-badge { display: inline-block; margin-top: 4px; background: #ff8c00; color: #fff;
                             font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; margin-left: 4px; }
-.social-card { background: #1a1a2e; border-left: 4px solid #e10600; padding: 16px 20px;
-               border-radius: 0 8px 8px 0; font-family: monospace; font-size: 0.9rem;
-               white-space: pre-wrap; word-break: break-word; margin: 16px 0; }
 .stage-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .stage-tab { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; text-decoration: none;
              background: #2a2a4e; color: #aaa; border: 1px solid #3a3a6e; }
 .stage-tab.active { background: #e10600; color: #fff; border-color: #e10600; }
 .chart-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
 .chart-row img { max-width: 100%; border-radius: 8px; border: 1px solid #2a2a4e; }
-.linkedin-post { background: #1a1a2e; border: 1px solid #2a2a4e; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
-.linkedin-post h3 { color: #4a9eff; }
-.linkedin-post table { border-collapse: collapse; width: 100%; }
-.linkedin-post th, .linkedin-post td { border: 1px solid #3a3a5e; padding: 6px 12px; text-align: left; }
-.linkedin-post th { background: #2a2a4e; color: #aaa; }
-.linkedin-post blockquote { border-left: 3px solid #e10600; margin: 0; padding-left: 16px; color: #bbb; }
 footer { text-align: center; padding: 32px; color: #555; font-size: 0.8rem; border-top: 1px solid #1a1a2e; margin-top: 40px; }
 a { color: #4a9eff; }
 </style>
@@ -66,448 +57,58 @@ a { color: #4a9eff; }
   padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
   ✅ <strong>Result (After Qualifying):</strong>
   Predicted <strong>NOR</strong> · Actual winner <strong>NOR</strong> (finished P1.0) · Correct
-</div><div class="stage-tabs"><a href="#pre_weekend" class="stage-tab">Pre-Weekend</a><a href="#fp1" class="stage-tab">After FP1</a><a href="#fp2" class="stage-tab">After FP2</a><a href="#fp3" class="stage-tab">After FP3</a><a href="#qualifying" class="stage-tab">After Qualifying</a><a href="#post_race" class="stage-tab active">Post-Race</a></div>
+</div><div class="stage-tabs"><a onclick="showTab('pre_weekend', this)" class="stage-tab" style="cursor:pointer;">Pre-Weekend</a><a onclick="showTab('fp1', this)" class="stage-tab" style="cursor:pointer;">After FP1</a><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('fp3', this)" class="stage-tab" style="cursor:pointer;">After FP3</a><a onclick="showTab('qualifying', this)" class="stage-tab" style="cursor:pointer;">After Qualifying</a><a onclick="showTab('post_race', this)" class="stage-tab active" style="cursor:pointer;">Post-Race</a></div>
 
-<section id="post_race">
+<section id="post_race" style="display:block;">
   <h2>Post-Race</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP [Post-Race]: 🏆 Predicted Champion: NOR (423 pts) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_post_race.png" alt="championship_standings_post_race" loading="lazy"><img src="charts/prediction_evolution_post_race.png" alt="prediction_evolution_post_race" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ Monaco Grand Prix — Post-Race Championship Update</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> NOR (423 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>NOR</td><td>423</td><td><strong>423</strong></td></tr>
-<tr><td>2</td><td>VER</td><td>421</td><td><strong>421</strong></td></tr>
-<tr><td>3</td><td>PIA</td><td>410</td><td><strong>410</strong></td></tr>
-<tr><td>4</td><td>RUS</td><td>319</td><td><strong>319</strong></td></tr>
-<tr><td>5</td><td>LEC</td><td>242</td><td><strong>242</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (833 pts)</p>
-<br>
-<p><em>16 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP1</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP2</td><td>DOO</td><td>18%</td></tr>
-<tr><td>After FP3</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After Qualifying</td><td>NOR</td><td>14%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="qualifying">
+<section id="qualifying" style="display:none;">
   <h2>After Qualifying</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP Prediction [After Qualifying]: P1 NOR (14%), P2 PIA, P3 HAM | 🏆 Champ: PIA (146pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_qualifying.png" alt="championship_standings_qualifying" loading="lazy"><img src="charts/prediction_evolution_qualifying.png" alt="prediction_evolution_qualifying" loading="lazy"><img src="charts/race_probabilities_qualifying.png" alt="race_probabilities_qualifying" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Monaco Grand Prix — Final Pre-Race Prediction — After Qualifying</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>NOR</strong> (McLaren) — 14% probability</p>
-<p>🥈 P2: <strong>PIA</strong> (McLaren) — 10% probability</p>
-<p>🥉 P3: <strong>HAM</strong> (Ferrari) — 10% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>NOR</td><td>McLaren</td><td>14%</td></tr>
-<tr><td>2</td><td>PIA</td><td>McLaren</td><td>10%</td></tr>
-<tr><td>3</td><td>HAM</td><td>Ferrari</td><td>10%</td></tr>
-<tr><td>4</td><td>LEC</td><td>Ferrari</td><td>8%</td></tr>
-<tr><td>5</td><td>VER</td><td>Red Bull Racing</td><td>7%</td></tr>
-<tr><td>6</td><td>ALO</td><td>Aston Martin</td><td>5%</td></tr>
-<tr><td>7</td><td>ALB</td><td>Williams</td><td>5%</td></tr>
-<tr><td>8</td><td>SAI</td><td>Williams</td><td>4%</td></tr>
-<tr><td>9</td><td>OCO</td><td>Haas</td><td>4%</td></tr>
-<tr><td>10</td><td>HAD</td><td>Racing Bulls</td><td>4%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> NOR starts from pole — strong favourite at 14% win probability.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> PIA (146 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>PIA</td><td>146</td><td><strong>146</strong></td></tr>
-<tr><td>2</td><td>NOR</td><td>133</td><td><strong>133</strong></td></tr>
-<tr><td>3</td><td>VER</td><td>124</td><td><strong>124</strong></td></tr>
-<tr><td>4</td><td>RUS</td><td>99</td><td><strong>99</strong></td></tr>
-<tr><td>5</td><td>LEC</td><td>61</td><td><strong>61</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (279 pts)</p>
-<br>
-<p><em>17 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP1</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP2</td><td>DOO</td><td>18%</td></tr>
-<tr><td>After FP3</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After Qualifying</td><td>NOR</td><td>14%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp3">
+<section id="fp3" style="display:none;">
   <h2>After FP3</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP Prediction [After FP3]: P1 HAM (11%), P2 NOR, P3 PIA | 🏆 Champ: PIA (146pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp3.png" alt="championship_standings_fp3" loading="lazy"><img src="charts/prediction_evolution_fp3.png" alt="prediction_evolution_fp3" loading="lazy"><img src="charts/race_probabilities_fp3.png" alt="race_probabilities_fp3" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Monaco Grand Prix — Updated Prediction — After FP3</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>HAM</strong> (Ferrari) — 11% probability</p>
-<p>🥈 P2: <strong>NOR</strong> (McLaren) — 9% probability</p>
-<p>🥉 P3: <strong>PIA</strong> (McLaren) — 9% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>HAM</td><td>Ferrari</td><td>11%</td></tr>
-<tr><td>2</td><td>NOR</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>3</td><td>PIA</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>4</td><td>VER</td><td>Red Bull Racing</td><td>6%</td></tr>
-<tr><td>5</td><td>SAI</td><td>Williams</td><td>6%</td></tr>
-<tr><td>6</td><td>ALO</td><td>Aston Martin</td><td>6%</td></tr>
-<tr><td>7</td><td>LEC</td><td>Ferrari</td><td>5%</td></tr>
-<tr><td>8</td><td>OCO</td><td>Haas</td><td>5%</td></tr>
-<tr><td>9</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>10</td><td>ALB</td><td>Williams</td><td>4%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> HAM predicted winner at 11% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> PIA (146 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>PIA</td><td>146</td><td><strong>146</strong></td></tr>
-<tr><td>2</td><td>NOR</td><td>133</td><td><strong>133</strong></td></tr>
-<tr><td>3</td><td>VER</td><td>124</td><td><strong>124</strong></td></tr>
-<tr><td>4</td><td>RUS</td><td>99</td><td><strong>99</strong></td></tr>
-<tr><td>5</td><td>LEC</td><td>61</td><td><strong>61</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (279 pts)</p>
-<br>
-<p><em>17 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP1</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP2</td><td>DOO</td><td>18%</td></tr>
-<tr><td>After FP3</td><td>HAM</td><td>11%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp2">
+<section id="fp2" style="display:none;">
   <h2>After FP2</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP Prediction [After FP2]: P1 DOO (18%), P2 NOR, P3 LEC | 🏆 Champ: VER (348pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp2.png" alt="championship_standings_fp2" loading="lazy"><img src="charts/prediction_evolution_fp2.png" alt="prediction_evolution_fp2" loading="lazy"><img src="charts/race_probabilities_fp2.png" alt="race_probabilities_fp2" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Monaco Grand Prix — Updated Prediction — After FP2 (Race Pace Data In)</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>DOO</strong> (Alpine) — 18% probability</p>
-<p>🥈 P2: <strong>NOR</strong> (McLaren) — 18% probability</p>
-<p>🥉 P3: <strong>LEC</strong> (Ferrari) — 14% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>DOO</td><td>Alpine</td><td>18%</td></tr>
-<tr><td>2</td><td>NOR</td><td>McLaren</td><td>18%</td></tr>
-<tr><td>3</td><td>LEC</td><td>Ferrari</td><td>14%</td></tr>
-<tr><td>4</td><td>PIA</td><td>McLaren</td><td>11%</td></tr>
-<tr><td>5</td><td>VER</td><td>Red Bull Racing</td><td>8%</td></tr>
-<tr><td>6</td><td>SAI</td><td>Williams</td><td>4%</td></tr>
-<tr><td>7</td><td>RUS</td><td>Mercedes</td><td>4%</td></tr>
-<tr><td>8</td><td>ANT</td><td>Mercedes</td><td>3%</td></tr>
-<tr><td>9</td><td>HAM</td><td>Ferrari</td><td>3%</td></tr>
-<tr><td>10</td><td>BEA</td><td>Haas</td><td>3%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> DOO predicted winner at 18% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> VER (348 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>VER</td><td>124</td><td><strong>348</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>146</td><td><strong>253</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>133</td><td><strong>220</strong></td></tr>
-<tr><td>4</td><td>LEC</td><td>61</td><td><strong>214</strong></td></tr>
-<tr><td>5</td><td>RUS</td><td>99</td><td><strong>184</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> Mercedes (387 pts)</p>
-<br>
-<p><em>17 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP1</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP2</td><td>DOO</td><td>18%</td></tr>
-</table>
-<br>
-<h3>🤖 TimeCopilot Analysis — Race</h3>
-<br>
-<blockquote>Given the query's conditions and Prophet's forecasts, LEC and NOR have strong podium potentials with NOR having an edge due to pole position. These selections are corroborated by qualifying and FP2 performances, despite inherent unpredictability due to the dynamic race environment. While Prophet indicates average trends, actual performance outcomes require accounting for real-time strategies and race-day occurrences.</blockquote>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>Based on the current data trends and forecasts, Max Verstappen (VER) is projected to win the championship, likely by securing strong finishes in the upcoming races. While Lewis Hamilton (HAM) and Charles Leclerc (LEC) demonstrate robust forms and challenge potential, the recent performance trajectory strongly favors VER. His consistent form and upper points margin ensure a comfortable buffer, securing his path to clinching unless unforeseen anomalies manifest during critical racetracks. The margin of victory could range around 26-52 points if predictions hold, considering the impact of competi...</blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp1">
+<section id="fp1" style="display:none;">
   <h2>After FP1</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP Prediction [After FP1]: P1 HAM (11%), P2 NOR, P3 PIA | 🏆 Champ: VER (348pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp1.png" alt="championship_standings_fp1" loading="lazy"><img src="charts/prediction_evolution_fp1.png" alt="prediction_evolution_fp1" loading="lazy"><img src="charts/race_probabilities_fp1.png" alt="race_probabilities_fp1" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Monaco Grand Prix — Updated Prediction — After FP1</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>HAM</strong> (Ferrari) — 11% probability</p>
-<p>🥈 P2: <strong>NOR</strong> (McLaren) — 9% probability</p>
-<p>🥉 P3: <strong>PIA</strong> (McLaren) — 9% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>HAM</td><td>Ferrari</td><td>11%</td></tr>
-<tr><td>2</td><td>NOR</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>3</td><td>PIA</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>4</td><td>VER</td><td>Red Bull Racing</td><td>6%</td></tr>
-<tr><td>5</td><td>SAI</td><td>Williams</td><td>6%</td></tr>
-<tr><td>6</td><td>ALO</td><td>Aston Martin</td><td>6%</td></tr>
-<tr><td>7</td><td>LEC</td><td>Ferrari</td><td>5%</td></tr>
-<tr><td>8</td><td>OCO</td><td>Haas</td><td>5%</td></tr>
-<tr><td>9</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>10</td><td>ALB</td><td>Williams</td><td>4%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> HAM predicted winner at 11% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> VER (348 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>VER</td><td>124</td><td><strong>348</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>146</td><td><strong>253</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>133</td><td><strong>220</strong></td></tr>
-<tr><td>4</td><td>LEC</td><td>61</td><td><strong>214</strong></td></tr>
-<tr><td>5</td><td>RUS</td><td>99</td><td><strong>184</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (279 pts)</p>
-<br>
-<p><em>17 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>HAM</td><td>11%</td></tr>
-<tr><td>After FP1</td><td>HAM</td><td>11%</td></tr>
-</table>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>Based on the analysis, Max Verstappen is predicted to win the 2025 World Championship by a considerable margin. His cumulative points suggest he has enough of a lead to secure the championship barring any unforeseen circumstances. The main competition could come from Lewis Hamilton and Charles Leclerc, though both would need significant wins in upcoming races to challenge Verstappen effectively. No drivers appear to be on a distinctly dominant winning streak beyond Verstappen's performances.</blockquote>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="pre_weekend">
+<section id="pre_weekend" style="display:none;">
   <h2>Pre-Weekend</h2>
   
-  <div class="social-card">🏎️ 2025 Monaco GP Prediction [Pre-weekend]: P1 HAM (11%), P2 PIA, P3 SAI | 🏆 Champ: VER (348pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_pre_weekend.png" alt="championship_standings_pre_weekend" loading="lazy"><img src="charts/race_probabilities_pre_weekend.png" alt="race_probabilities_pre_weekend" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Monaco Grand Prix — Pre-Weekend Prediction</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 28, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>HAM</strong> (Ferrari) — 11% probability</p>
-<p>🥈 P2: <strong>PIA</strong> (McLaren) — 8% probability</p>
-<p>🥉 P3: <strong>SAI</strong> (Williams) — 8% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>HAM</td><td>Ferrari</td><td>11%</td></tr>
-<tr><td>2</td><td>PIA</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>3</td><td>SAI</td><td>Williams</td><td>8%</td></tr>
-<tr><td>4</td><td>NOR</td><td>McLaren</td><td>7%</td></tr>
-<tr><td>5</td><td>GAS</td><td>Alpine</td><td>6%</td></tr>
-<tr><td>6</td><td>ALO</td><td>Aston Martin</td><td>6%</td></tr>
-<tr><td>7</td><td>VER</td><td>Red Bull Racing</td><td>6%</td></tr>
-<tr><td>8</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>9</td><td>OCO</td><td>Haas</td><td>5%</td></tr>
-<tr><td>10</td><td>LEC</td><td>Ferrari</td><td>4%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> HAM predicted winner at 11% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> VER (348 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>VER</td><td>124</td><td><strong>348</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>146</td><td><strong>253</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>133</td><td><strong>220</strong></td></tr>
-<tr><td>4</td><td>LEC</td><td>61</td><td><strong>214</strong></td></tr>
-<tr><td>5</td><td>RUS</td><td>99</td><td><strong>184</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (277 pts)</p>
-<br>
-<p><em>17 races remaining in the season.</em></p>
-<br>
-<h3>🤖 TimeCopilot Analysis — Race</h3>
-<br>
-<blockquote>Based on the model, the deterministic interpretations predict that traditionally strong performers with low prior finish positions (historically better results) will likely excel. Those with historically best results, when considering grid positions and car performance this season, would be good bets for the podium. However, actual race results will heavily rely on individual race-specific circumstances beyond pure historical data.</blockquote>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>Based on current cumulative points and forecast analysis, Max Verstappen is highly likely to win the championship given his strong current lead. Lewis Hamilton and Lando Norris are seen as realistic challengers based on past performances, though they need an astonishing maximum-point series of races to change the outcome significantly. Consideration of forecast reliability with identified anomalies is vital. Winning margin likely remains adequate unless major disruptions occur.</blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('section[id]').forEach(function(s) { s.style.display = 'none'; });
+  document.getElementById(id).style.display = 'block';
+  document.querySelectorAll('.stage-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+}
+</script>
 
 </main>
 <footer>
   Generated by <a href="https://timecopilot.dev/">TimeCopilot</a> ·
   Data sources: FastF1, OpenF1, Jolpica-F1 ·
-  Updated 2026-03-09 19:05 UTC
+  Updated 2026-03-09 22:54 UTC
 </footer>
 </body>
 </html>

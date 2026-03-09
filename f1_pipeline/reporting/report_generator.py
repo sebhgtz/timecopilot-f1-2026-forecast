@@ -33,6 +33,17 @@ import pandas as pd
 
 REPORTS_DIR = Path("reports")
 
+_STAGE_LABELS = {
+    "pre_weekend": "Pre-Weekend",
+    "fp1": "After FP1",
+    "fp2": "After FP2",
+    "fp3": "After FP3",
+    "sprint_qualifying": "After Sprint Qualifying",
+    "sprint": "After Sprint",
+    "qualifying": "After Qualifying",
+    "post_race": "Post-Race",
+}
+
 
 class ReportGenerator:
     """Generates social posts and charts for F1 predictions."""
@@ -106,7 +117,7 @@ class ReportGenerator:
         Format: emoji + race prediction + championship snippet + hashtags
         """
         stage_labels = {
-            "pre_weekend": "Pre-weekend",
+            "pre_weekend": "Pre-Weekend",
             "fp1": "After FP1",
             "fp2": "After FP2",
             "fp3": "After FP3",
@@ -240,15 +251,6 @@ class ReportGenerator:
         if driver_champ_forecast and getattr(driver_champ_forecast, "narrative", ""):
             lines += self._narrative_section(driver_champ_forecast.narrative, "Championship")
 
-        # Note when LLM was unavailable (rate limit / key error)
-        rf_model = getattr(race_forecast, "model_used", "") if race_forecast else ""
-        cf_model = getattr(driver_champ_forecast, "model_used", "") if driver_champ_forecast else ""
-        if "failed" in (rf_model, cf_model):
-            lines += [
-                "> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*",
-                "",
-            ]
-
         # Footer
         lines += [
             "",
@@ -334,18 +336,32 @@ class ReportGenerator:
 
         top5 = driver_fc.top_n(5)
         if not top5.empty:
-            lines += [
-                f"**Predicted Final {self.year} Driver Standings (Top 5):**",
-                "",
-                "| Pos | Driver | Current Pts | Predicted Final |",
-                "|-----|--------|-------------|-----------------|",
-            ]
-            for i, row in top5.iterrows():
-                name = str(row.get("unique_id", "")).replace("driver_", "")
-                curr = float(row.get("current_points", 0))
-                pred = float(row.get("predicted_points", 0))
-                pos = int(row.get("predicted_position", i + 1))
-                lines.append(f"| {pos} | {name} | {curr:.0f} | **{pred:.0f}** |")
+            all_zero_curr = (top5["current_points"].fillna(0) == 0).all()
+            if all_zero_curr:
+                lines += [
+                    f"**Predicted Final {self.year} Driver Standings (Top 5):**",
+                    "",
+                    "| Pos | Driver | Predicted Final |",
+                    "|-----|--------|-----------------|",
+                ]
+                for i, row in top5.iterrows():
+                    name = str(row.get("unique_id", "")).replace("driver_", "")
+                    pred = float(row.get("predicted_points", 0))
+                    pos = int(row.get("predicted_position", i + 1))
+                    lines.append(f"| {pos} | {name} | **{pred:.0f}** |")
+            else:
+                lines += [
+                    f"**Predicted Final {self.year} Driver Standings (Top 5):**",
+                    "",
+                    "| Pos | Driver | Current Pts | Predicted Final |",
+                    "|-----|--------|-------------|-----------------|",
+                ]
+                for i, row in top5.iterrows():
+                    name = str(row.get("unique_id", "")).replace("driver_", "")
+                    curr = float(row.get("current_points", 0))
+                    pred = float(row.get("predicted_points", 0))
+                    pos = int(row.get("predicted_position", i + 1))
+                    lines.append(f"| {pos} | {name} | {curr:.0f} | **{pred:.0f}** |")
             lines.append("")
 
         if constructor_fc:
@@ -623,7 +639,7 @@ class ReportGenerator:
             ))
             fig.update_layout(
                 title=dict(
-                    text=f"{race_forecast.race_name}<br><sup>Race Winner Probability — {session_stage.replace('_', ' ').title()}</sup>",
+                    text=f"{race_forecast.race_name}<br><sup>Race Winner Probability — {_STAGE_LABELS.get(session_stage, session_stage.upper())}</sup>",
                     font=dict(size=18),
                 ),
                 xaxis_title="Win Probability (%)",
@@ -656,24 +672,26 @@ class ReportGenerator:
             current_rev = current[::-1]
             predicted_rev = predicted[::-1]
 
+            show_current = any(c > 0 for c in current)
             fig = go.Figure()
-            fig.add_trace(go.Bar(
-                name="Current Points",
-                x=current_rev, y=names_rev,
-                orientation="h",
-                marker_color="#4a9eff",
-                opacity=0.7,
-            ))
+            if show_current:
+                fig.add_trace(go.Bar(
+                    name="Current Points",
+                    x=current_rev, y=names_rev,
+                    orientation="h",
+                    marker_color="#4a9eff",
+                    opacity=0.85,
+                ))
             fig.add_trace(go.Bar(
                 name="Predicted Final",
                 x=predicted_rev, y=names_rev,
                 orientation="h",
                 marker_color="#ff6b35",
-                opacity=0.9,
+                opacity=0.85,
             ))
 
             fig.update_layout(
-                barmode="overlay",
+                barmode="group",
                 title=dict(
                     text=f"{self.year} F1 Driver Championship — Predicted Final Standings<br>"
                          f"<sup>After {champ_fc.race_name} | {champ_fc.remaining_races} races remaining</sup>",
@@ -778,6 +796,8 @@ _CONSTRUCTOR_DISPLAY: dict[str, str] = {
     "cadillac": "Cadillac",
     "racing bulls": "Racing Bulls",
     "red bull racing": "Red Bull Racing",
+    "red_bull_racing": "Red Bull Racing",
+    "red_bull": "Red Bull Racing",
 }
 
 

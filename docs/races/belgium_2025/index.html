@@ -26,21 +26,12 @@ h3 { color: #fff; }
                            font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; }
 .race-card .sprint-badge { display: inline-block; margin-top: 4px; background: #ff8c00; color: #fff;
                             font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; margin-left: 4px; }
-.social-card { background: #1a1a2e; border-left: 4px solid #e10600; padding: 16px 20px;
-               border-radius: 0 8px 8px 0; font-family: monospace; font-size: 0.9rem;
-               white-space: pre-wrap; word-break: break-word; margin: 16px 0; }
 .stage-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .stage-tab { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; text-decoration: none;
              background: #2a2a4e; color: #aaa; border: 1px solid #3a3a6e; }
 .stage-tab.active { background: #e10600; color: #fff; border-color: #e10600; }
 .chart-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
 .chart-row img { max-width: 100%; border-radius: 8px; border: 1px solid #2a2a4e; }
-.linkedin-post { background: #1a1a2e; border: 1px solid #2a2a4e; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
-.linkedin-post h3 { color: #4a9eff; }
-.linkedin-post table { border-collapse: collapse; width: 100%; }
-.linkedin-post th, .linkedin-post td { border: 1px solid #3a3a5e; padding: 6px 12px; text-align: left; }
-.linkedin-post th { background: #2a2a4e; color: #aaa; }
-.linkedin-post blockquote { border-left: 3px solid #e10600; margin: 0; padding-left: 16px; color: #bbb; }
 footer { text-align: center; padding: 32px; color: #555; font-size: 0.8rem; border-top: 1px solid #1a1a2e; margin-top: 40px; }
 a { color: #4a9eff; }
 </style>
@@ -66,436 +57,58 @@ a { color: #4a9eff; }
   padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
   ❌ <strong>Result (After Qualifying):</strong>
   Predicted <strong>NOR</strong> · Actual winner <strong>PIA</strong> (finished P2.0) · Wrong
-</div><div class="stage-tabs"><a href="#pre_weekend" class="stage-tab">Pre-Weekend</a><a href="#fp1" class="stage-tab">After FP1</a><a href="#fp2" class="stage-tab">After FP2</a><a href="#fp3" class="stage-tab">After FP3</a><a href="#qualifying" class="stage-tab">After Qualifying</a><a href="#post_race" class="stage-tab active">Post-Race</a></div>
+</div><div class="stage-tabs"><a onclick="showTab('pre_weekend', this)" class="stage-tab" style="cursor:pointer;">Pre-Weekend</a><a onclick="showTab('fp1', this)" class="stage-tab" style="cursor:pointer;">After FP1</a><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('fp3', this)" class="stage-tab" style="cursor:pointer;">After FP3</a><a onclick="showTab('qualifying', this)" class="stage-tab" style="cursor:pointer;">After Qualifying</a><a onclick="showTab('post_race', this)" class="stage-tab active" style="cursor:pointer;">Post-Race</a></div>
 
-<section id="post_race">
+<section id="post_race" style="display:block;">
   <h2>Post-Race</h2>
   
-  <div class="social-card">🏎️ 2025 Belgian GP [Post-Race]: 🏆 Predicted Champion: NOR (423 pts) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_post_race.png" alt="championship_standings_post_race" loading="lazy"><img src="charts/prediction_evolution_post_race.png" alt="prediction_evolution_post_race" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ Belgian Grand Prix — Post-Race Championship Update</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> NOR (423 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>NOR</td><td>423</td><td><strong>423</strong></td></tr>
-<tr><td>2</td><td>VER</td><td>421</td><td><strong>421</strong></td></tr>
-<tr><td>3</td><td>PIA</td><td>410</td><td><strong>410</strong></td></tr>
-<tr><td>4</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>5</td><td>RUS</td><td>319</td><td><strong>319</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (833 pts)</p>
-<br>
-<p><em>11 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>VER</td><td>15%</td></tr>
-<tr><td>After FP1</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP2</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP3</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After Qualifying</td><td>NOR</td><td>11%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="qualifying">
+<section id="qualifying" style="display:none;">
   <h2>After Qualifying</h2>
   
-  <div class="social-card">🏎️ 2025 Belgium GP Prediction [After Qualifying]: P1 NOR (11%), P2 LEC, P3 PIA | 🏆 Champ: ROS (385pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_qualifying.png" alt="championship_standings_qualifying" loading="lazy"><img src="charts/prediction_evolution_qualifying.png" alt="prediction_evolution_qualifying" loading="lazy"><img src="charts/race_probabilities_qualifying.png" alt="race_probabilities_qualifying" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Belgium Grand Prix — Final Pre-Race Prediction — After Qualifying</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>NOR</strong> (McLaren) — 11% probability</p>
-<p>🥈 P2: <strong>LEC</strong> (Ferrari) — 10% probability</p>
-<p>🥉 P3: <strong>PIA</strong> (McLaren) — 9% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>NOR</td><td>McLaren</td><td>11%</td></tr>
-<tr><td>2</td><td>LEC</td><td>Ferrari</td><td>10%</td></tr>
-<tr><td>3</td><td>PIA</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>4</td><td>VER</td><td>Red Bull Racing</td><td>8%</td></tr>
-<tr><td>5</td><td>ALB</td><td>Williams</td><td>7%</td></tr>
-<tr><td>6</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>7</td><td>TSU</td><td>Red Bull Racing</td><td>5%</td></tr>
-<tr><td>8</td><td>OCO</td><td>Haas</td><td>4%</td></tr>
-<tr><td>9</td><td>HAD</td><td>Racing Bulls</td><td>4%</td></tr>
-<tr><td>10</td><td>LAW</td><td>Racing Bulls</td><td>4%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> NOR starts from pole — strong favourite at 11% win probability.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> ROS (385 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>234</td><td><strong>234</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>226</td><td><strong>226</strong></td></tr>
-<tr><td>4</td><td>VER</td><td>165</td><td><strong>165</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>152</td><td><strong>152</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (460 pts)</p>
-<br>
-<p><em>12 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>VER</td><td>15%</td></tr>
-<tr><td>After FP1</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP2</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP3</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After Qualifying</td><td>NOR</td><td>11%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp3">
+<section id="fp3" style="display:none;">
   <h2>After FP3</h2>
   
-  <div class="social-card">🏎️ 2025 Belgium GP Prediction [After FP3]: P1 LEC (8%), P2 VER, P3 NOR | 🏆 Champ: ROS (385pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp3.png" alt="championship_standings_fp3" loading="lazy"><img src="charts/prediction_evolution_fp3.png" alt="prediction_evolution_fp3" loading="lazy"><img src="charts/race_probabilities_fp3.png" alt="race_probabilities_fp3" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Belgium Grand Prix — Updated Prediction — After FP3</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>LEC</strong> (Ferrari) — 8% probability</p>
-<p>🥈 P2: <strong>VER</strong> (Red Bull Racing) — 8% probability</p>
-<p>🥉 P3: <strong>NOR</strong> (McLaren) — 8% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>LEC</td><td>Ferrari</td><td>8%</td></tr>
-<tr><td>2</td><td>VER</td><td>Red Bull Racing</td><td>8%</td></tr>
-<tr><td>3</td><td>NOR</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>4</td><td>ALB</td><td>Williams</td><td>6%</td></tr>
-<tr><td>5</td><td>PIA</td><td>McLaren</td><td>6%</td></tr>
-<tr><td>6</td><td>HAM</td><td>Ferrari</td><td>6%</td></tr>
-<tr><td>7</td><td>OCO</td><td>Haas</td><td>6%</td></tr>
-<tr><td>8</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>9</td><td>GAS</td><td>Alpine</td><td>5%</td></tr>
-<tr><td>10</td><td>TSU</td><td>Red Bull Racing</td><td>5%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> LEC predicted winner at 8% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> ROS (385 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>234</td><td><strong>234</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>226</td><td><strong>226</strong></td></tr>
-<tr><td>4</td><td>VER</td><td>165</td><td><strong>165</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>152</td><td><strong>152</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (460 pts)</p>
-<br>
-<p><em>12 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>VER</td><td>15%</td></tr>
-<tr><td>After FP1</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP2</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP3</td><td>LEC</td><td>8%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp2">
+<section id="fp2" style="display:none;">
   <h2>After FP2</h2>
   
-  <div class="social-card">🏎️ 2025 Belgium GP Prediction [After FP2]: P1 LEC (8%), P2 VER, P3 NOR | 🏆 Champ: ROS (385pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp2.png" alt="championship_standings_fp2" loading="lazy"><img src="charts/prediction_evolution_fp2.png" alt="prediction_evolution_fp2" loading="lazy"><img src="charts/race_probabilities_fp2.png" alt="race_probabilities_fp2" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Belgium Grand Prix — Updated Prediction — After FP2 (Race Pace Data In)</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>LEC</strong> (Ferrari) — 8% probability</p>
-<p>🥈 P2: <strong>VER</strong> (Red Bull Racing) — 8% probability</p>
-<p>🥉 P3: <strong>NOR</strong> (McLaren) — 8% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>LEC</td><td>Ferrari</td><td>8%</td></tr>
-<tr><td>2</td><td>VER</td><td>Red Bull Racing</td><td>8%</td></tr>
-<tr><td>3</td><td>NOR</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>4</td><td>ALB</td><td>Williams</td><td>6%</td></tr>
-<tr><td>5</td><td>PIA</td><td>McLaren</td><td>6%</td></tr>
-<tr><td>6</td><td>HAM</td><td>Ferrari</td><td>6%</td></tr>
-<tr><td>7</td><td>OCO</td><td>Haas</td><td>6%</td></tr>
-<tr><td>8</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>9</td><td>GAS</td><td>Alpine</td><td>5%</td></tr>
-<tr><td>10</td><td>TSU</td><td>Red Bull Racing</td><td>5%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> LEC predicted winner at 8% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> ROS (385 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>234</td><td><strong>234</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>226</td><td><strong>226</strong></td></tr>
-<tr><td>4</td><td>VER</td><td>165</td><td><strong>165</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>152</td><td><strong>152</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (460 pts)</p>
-<br>
-<p><em>12 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>VER</td><td>15%</td></tr>
-<tr><td>After FP1</td><td>LEC</td><td>8%</td></tr>
-<tr><td>After FP2</td><td>LEC</td><td>8%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp1">
+<section id="fp1" style="display:none;">
   <h2>After FP1</h2>
   
-  <div class="social-card">🏎️ 2025 Belgium GP Prediction [After FP1]: P1 LEC (8%), P2 VER, P3 NOR | 🏆 Champ: ROS (385pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp1.png" alt="championship_standings_fp1" loading="lazy"><img src="charts/prediction_evolution_fp1.png" alt="prediction_evolution_fp1" loading="lazy"><img src="charts/race_probabilities_fp1.png" alt="race_probabilities_fp1" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Belgium Grand Prix — Updated Prediction — After FP1</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>LEC</strong> (Ferrari) — 8% probability</p>
-<p>🥈 P2: <strong>VER</strong> (Red Bull Racing) — 8% probability</p>
-<p>🥉 P3: <strong>NOR</strong> (McLaren) — 8% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>LEC</td><td>Ferrari</td><td>8%</td></tr>
-<tr><td>2</td><td>VER</td><td>Red Bull Racing</td><td>8%</td></tr>
-<tr><td>3</td><td>NOR</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>4</td><td>ALB</td><td>Williams</td><td>6%</td></tr>
-<tr><td>5</td><td>PIA</td><td>McLaren</td><td>6%</td></tr>
-<tr><td>6</td><td>HAM</td><td>Ferrari</td><td>6%</td></tr>
-<tr><td>7</td><td>OCO</td><td>Haas</td><td>6%</td></tr>
-<tr><td>8</td><td>RUS</td><td>Mercedes</td><td>5%</td></tr>
-<tr><td>9</td><td>GAS</td><td>Alpine</td><td>5%</td></tr>
-<tr><td>10</td><td>TSU</td><td>Red Bull Racing</td><td>5%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> LEC predicted winner at 8% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> ROS (385 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>234</td><td><strong>234</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>226</td><td><strong>226</strong></td></tr>
-<tr><td>4</td><td>VER</td><td>165</td><td><strong>165</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>152</td><td><strong>152</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (460 pts)</p>
-<br>
-<p><em>12 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>Pre-Weekend</td><td>VER</td><td>15%</td></tr>
-<tr><td>After FP1</td><td>LEC</td><td>8%</td></tr>
-</table>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="pre_weekend">
+<section id="pre_weekend" style="display:none;">
   <h2>Pre-Weekend</h2>
   
-  <div class="social-card">🏎️ 2025 Belgium GP Prediction [Pre-weekend]: P1 VER (15%), P2 BOR, P3 HAM | 🏆 Champ: ROS (385pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_pre_weekend.png" alt="championship_standings_pre_weekend" loading="lazy"><img src="charts/race_probabilities_pre_weekend.png" alt="race_probabilities_pre_weekend" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2025 Belgium Grand Prix — Pre-Weekend Prediction</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | February 26, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>VER</strong> (Red Bull Racing) — 15% probability</p>
-<p>🥈 P2: <strong>BOR</strong> (Kick Sauber) — 15% probability</p>
-<p>🥉 P3: <strong>HAM</strong> (Ferrari) — 15% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>VER</td><td>Red Bull Racing</td><td>15%</td></tr>
-<tr><td>2</td><td>BOR</td><td>Audi</td><td>15%</td></tr>
-<tr><td>3</td><td>HAM</td><td>Ferrari</td><td>15%</td></tr>
-<tr><td>4</td><td>LEC</td><td>Ferrari</td><td>15%</td></tr>
-<tr><td>5</td><td>PIA</td><td>McLaren</td><td>15%</td></tr>
-<tr><td>6</td><td>OCO</td><td>Haas</td><td>3%</td></tr>
-<tr><td>7</td><td>NOR</td><td>McLaren</td><td>3%</td></tr>
-<tr><td>8</td><td>SAI</td><td>Williams</td><td>2%</td></tr>
-<tr><td>9</td><td>ALO</td><td>Aston Martin</td><td>2%</td></tr>
-<tr><td>10</td><td>RUS</td><td>Mercedes</td><td>2%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> VER predicted winner at 15% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2025 Driver Champion:</strong> ROS (385 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2025 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>ROS</td><td>385</td><td><strong>385</strong></td></tr>
-<tr><td>2</td><td>PIA</td><td>234</td><td><strong>234</strong></td></tr>
-<tr><td>3</td><td>NOR</td><td>226</td><td><strong>226</strong></td></tr>
-<tr><td>4</td><td>VER</td><td>165</td><td><strong>165</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>152</td><td><strong>152</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2025 Constructor Champion:</strong> McLaren (460 pts)</p>
-<br>
-<p><em>12 races remaining in the season.</em></p>
-<br>
-<h3>🤖 TimeCopilot Analysis — Race</h3>
-<br>
-<blockquote>Considering historical trends, car performance, and the given track conditions, drivers like HAM and VER are likely strong contenders for the win and podium positions. Their historical consistency at this circuit, combined with current performance trajectory, marks them as strong bets.</blockquote>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('section[id]').forEach(function(s) { s.style.display = 'none'; });
+  document.getElementById(id).style.display = 'block';
+  document.querySelectorAll('.stage-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+}
+</script>
 
 </main>
 <footer>
   Generated by <a href="https://timecopilot.dev/">TimeCopilot</a> ·
   Data sources: FastF1, OpenF1, Jolpica-F1 ·
-  Updated 2026-03-09 19:05 UTC
+  Updated 2026-03-09 22:54 UTC
 </footer>
 </body>
 </html>

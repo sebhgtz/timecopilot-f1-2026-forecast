@@ -26,21 +26,12 @@ h3 { color: #fff; }
                            font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; }
 .race-card .sprint-badge { display: inline-block; margin-top: 4px; background: #ff8c00; color: #fff;
                             font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; margin-left: 4px; }
-.social-card { background: #1a1a2e; border-left: 4px solid #e10600; padding: 16px 20px;
-               border-radius: 0 8px 8px 0; font-family: monospace; font-size: 0.9rem;
-               white-space: pre-wrap; word-break: break-word; margin: 16px 0; }
 .stage-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
 .stage-tab { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; text-decoration: none;
              background: #2a2a4e; color: #aaa; border: 1px solid #3a3a6e; }
 .stage-tab.active { background: #e10600; color: #fff; border-color: #e10600; }
 .chart-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
 .chart-row img { max-width: 100%; border-radius: 8px; border: 1px solid #2a2a4e; }
-.linkedin-post { background: #1a1a2e; border: 1px solid #2a2a4e; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
-.linkedin-post h3 { color: #4a9eff; }
-.linkedin-post table { border-collapse: collapse; width: 100%; }
-.linkedin-post th, .linkedin-post td { border: 1px solid #3a3a5e; padding: 6px 12px; text-align: left; }
-.linkedin-post th { background: #2a2a4e; color: #aaa; }
-.linkedin-post blockquote { border-left: 3px solid #e10600; margin: 0; padding-left: 16px; color: #bbb; }
 footer { text-align: center; padding: 32px; color: #555; font-size: 0.8rem; border-top: 1px solid #1a1a2e; margin-top: 40px; }
 a { color: #4a9eff; }
 </style>
@@ -66,82 +57,15 @@ a { color: #4a9eff; }
   padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
   ✅ <strong>Result (After Qualifying):</strong>
   Predicted <strong>RUS</strong> · Actual winner <strong>RUS</strong> (finished P1.0) · Correct
-</div><div class="stage-tabs"><a href="#pre_weekend" class="stage-tab">Pre-Weekend</a><a href="#fp2" class="stage-tab">After FP2</a><a href="#qualifying" class="stage-tab">After Qualifying</a><a href="#post_race" class="stage-tab active">Post-Race</a></div>
+</div><div class="stage-tabs"><a onclick="showTab('pre_weekend', this)" class="stage-tab" style="cursor:pointer;">Pre-Weekend</a><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('qualifying', this)" class="stage-tab" style="cursor:pointer;">After Qualifying</a><a onclick="showTab('post_race', this)" class="stage-tab active" style="cursor:pointer;">Post-Race</a></div>
 
-<section id="post_race">
+<section id="post_race" style="display:block;">
   <h2>Post-Race</h2>
   
-  <div class="social-card">🏎️ 2026 Australian GP [Post-Race]: 🏁 RUS wins! 🏆 Predicted Champion: RUS (25 pts) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_post_race.png" alt="championship_standings_post_race" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ Australian Grand Prix — Post-Race Championship Update</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | March 09, 2026</em></p>
-<br>
-<hr>
-<br>
-<blockquote>📊 <strong>Pre-Race Pick (After Qualifying):</strong> RUS · 14% win prob · 🏁 <strong>Winner: RUS</strong> · ✅ Correct · finished P1</blockquote>
-<br>
-<h3>🏁 Race Result — Australian Grand Prix</h3>
-<br>
-<p><strong>Winner: RUS (Mercedes)</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Constructor</td><td>Pts</td></tr>
-<tr><td>1</td><td>RUS</td><td>Mercedes</td><td>25</td></tr>
-<tr><td>2</td><td>ANT</td><td>Mercedes</td><td>18</td></tr>
-<tr><td>3</td><td>LEC</td><td>Ferrari</td><td>15</td></tr>
-<tr><td>4</td><td>HAM</td><td>Ferrari</td><td>12</td></tr>
-<tr><td>5</td><td>NOR</td><td>McLaren</td><td>10</td></tr>
-<tr><td>6</td><td>VER</td><td>Red Bull Racing</td><td>8</td></tr>
-<tr><td>7</td><td>BEA</td><td>Haas</td><td>6</td></tr>
-<tr><td>8</td><td>LIN</td><td>RB F1 Team</td><td>4</td></tr>
-<tr><td>9</td><td>BOR</td><td>Audi</td><td>2</td></tr>
-<tr><td>10</td><td>GAS</td><td>Alpine</td><td>1</td></tr>
-<tr><td>11</td><td>OCO</td><td>Haas</td><td>0</td></tr>
-<tr><td>12</td><td>ALB</td><td>Williams</td><td>0</td></tr>
-<tr><td>13</td><td>LAW</td><td>RB F1 Team</td><td>0</td></tr>
-<tr><td>14</td><td>COL</td><td>Alpine</td><td>0</td></tr>
-<tr><td>15</td><td>SAI</td><td>Williams</td><td>0</td></tr>
-<tr><td>16</td><td>PER</td><td>Cadillac F1 Team</td><td>0</td></tr>
-<tr><td>DNF</td><td>STR</td><td>Aston Martin</td><td>0</td></tr>
-<tr><td>DNF</td><td>ALO</td><td>Aston Martin</td><td>0</td></tr>
-<tr><td>DNF</td><td>BOT</td><td>Cadillac F1 Team</td><td>0</td></tr>
-<tr><td>DNF</td><td>HAD</td><td>Red Bull Racing</td><td>0</td></tr>
-<tr><td>DNS</td><td>PIA</td><td>McLaren</td><td>0</td></tr>
-<tr><td>DNS</td><td>HUL</td><td>Audi</td><td>0</td></tr>
-</table>
-<br>
-<p>🔮 <strong>Model predicted (After Qualifying): RUS</strong> (14% win prob) → ✅ Correct! <em>(finished P1)</em></p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2026 Driver Champion:</strong> RUS (25 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2026 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>RUS</td><td>25</td><td><strong>25</strong></td></tr>
-<tr><td>2</td><td>ANT</td><td>18</td><td><strong>18</strong></td></tr>
-<tr><td>3</td><td>LEC</td><td>15</td><td><strong>15</strong></td></tr>
-<tr><td>4</td><td>HAM</td><td>12</td><td><strong>12</strong></td></tr>
-<tr><td>5</td><td>NOR</td><td>10</td><td><strong>10</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2026 Constructor Champion:</strong> red_bull_racing (388 pts)</p>
-<br>
-<p><em>23 races remaining in the season.</em></p>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="qualifying">
+<section id="qualifying" style="display:none;">
   <h2>After Qualifying</h2>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
   background:#1a3a1a; border:1px solid #2a2a4e; border-radius:8px;
@@ -151,284 +75,82 @@ a { color: #4a9eff; }
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🔮 Predicted (After Qualifying)
       </div>
-      <strong style="font-size:1.05rem;">RUS</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">14% win probability</span>
+      <span style="display:block; margin-bottom:3px;">P1: <strong>RUS</strong><span style="color:#888; font-size:0.78rem;"> (14%)</span></span><span style="display:block; margin-bottom:3px;">P2: <strong>LEC</strong><span style="color:#888; font-size:0.78rem;"> (10%)</span></span><span style="display:block; margin-bottom:3px;">P3: <strong>PIA</strong><span style="color:#888; font-size:0.78rem;"> (9%)</span></span>
     </div>
   
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🏁 Actual Result
       </div>
-      ✅ <strong style="font-size:1.05rem;">RUS</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">Correct! · finished P1.0</span>
+      ✅ <strong style="font-size:1.05rem;">RUS</strong> wins<br>
+      <span style="color:#aaa; font-size:0.8rem;">Correct!</span>
     </div>
 </div>
-  <div class="social-card">🏎️ 2026 Australia GP Prediction [After Qualifying]: P1 RUS (14%), P2 LEC, P3 PIA | 🏆 Champ: PIA (473pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_qualifying.png" alt="championship_standings_qualifying" loading="lazy"><img src="charts/prediction_evolution_qualifying.png" alt="prediction_evolution_qualifying" loading="lazy"><img src="charts/race_probabilities_qualifying.png" alt="race_probabilities_qualifying" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2026 Australia Grand Prix — Final Pre-Race Prediction — After Qualifying</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | March 07, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>RUS</strong> (Mercedes) — 14% probability</p>
-<p>🥈 P2: <strong>LEC</strong> (Ferrari) — 10% probability</p>
-<p>🥉 P3: <strong>PIA</strong> (McLaren) — 9% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>RUS</td><td>Mercedes</td><td>14%</td></tr>
-<tr><td>2</td><td>LEC</td><td>Ferrari</td><td>10%</td></tr>
-<tr><td>3</td><td>PIA</td><td>McLaren</td><td>9%</td></tr>
-<tr><td>4</td><td>NOR</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>5</td><td>HAM</td><td>Ferrari</td><td>7%</td></tr>
-<tr><td>6</td><td>LIN</td><td>Racing Bulls</td><td>7%</td></tr>
-<tr><td>7</td><td>SAI</td><td>Williams</td><td>6%</td></tr>
-<tr><td>8</td><td>STR</td><td>Aston Martin</td><td>6%</td></tr>
-<tr><td>9</td><td>HUL</td><td>Audi</td><td>5%</td></tr>
-<tr><td>10</td><td>OCO</td><td>Haas</td><td>5%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> RUS starts from pole — strong favourite at 14% win probability.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2026 Driver Champion:</strong> PIA (473 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2026 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>PIA</td><td>0</td><td><strong>473</strong></td></tr>
-<tr><td>2</td><td>NOR</td><td>0</td><td><strong>394</strong></td></tr>
-<tr><td>3</td><td>VER</td><td>0</td><td><strong>359</strong></td></tr>
-<tr><td>4</td><td>RUS</td><td>0</td><td><strong>244</strong></td></tr>
-<tr><td>5</td><td>LEC</td><td>0</td><td><strong>239</strong></td></tr>
-</table>
-<br>
-<p><em>24 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>pre_weekend</td><td>ALB</td><td>6%</td></tr>
-<tr><td>FP2</td><td>PIA</td><td>8%</td></tr>
-<tr><td>Qualifying</td><td>RUS</td><td>14%</td></tr>
-</table>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>The likely winner of the 2026 F1 World Championship may be NOR, given their consistent points accumulation, though strong performances from VER and LEC indicate they should not be underestimated. The margin of victory could realistically be within 10-20 points, reflecting the close nature of the competition.</blockquote>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="fp2">
+<section id="fp2" style="display:none;">
   <h2>After FP2</h2>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
-  background:#1a3a1a; border:1px solid #2a2a4e; border-radius:8px;
+  background:#3a1a1a; border:1px solid #2a2a4e; border-radius:8px;
   padding:14px 18px; margin:0 0 16px; font-size:0.9rem;">
   
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🔮 Predicted (After FP2)
       </div>
-      <strong style="font-size:1.05rem;">PIA</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">8% win probability</span>
+      <span style="display:block; margin-bottom:3px;">P1: <strong>PIA</strong><span style="color:#888; font-size:0.78rem;"> (8%)</span></span><span style="display:block; margin-bottom:3px;">P2: <strong>RUS</strong><span style="color:#888; font-size:0.78rem;"> (7%)</span></span><span style="display:block; margin-bottom:3px;">P3: <strong>HAM</strong><span style="color:#888; font-size:0.78rem;"> (7%)</span></span>
     </div>
   
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🏁 Actual Result
       </div>
-      ✅ <strong style="font-size:1.05rem;">RUS</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">Correct! · finished P1.0</span>
+      ❌ <strong style="font-size:1.05rem;">RUS</strong> wins<br>
+      <span style="color:#aaa; font-size:0.8rem;">Wrong (winner: RUS)</span>
     </div>
 </div>
-  <div class="social-card">🏎️ 2026 Australia GP Prediction [After FP2]: P1 PIA (8%), P2 RUS, P3 HAM | 🏆 Champ: PIA (473pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_fp2.png" alt="championship_standings_fp2" loading="lazy"><img src="charts/prediction_evolution_fp2.png" alt="prediction_evolution_fp2" loading="lazy"><img src="charts/race_probabilities_fp2.png" alt="race_probabilities_fp2" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2026 Australia Grand Prix — Updated Prediction — After FP2 (Race Pace Data In)</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | March 06, 2026</em></p>
-<br>
-<hr>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>PIA</strong> (McLaren) — 8% probability</p>
-<p>🥈 P2: <strong>RUS</strong> (Mercedes) — 7% probability</p>
-<p>🥉 P3: <strong>HAM</strong> (Ferrari) — 7% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>PIA</td><td>McLaren</td><td>8%</td></tr>
-<tr><td>2</td><td>RUS</td><td>Mercedes</td><td>7%</td></tr>
-<tr><td>3</td><td>HAM</td><td>Ferrari</td><td>7%</td></tr>
-<tr><td>4</td><td>LEC</td><td>Ferrari</td><td>7%</td></tr>
-<tr><td>5</td><td>VER</td><td>Red Bull Racing</td><td>7%</td></tr>
-<tr><td>6</td><td>NOR</td><td>McLaren</td><td>7%</td></tr>
-<tr><td>7</td><td>LIN</td><td>Racing Bulls</td><td>7%</td></tr>
-<tr><td>8</td><td>OCO</td><td>Haas</td><td>6%</td></tr>
-<tr><td>9</td><td>HUL</td><td>Audi</td><td>6%</td></tr>
-<tr><td>10</td><td>ALB</td><td>Williams</td><td>6%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> PIA predicted winner at 8% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2026 Driver Champion:</strong> PIA (473 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2026 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>PIA</td><td>0</td><td><strong>473</strong></td></tr>
-<tr><td>2</td><td>NOR</td><td>0</td><td><strong>394</strong></td></tr>
-<tr><td>3</td><td>VER</td><td>0</td><td><strong>359</strong></td></tr>
-<tr><td>4</td><td>RUS</td><td>0</td><td><strong>244</strong></td></tr>
-<tr><td>5</td><td>LEC</td><td>0</td><td><strong>239</strong></td></tr>
-</table>
-<br>
-<p><em>24 races remaining in the season.</em></p>
-<br>
-<h3>🔄 Prediction Evolution This Weekend</h3>
-<br>
-<table>
-<tr><td>Stage</td><td>Predicted Winner</td><td>Confidence</td></tr>
-<tr><td>pre_weekend</td><td>ALB</td><td>6%</td></tr>
-<tr><td>FP2</td><td>PIA</td><td>8%</td></tr>
-</table>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>The likely winner of the 2026 F1 World Championship may be NOR, given their consistent points accumulation, though strong performances from VER and LEC indicate they should not be underestimated. The margin of victory could realistically be within 10-20 points, reflecting the close nature of the competition.</blockquote>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
-<section id="pre_weekend">
+<section id="pre_weekend" style="display:none;">
   <h2>Pre-Weekend</h2>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
-  background:#1a3a1a; border:1px solid #2a2a4e; border-radius:8px;
+  background:#3a1a1a; border:1px solid #2a2a4e; border-radius:8px;
   padding:14px 18px; margin:0 0 16px; font-size:0.9rem;">
   
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🔮 Predicted (Pre-Weekend)
       </div>
-      <strong style="font-size:1.05rem;">ALB</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">6% win probability</span>
+      <span style="display:block; margin-bottom:3px;">P1: <strong>ALB</strong><span style="color:#888; font-size:0.78rem;"> (6%)</span></span><span style="display:block; margin-bottom:3px;">P2: <strong>ALO</strong><span style="color:#888; font-size:0.78rem;"> (6%)</span></span><span style="display:block; margin-bottom:3px;">P3: <strong>BOT</strong><span style="color:#888; font-size:0.78rem;"> (6%)</span></span>
     </div>
   
     <div>
       <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
         🏁 Actual Result
       </div>
-      ✅ <strong style="font-size:1.05rem;">RUS</strong><br>
-      <span style="color:#aaa; font-size:0.8rem;">Correct! · finished P1.0</span>
+      ❌ <strong style="font-size:1.05rem;">RUS</strong> wins<br>
+      <span style="color:#aaa; font-size:0.8rem;">Wrong (winner: RUS)</span>
     </div>
 </div>
-  <div class="social-card">🏎️ 2026 Australia GP Prediction [Pre-weekend]: P1 ALB (6%), P2 ALO, P3 BOT | 🏆 Champ: NOR (238pts predicted) #F1 #Formula1 #TimeCopilot</div>
   <div class="chart-row"><img src="charts/championship_standings_pre_weekend.png" alt="championship_standings_pre_weekend" loading="lazy"><img src="charts/race_probabilities_pre_weekend.png" alt="race_probabilities_pre_weekend" loading="lazy"></div>
-  <div class="linkedin-post"><h2>🏎️ 2026 Australia Grand Prix — Pre-Weekend Prediction</h2>
-<p><em>Powered by <a href="https://timecopilot.dev/">TimeCopilot</a> — AI time series forecasting | March 09, 2026</em></p>
-<br>
-<hr>
-<br>
-<blockquote>📊 <strong>Pre-Race Pick (After Qualifying):</strong> RUS · 14% win prob · 🏁 <em>Race not yet run</em></blockquote>
-<br>
-<h3>🏁 Race Prediction</h3>
-<br>
-<p><strong>Predicted Podium:</strong></p>
-<p>🥇 P1: <strong>ALB</strong> (Williams) — 6% probability</p>
-<p>🥈 P2: <strong>ALO</strong> (Aston Martin) — 6% probability</p>
-<p>🥉 P3: <strong>BOT</strong> (Cadillac) — 6% probability</p>
-<br>
-<p><strong>Full Top 10 Prediction:</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Team</td><td>Win Probability</td></tr>
-<tr><td>1</td><td>ALB</td><td>Williams</td><td>6%</td></tr>
-<tr><td>2</td><td>ALO</td><td>Aston Martin</td><td>6%</td></tr>
-<tr><td>3</td><td>BOT</td><td>Cadillac</td><td>6%</td></tr>
-<tr><td>4</td><td>GAS</td><td>Alpine</td><td>6%</td></tr>
-<tr><td>5</td><td>HAM</td><td>Ferrari</td><td>6%</td></tr>
-<tr><td>6</td><td>HUL</td><td>Audi</td><td>6%</td></tr>
-<tr><td>7</td><td>LEC</td><td>Ferrari</td><td>6%</td></tr>
-<tr><td>8</td><td>LIN</td><td>Racing Bulls</td><td>6%</td></tr>
-<tr><td>9</td><td>NOR</td><td>McLaren</td><td>6%</td></tr>
-<tr><td>10</td><td>OCO</td><td>Haas</td><td>6%</td></tr>
-</table>
-<br>
-<p>💡 <strong>Key Insight:</strong> ALB predicted winner at 6% based on historical circuit performance.</p>
-<br>
-<p><strong>Strategy Outlook:</strong> Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.</p>
-<br>
-<h3>🏆 Championship Prediction</h3>
-<br>
-<p><strong>Predicted 2026 Driver Champion:</strong> NOR (238 pts predicted final)</p>
-<br>
-<p><strong>Predicted Final 2026 Driver Standings (Top 5):</strong></p>
-<br>
-<table>
-<tr><td>Pos</td><td>Driver</td><td>Current Pts</td><td>Predicted Final</td></tr>
-<tr><td>1</td><td>NOR</td><td>10</td><td><strong>238</strong></td></tr>
-<tr><td>2</td><td>VER</td><td>8</td><td><strong>200</strong></td></tr>
-<tr><td>3</td><td>RUS</td><td>25</td><td><strong>193</strong></td></tr>
-<tr><td>4</td><td>LEC</td><td>15</td><td><strong>177</strong></td></tr>
-<tr><td>5</td><td>PER</td><td>0</td><td><strong>162</strong></td></tr>
-</table>
-<br>
-<p><strong>Predicted 2026 Constructor Champion:</strong> red_bull_racing (388 pts)</p>
-<br>
-<p><em>23 races remaining in the season.</em></p>
-<br>
-<h3>🤖 TimeCopilot Analysis — Championship</h3>
-<br>
-<blockquote>Based on the current points distributions and forecasts, the leading drivers are projected to maintain their trajectories with the championship leader winning by a likely margin in points of approximately 4-15 points, given competitive performance among top challengers. Drivers such as ALB, ALO, and HAM appear as realistic contenders to catch up given their recent form trends.</blockquote>
-<br>
-<blockquote>⚠️ <em>LLM analysis unavailable for this update — statistical model used instead.</em></blockquote>
-<br>
-<br>
-<hr>
-<br>
-<p><strong>Methodology:</strong> Historical F1 data (2015–2025) from FastF1 + OpenF1 API, structured as time series and forecasted using <a href="https://timecopilot.dev/">TimeCopilot</a> — the #1 ranked time series forecasting agent on the GIFT-Eval benchmark (NeurIPS 2025). Championship prediction uses cumulative points series. Race prediction uses circuit-specific finishing position trends enriched with current weekend pace data.</p>
-<br>
-<p>#F1 #Formula1 #TimeCopilot #DataScience #MachineLearning #TimeSeriesForecasting #Racing</p></div>
 </section>
 
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('section[id]').forEach(function(s) { s.style.display = 'none'; });
+  document.getElementById(id).style.display = 'block';
+  document.querySelectorAll('.stage-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+}
+</script>
 
 </main>
 <footer>
   Generated by <a href="https://timecopilot.dev/">TimeCopilot</a> ·
   Data sources: FastF1, OpenF1, Jolpica-F1 ·
-  Updated 2026-03-09 19:05 UTC
+  Updated 2026-03-09 22:54 UTC
 </footer>
 </body>
 </html>
