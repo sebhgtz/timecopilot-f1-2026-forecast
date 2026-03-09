@@ -76,7 +76,7 @@ def main():
         type=str,
         default=None,
         choices=["pre_weekend", "fp1", "fp2", "fp3", "qualifying",
-                 "sprint_qualifying", "sprint"],
+                 "sprint_qualifying", "sprint", "post_race"],
         help="Session stage to update. Omit to run full pre-weekend pipeline.",
     )
     parser.add_argument(
