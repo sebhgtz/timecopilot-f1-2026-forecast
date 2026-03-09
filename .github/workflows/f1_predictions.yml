@@ -36,6 +36,7 @@ on:
           - qualifying
           - sprint_qualifying
           - sprint
+          - post_race
       force_refresh:
         description: 'Force rebuild all cached data (slower but ensures freshness)'
         required: false
