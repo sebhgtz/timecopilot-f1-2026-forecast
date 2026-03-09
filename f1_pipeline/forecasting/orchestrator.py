@@ -362,7 +362,7 @@ def post_race_championship_update(
         year=year,
     )
 
-    # Fetch actual race results for the result section
+    # Fetch actual race results for the result section and accuracy logging
     actual_race_results = None
     try:
         actual_race_results = jolpica_fresh.race_results(year, round=race.round)
@@ -370,6 +370,10 @@ def post_race_championship_update(
             print(f"   ✓ Fetched actual race results ({len(actual_race_results)} finishers)")
     except Exception as exc:
         print(f"  ⚠️  Could not fetch actual race results: {exc}")
+
+    # Log accuracy BEFORE generate_all so the result badge reads the correct actual_winner
+    if race.round > 0:
+        log_race_accuracy(race_slug, year, race.round, jolpica_fresh)
 
     print("\n📄 Generating post-race report...")
     rg = ReportGenerator(race_slug=race_slug, year=year, race_name=race.name)
@@ -385,10 +389,6 @@ def post_race_championship_update(
 
     print(f"\n✅ Post-race championship update complete for {race.name} {year}")
     print(f"   Predicted champion: {driver_champ_fc.predicted_champion()}")
-
-    # Log prediction accuracy (predicted winner vs actual winner)
-    if race.round > 0:
-        log_race_accuracy(race_slug, year, race.round, jolpica)
 
     # Log actual session weather (qualifying + race) from Open-Meteo archive
     # Accumulates over the season so wet_driver_stats can learn from results

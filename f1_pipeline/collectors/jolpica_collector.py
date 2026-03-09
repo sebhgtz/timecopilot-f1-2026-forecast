@@ -280,7 +280,7 @@ class JolpicaCollector:
                     "driver_code": driver.get("code", ""),
                     "driver_name": f"{driver.get('givenName', '')} {driver.get('familyName', '')}".strip(),
                     "constructor": constructor.get("name", ""),
-                    "grid": int(result.get("grid", 0)),
+                    "grid": _safe_int(result.get("grid")) or 0,
                     "finish_position": _safe_int(result.get("position")),
                     "points": float(result.get("points", 0)),
                     "status": result.get("status", ""),
