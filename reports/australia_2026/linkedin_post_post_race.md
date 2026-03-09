@@ -50,13 +50,11 @@
 | 4 | HAM | 12 | **12** |
 | 5 | NOR | 10 | **10** |
 
-**Predicted 2026 Constructor Champion:** Mercedes (43 pts)
+**Predicted 2026 Constructor Champion:** red_bull_racing (388 pts)
 
 *23 races remaining in the season.*
 
-### 🤖 TimeCopilot Analysis — Championship
-
-> Considering these analyses, the likely championship winner is difficult to ascertain definitively due to potential race outcome variability. The forecasts suggest that the current leaders could maintain their trajectory barring any drastic changes. Potential challengers can include drivers exhibiting recent improvements or anomalies, specifically those capable of explosive performances. The final championship margin will heavily depend on race-to-race developments over the 23 remaining races, maintaining thus a competitive edge till the end.
+> ⚠️ *LLM analysis unavailable for this update — statistical model used instead.*
 
 
 ---
