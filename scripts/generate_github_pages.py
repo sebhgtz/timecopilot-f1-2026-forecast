@@ -458,10 +458,11 @@ def _build_constructor_championship_html(race_dir: Path) -> str:
             for row in csv.DictReader(f):
                 slug = row.get("unique_id", "").replace("constructor_", "")
                 display = _CONSTRUCTOR_SLUG_DISPLAY.get(slug, slug.replace("_", " ").title())
+                curr = float(row.get("current_points", 0))
                 rows.append({
                     "name": display,
-                    "current": float(row.get("current_points", 0)),
-                    "predicted": float(row.get("predicted_points", 0)),
+                    "current": curr,
+                    "predicted": max(float(row.get("predicted_points", 0)), curr),
                     "pred_pos": int(float(row.get("predicted_position", 99))),
                 })
         rows.sort(key=lambda r: r["pred_pos"])
@@ -483,7 +484,7 @@ def _build_constructor_championship_html(race_dir: Path) -> str:
                     if not constructor:
                         continue
                     curr = float(dr.get("current_points", 0))
-                    pred = float(dr.get("predicted_points", 0))
+                    pred = max(float(dr.get("predicted_points", 0)), curr)
                     if constructor not in cons_totals:
                         cons_totals[constructor] = {"current": 0.0, "predicted": 0.0}
                     cons_totals[constructor]["current"] += curr
