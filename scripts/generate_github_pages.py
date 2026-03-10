@@ -313,63 +313,87 @@ def _build_race_comparison_html(race_dir: Path) -> str:
     dnf_drivers = {r["driver_code"] for r in actual_dnf}
     dns_drivers = {r["driver_code"] for r in actual_dns}
 
+    td = "padding:4px 10px; vertical-align:middle;"
+    td_border = td + " border-left:1px solid #2a2a4e;"
+    td_center = td_border + " text-align:center; white-space:nowrap;"
+
     rows_html = ""
-    max_rows = max(len(predicted_rows), len(actual_classified))
-    for i in range(max_rows):
-        pred = predicted_rows[i] if i < len(predicted_rows) else None
-        act = actual_classified[i] if i < len(actual_classified) else None
 
-        pred_cell = ""
-        delta_cell = ""
-        if pred:
-            pred_cell = (
-                f'P{pred["rank"]}: <strong>{pred["driver_code"]}</strong>'
-                f'<span style="color:#888; font-size:0.8rem;"> ({pred["prob"]:.0f}%)</span>'
-            )
-            act_for_pred = actual_by_driver.get(pred["driver_code"])
-            if act_for_pred:
-                delta = pred["rank"] - act_for_pred["position"]  # positive = beat prediction
-                if delta == 0:
-                    delta_cell = "✅"
-                elif delta > 0:
-                    delta_cell = f'<span style="color:#4aff9a;">⬆️ {delta}</span>'
-                else:
-                    delta_cell = f'<span style="color:#ff6b6b;">⬇️ {abs(delta)}</span>'
-            elif pred["driver_code"] in dns_drivers:
-                delta_cell = '<span style="color:#888;">❌ DNS</span>'
-            elif pred["driver_code"] in dnf_drivers:
-                delta_cell = '<span style="color:#888;">❌ DNF</span>'
+    # One row per predicted driver (sorted by predicted rank)
+    for pred in predicted_rows:
+        driver = pred["driver_code"]
+        act = actual_by_driver.get(driver)
 
-        act_cell = ""
+        pred_cell = (
+            f'P{pred["rank"]}'
+            f'<span style="color:#888; font-size:0.8rem;"> ({pred["prob"]:.0f}%)</span>'
+        )
+
         if act:
             pts = int(act.get("points", 0))
-            pts_str = f" · {pts}pts" if pts > 0 else ""
-            act_cell = (
-                f'P{act["position"]}: <strong>{act["driver_code"]}</strong>'
-                f'<span style="color:#888; font-size:0.8rem;">{pts_str}</span>'
-            )
+            pts_str = f'<span style="color:#888; font-size:0.8rem;"> · {pts}pts</span>' if pts > 0 else ""
+            act_cell = f'P{act["position"]}{pts_str}'
+            delta = pred["rank"] - act["position"]
+            if delta == 0:
+                delta_cell = "✅"
+            elif delta > 0:
+                delta_cell = f'<span style="color:#4aff9a;">⬆️ {delta}</span>'
+            else:
+                delta_cell = f'<span style="color:#ff6b6b;">⬇️ {abs(delta)}</span>'
+        elif driver in dns_drivers:
+            act_cell = '<span style="color:#888;">DNS</span>'
+            delta_cell = '<span style="color:#888;">❌</span>'
+        elif driver in dnf_drivers:
+            act_cell = '<span style="color:#888;">DNF</span>'
+            delta_cell = '<span style="color:#888;">❌</span>'
+        else:
+            act_cell = '<span style="color:#555;">—</span>'
+            delta_cell = ""
 
         rows_html += (
             f'<tr>'
-            f'<td style="padding:5px 10px; vertical-align:top;">{pred_cell}</td>'
-            f'<td style="padding:5px 10px; vertical-align:top; border-left:1px solid #2a2a4e;">{act_cell}</td>'
-            f'<td style="padding:5px 10px; text-align:center; vertical-align:top; border-left:1px solid #2a2a4e; white-space:nowrap;">{delta_cell}</td>'
+            f'<td style="{td}">{pred_cell}</td>'
+            f'<td style="{td}"><strong>{driver}</strong></td>'
+            f'<td style="{td_border}">{act_cell}</td>'
+            f'<td style="{td_center}">{delta_cell}</td>'
             f'</tr>\n'
         )
 
-    for r in actual_dnf:
+    # Unranked actual finishers (classified but not in prediction)
+    unranked = [r for r in actual_classified if r["driver_code"] not in predicted_set]
+    if unranked:
         rows_html += (
-            f'<tr><td></td>'
-            f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
-            f'DNF: {r["driver_code"]}</td><td style="border-left:1px solid #2a2a4e;"></td></tr>\n'
+            f'<tr><td colspan="4" style="padding:6px 10px 2px; color:#555; '
+            f'font-size:0.75rem; border-top:1px solid #1a1a3e;">'
+            f'Not in forecast range:</td></tr>\n'
         )
-    for r in actual_dns:
-        rows_html += (
-            f'<tr><td></td>'
-            f'<td style="padding:3px 10px; color:#888; font-size:0.82rem; border-left:1px solid #2a2a4e;">'
-            f'DNS: {r["driver_code"]}</td><td style="border-left:1px solid #2a2a4e;"></td></tr>\n'
-        )
+        for r in sorted(unranked, key=lambda x: x["position"]):
+            pts = int(r.get("points", 0))
+            pts_str = f'<span style="color:#888; font-size:0.8rem;"> · {pts}pts</span>' if pts > 0 else ""
+            rows_html += (
+                f'<tr>'
+                f'<td style="{td}; color:#555;">—</td>'
+                f'<td style="{td}; color:#aaa;"><strong>{r["driver_code"]}</strong></td>'
+                f'<td style="{td_border}; color:#aaa;">P{r["position"]}{pts_str}</td>'
+                f'<td style="{td_center}"></td>'
+                f'</tr>\n'
+            )
 
+    # DNF/DNS for drivers not already in predicted set
+    for r in actual_dnf + actual_dns:
+        if r["driver_code"] not in predicted_set:
+            label = "DNS" if r["driver_code"] in dns_drivers else "DNF"
+            rows_html += (
+                f'<tr>'
+                f'<td style="{td}; color:#555;">—</td>'
+                f'<td style="{td}; color:#888;"><strong>{r["driver_code"]}</strong></td>'
+                f'<td style="{td_border}; color:#888;">{label}</td>'
+                f'<td style="{td_center}"></td>'
+                f'</tr>\n'
+            )
+
+    th = "padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;"
+    th_border = th + " border-left:1px solid #2a2a4e;"
     return f"""<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
   <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
     📊 Race Prediction vs Result
@@ -377,9 +401,10 @@ def _build_race_comparison_html(race_dir: Path) -> str:
   <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
     <thead>
       <tr>
-        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">🔮 Predicted ({best_stage_label})</th>
-        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">🏁 Actual Result</th>
-        <th style="padding:5px 10px; text-align:center; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">Δ Pos</th>
+        <th style="{th}">🔮 {best_stage_label}</th>
+        <th style="{th}">Driver</th>
+        <th style="{th_border}">🏁 Actual</th>
+        <th style="{th_border} text-align:center;">Δ</th>
       </tr>
     </thead>
     <tbody>{rows_html}</tbody>
@@ -430,6 +455,18 @@ def _build_constructor_championship_html(race_dir: Path) -> str:
         return ""
     if not rows:
         return ""
+
+    # If all predicted == current, the forecast failed (insufficient data) — show a note instead
+    all_same = all(abs(r["predicted"] - r["current"]) < 0.1 for r in rows)
+    if all_same:
+        return """<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
+  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
+    🏗️ Constructor Championship Prediction
+  </div>
+  <p style="color:#555; font-size:0.85rem; margin:0;">
+    Forecast not yet available — insufficient season data. Will update as the season progresses.
+  </p>
+</div>"""
 
     all_zero = all(r["current"] == 0 for r in rows)
     th = "padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;"
