@@ -3,7 +3,7 @@
 
 ---
 
-> 📊 **Pre-Race Pick (After Qualifying):** RUS · 14% win prob · 🏁 **Winner: RUS** · ✅ Correct · finished P1
+> 📊 **Pre-Race Pick (After Qualifying):** RUS · 27% win prob · 🏁 **Winner: RUS** · ✅ Correct · finished P1
 
 ### 🏁 Race Result — Australian Grand Prix
 
@@ -34,7 +34,7 @@
 | DNS | PIA | McLaren | 0 |
 | DNS | HUL | Audi | 0 |
 
-🔮 **Model predicted (After Qualifying): RUS** (14% win prob) → ✅ Correct! *(finished P1)*
+🔮 **Model predicted (After Qualifying): RUS** (27% win prob) → ✅ Correct! *(finished P1)*
 
 ### 🏆 Championship Prediction
 

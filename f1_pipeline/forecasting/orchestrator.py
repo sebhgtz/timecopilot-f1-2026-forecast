@@ -362,6 +362,14 @@ def post_race_championship_update(
         year=year,
     )
 
+    # Save driver championship standings CSV (syncs with post-race chart PNG)
+    if driver_champ_fc is not None and not driver_champ_fc.predicted_final.empty:
+        from pathlib import Path as _Path
+        driver_path = _Path(f"reports/{race_slug}_{year}") / "championship_final_standings.csv"
+        driver_path.parent.mkdir(parents=True, exist_ok=True)
+        driver_champ_fc.predicted_final.to_csv(driver_path, index=False)
+        print(f"   ✓ Saved championship_final_standings.csv (post-race forecast)")
+
     # Save constructor championship standings CSV
     if constructor_champ_fc is not None and not constructor_champ_fc.predicted_final.empty:
         from pathlib import Path as _Path

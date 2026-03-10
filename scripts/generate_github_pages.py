@@ -412,6 +412,20 @@ def _build_race_comparison_html(race_dir: Path) -> str:
 </div>"""
 
 
+_DRIVER_CONSTRUCTOR_2026 = {
+    "VER": "Red Bull Racing", "HAD": "Red Bull Racing",
+    "HAM": "Ferrari",         "LEC": "Ferrari",
+    "NOR": "McLaren",         "PIA": "McLaren",
+    "RUS": "Mercedes",        "ANT": "Mercedes",
+    "ALO": "Aston Martin",    "STR": "Aston Martin",
+    "GAS": "Alpine",          "COL": "Alpine",
+    "SAI": "Williams",        "ALB": "Williams",
+    "BEA": "Haas",            "OCO": "Haas",
+    "HUL": "Audi",            "BOR": "Audi",
+    "LAW": "Racing Bulls",    "LIN": "Racing Bulls",
+    "BOT": "Cadillac",        "PER": "Cadillac",
+}
+
 _CONSTRUCTOR_SLUG_DISPLAY = {
     "mercedes": "Mercedes",
     "red_bull_racing": "Red Bull Racing",
@@ -456,17 +470,34 @@ def _build_constructor_championship_html(race_dir: Path) -> str:
     if not rows:
         return ""
 
-    # If all predicted == current, the forecast failed (insufficient data) — show a note instead
+    # If all predicted == current, the constructor forecast failed — derive from driver sums
     all_same = all(abs(r["predicted"] - r["current"]) < 0.1 for r in rows)
     if all_same:
-        return """<div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
-  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
-    🏗️ Constructor Championship Prediction
-  </div>
-  <p style="color:#555; font-size:0.85rem; margin:0;">
-    Forecast not yet available — insufficient season data. Will update as the season progresses.
-  </p>
-</div>"""
+        driver_path = race_dir / "championship_final_standings.csv"
+        cons_totals: dict = {}
+        try:
+            with driver_path.open(encoding="utf-8") as f:
+                for dr in csv.DictReader(f):
+                    driver = dr.get("unique_id", "").replace("driver_", "")
+                    constructor = _DRIVER_CONSTRUCTOR_2026.get(driver)
+                    if not constructor:
+                        continue
+                    curr = float(dr.get("current_points", 0))
+                    pred = float(dr.get("predicted_points", 0))
+                    if constructor not in cons_totals:
+                        cons_totals[constructor] = {"current": 0.0, "predicted": 0.0}
+                    cons_totals[constructor]["current"] += curr
+                    cons_totals[constructor]["predicted"] += pred
+        except Exception:
+            pass
+        if cons_totals:
+            rows = [
+                {"name": k, "current": v["current"], "predicted": v["predicted"]}
+                for k, v in cons_totals.items()
+            ]
+            rows.sort(key=lambda r: r["predicted"], reverse=True)
+            for i, r in enumerate(rows):
+                r["pred_pos"] = i + 1
 
     all_zero = all(r["current"] == 0 for r in rows)
     th = "padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;"
