@@ -1,0 +1,35 @@
+{
+  "stage": "qualifying",
+  "race_name": "2026 China Grand Prix",
+  "circuit_slug": "china",
+  "year": 2026,
+  "timestamp": "2026-03-14T09:29:17.989388",
+  "predicted_winner": {
+    "driver_code": "RUS",
+    "constructor": "Mercedes",
+    "win_probability": 0.19996328656674991,
+    "predicted_position": 4.8
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "RUS",
+      "constructor": "Mercedes",
+      "probability": 0.19996328656674991
+    },
+    {
+      "position": 2,
+      "driver_code": "HAM",
+      "constructor": "Ferrari",
+      "probability": 0.15510997803208207
+    },
+    {
+      "position": 3,
+      "driver_code": "LEC",
+      "constructor": "Ferrari",
+      "probability": 0.12381494551190322
+    }
+  ],
+  "key_insight": "RUS (P2 on grid) leads predictions at 20% win probability.",
+  "narrative": ""
+}
