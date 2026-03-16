@@ -26,6 +26,8 @@ from typing import Optional
 import pandas as pd
 import numpy as np
 
+from ..collectors.calendar_manager import ROOKIES_2026 as _ROOKIES, SECOND_YEAR_2026 as _SECOND_YEAR
+
 
 @dataclass
 class ChampionshipForecastResult:
@@ -109,6 +111,7 @@ class ChampionshipForecaster:
         max_points_per_race: float = 26.0,
         driver_filter: Optional[list[str]] = None,
         year: int = 2026,
+        driver_stats: Optional[dict[str, dict]] = None,
     ) -> ChampionshipForecastResult:
         """
         Forecast driver championship final standings.
@@ -120,6 +123,9 @@ class ChampionshipForecaster:
             max_points_per_race:  Maximum points available per race (25 + 1 fastest lap)
             driver_filter:        Only forecast these driver codes (e.g. top 8 contenders)
             year:                 Season year for the LLM query context
+            driver_stats:         Optional dict {driver_code: {"current_points": float,
+                                  "2025_final_position": int}} for second-year/rookie drivers.
+                                  Injects career-stage context into the LLM query.
 
         Returns:
             ChampionshipForecastResult
@@ -130,7 +136,8 @@ class ChampionshipForecaster:
             remaining_races=remaining_races,
             race_name=race_name,
             entity_filter=driver_filter,
-            query=self._driver_query(remaining_races, max_points_per_race, year=year),
+            query=self._driver_query(remaining_races, max_points_per_race, year=year,
+                                     driver_stats=driver_stats),
             year=year,
         )
 
@@ -379,12 +386,45 @@ class ChampionshipForecaster:
 
     # ── LLM query builders ────────────────────────────────────────────────────
 
-    def _driver_query(self, remaining_races: int, max_pts: float, year: int = 2026) -> str:
+    def _driver_query(
+        self,
+        remaining_races: int,
+        max_pts: float,
+        year: int = 2026,
+        driver_stats: Optional[dict[str, dict]] = None,
+    ) -> str:
+        # Build context for developing drivers (second-year + rookies) so the LLM
+        # can reason about career trajectory rather than just 1 year of data.
+        second_year_context = ""
+        if driver_stats:
+            sy_notes = []
+            for code, tier in _SECOND_YEAR.items():
+                stats = driver_stats.get(code, {})
+                curr = stats.get("current_points", "?")
+                pos_2025 = stats.get("2025_final_position", "?")
+                sy_notes.append(
+                    f"{code} (second-year driver, {tier}-tier car, "
+                    f"finished P{pos_2025} in 2025 WDC, currently {curr} pts in {year})"
+                )
+            for code in _ROOKIES:
+                stats = driver_stats.get(code, {})
+                curr = stats.get("current_points", "?")
+                sy_notes.append(
+                    f"{code} (true rookie, first F1 season, currently {curr} pts)"
+                )
+            if sy_notes:
+                second_year_context = (
+                    f" Developing drivers to note: {'; '.join(sy_notes)}. "
+                    f"Second-year drivers in competitive cars often show strong improvement "
+                    f"as they adapt to their machinery across the season."
+                )
+
         return (
             f"This is the {year} F1 Driver World Championship. "
             f"Each series represents a driver's cumulative points after each race. "
             f"There are {remaining_races} races remaining, with a maximum of {max_pts:.0f} "
-            f"points available per race (25 pts for win + 1 fastest lap). "
+            f"points available per race (25 pts for win + 1 fastest lap)."
+            f"{second_year_context} "
             f"Consider: (1) current championship gaps, (2) recent form trajectory, "
             f"(3) whether any driver is on a dominant winning streak vs. inconsistent, "
             f"(4) whether the championship leader has enough cushion to clinch. "

@@ -169,6 +169,18 @@ DRIVERS_2026: dict[str, str] = {
 # pre-season testing pace when building circuit series.
 ROOKIES_2026: set[str] = {"LIN"}
 
+# Drivers who debuted in 2025 and are in their second F1 season in 2026.
+# They have exactly 1 year of historical data — enough for championship forecasting
+# but insufficient for per-circuit forecasts (need 3+ data points per circuit).
+# tier: "front" = top-3 constructor expected, "midfield" = 4th–7th, "back" = 8th–10th.
+# Used by circuit_series.py (synthetic row backfill) and forecasting LLM queries.
+SECOND_YEAR_2026: dict[str, str] = {
+    "ANT": "front",    # Andrea Kimi Antonelli — Mercedes (won China 2026 R2)
+    "BOR": "midfield", # Gabriel Bortoleto — Audi
+    "HAD": "front",    # Isack Hadjar — Red Bull Racing
+    "BEA": "back",     # Oliver Bearman — Haas
+}
+
 
 # ── 2026 Calendar ─────────────────────────────────────────────────────────────
 

@@ -32,7 +32,7 @@ from pathlib import Path
 from typing import Optional
 import pandas as pd
 
-from ..collectors.calendar_manager import CalendarManager, DRIVERS_2026, ROOKIES_2026
+from ..collectors.calendar_manager import CalendarManager, DRIVERS_2026, ROOKIES_2026, SECOND_YEAR_2026
 from ..collectors.historical_collector import (
     build_historical_dataset, build_testing_dataset,
     get_testing_pace_summary, testing_pace_to_position_estimate,
@@ -345,6 +345,28 @@ def post_race_championship_update(
     driver_champ_df = driver_champ_df[driver_champ_df["unique_id"].isin(_allowed_driver_uids)]
 
     print(f"\n🔮 Running post-race championship forecasts ({remaining_races} races remaining)...")
+
+    # Build career-stage context for second-year drivers so the LLM can reason
+    # about trajectory beyond the single year of historical data they have.
+    driver_stats: dict[str, dict] = {}
+    for code in SECOND_YEAR_2026:
+        uid = f"driver_{code}"
+        curr_df = driver_champ_df[
+            (driver_champ_df["unique_id"] == uid) &
+            (pd.to_datetime(driver_champ_df["ds"]).dt.year == year)
+        ]
+        current_pts = float(curr_df["y"].max()) if not curr_df.empty else 0.0
+        hist_2025 = driver_champ_df[
+            (driver_champ_df["unique_id"] == uid) &
+            (pd.to_datetime(driver_champ_df["ds"]).dt.year == 2025)
+        ]
+        pos_2025 = (
+            int(hist_2025["championship_position"].iloc[-1])
+            if not hist_2025.empty and "championship_position" in hist_2025.columns
+            else "?"
+        )
+        driver_stats[code] = {"current_points": current_pts, "2025_final_position": pos_2025}
+
     from .championship_forecaster import ChampionshipForecaster
     cf = ChampionshipForecaster(llm=llm, post_call_delay_s=20)
     driver_champ_fc = cf.forecast_drivers(
@@ -353,6 +375,7 @@ def post_race_championship_update(
         race_name=race.name,
         driver_filter=list(DRIVERS_2026.keys()),
         year=year,
+        driver_stats=driver_stats,
     )
     constructor_champ_fc = cf.forecast_constructors(
         constructor_champ_df,

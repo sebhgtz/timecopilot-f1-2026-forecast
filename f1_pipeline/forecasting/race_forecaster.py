@@ -29,6 +29,8 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 
+from ..collectors.calendar_manager import ROOKIES_2026 as _ROOKIES, SECOND_YEAR_2026 as _SECOND_YEAR
+
 
 @dataclass
 class RaceForecastResult:
@@ -547,7 +549,9 @@ class RaceForecaster:
         grid_info = ""
         if covariates.get("grid_positions"):
             top3_grid = sorted(covariates["grid_positions"].items(), key=lambda x: x[1])[:3]
-            grid_info = f" Qualifying: {', '.join(f'{d} (P{p:.0f})' for d, p in top3_grid)}."
+            grid_info = " Qualifying: " + ", ".join(
+                f"{d}{_career_tag(d)} (P{p:.0f})" for d, p in top3_grid
+            ) + "."
 
         weather_enc = covariates.get("weather_enc", 0)
         weather_desc = covariates.get("weather_desc", "dry")
@@ -605,11 +609,22 @@ class RaceForecaster:
 
         sprint_context = " This is a sprint weekend." if is_sprint else ""
 
+        # Annotate any developing drivers in the field so the LLM can reason about
+        # limited history and career trajectory (second-year = only 2025 data exists).
+        career_notes = []
+        for driver in sorted(covariates.get("grid_positions", {}).keys()):
+            if driver in _ROOKIES:
+                career_notes.append(f"{driver} is a true rookie (2026 F1 debut, limited historical data)")
+            elif driver in _SECOND_YEAR:
+                career_notes.append(f"{driver} is in their second F1 season (debuted 2025, one year of history)")
+        career_context = (" Driver career notes: " + "; ".join(career_notes) + ".") if career_notes else ""
+
         return (
             f"This is historical finishing position data for Formula 1 drivers at the "
             f"{circuit_slug.replace('_', ' ').title()} circuit (lower = better result; "
             f"20 = DNF).{sprint_context} Predict each driver's likely finishing position in the "
-            f"{year} race (h=1).{grid_info}{sprint_info}{weather_info}{fp_info}{strategy_info} "
+            f"{year} race (h=1).{grid_info}{sprint_info}{weather_info}{fp_info}{strategy_info}"
+            f"{career_context} "
             f"Consider: (1) driver's historical trend at this circuit, "
             f"(2) qualifying grid position as the strongest predictor, "
             f"{'(3) sprint race result as direct evidence of car race pace, ' if is_sprint else ''}"
@@ -684,3 +699,12 @@ def _normalize_to_annual(tc_df: pd.DataFrame) -> pd.DataFrame:
     if not normalized:
         return tc_df
     return pd.concat(normalized, ignore_index=True)
+
+
+def _career_tag(driver_code: str) -> str:
+    """Return a parenthetical career-stage label for the LLM query."""
+    if driver_code in _ROOKIES:
+        return " [rookie, 2026 debut]"
+    if driver_code in _SECOND_YEAR:
+        return " [second-year, debuted 2025]"
+    return ""

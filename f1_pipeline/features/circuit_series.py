@@ -24,6 +24,7 @@ import numpy as np
 import pandas as pd
 
 from ..collectors.jolpica_collector import JolpicaCollector
+from ..collectors.calendar_manager import SECOND_YEAR_2026 as _SECOND_YEAR_DRIVERS
 
 # Circuits that appear on the 2026 calendar (slug → common name fragments)
 CIRCUITS_2026 = {
@@ -384,6 +385,65 @@ def add_current_race_covariates(
             fp2_long_run_rank, new_driver_car_rank,
         ))
 
+    # --- Backfill second-year drivers who have <3 real circuit data points ---
+    # Drivers who debuted in 2025 have exactly 1 historical appearance per circuit,
+    # which is below the min_len=3 threshold. We generate 2 synthetic historical rows
+    # so TimeCopilot receives enough data points to produce a real forecast.
+    # Synthetic rows are based on the driver's actual 2025 performance (not a generic
+    # default), and carry a slight upward trend to represent career improvement.
+    for driver_code, tier in _SECOND_YEAR_DRIVERS.items():
+        if driver_code not in historical_at_circuit:
+            continue  # no real data at all — handled by new_driver_entries path
+        driver_history = existing[existing["driver_code"] == driver_code]
+        circuit_history = driver_history[driver_history["circuit_slug"] == circuit_slug]
+        if len(circuit_history) >= 3:
+            continue  # already has enough data, no augmentation needed
+
+        # Estimate base finishing position from actual 2025 data at this circuit;
+        # fall back to overall 2025 avg finish, then car tier default.
+        if not circuit_history.empty:
+            est_pos = float(circuit_history["y"].mean())
+        else:
+            overall_avg = driver_history["y"].mean()
+            est_pos = float(overall_avg) if not np.isnan(overall_avg) else _tier_to_est_pos(tier)
+
+        if current_team_map and driver_code in current_team_map:
+            constructor = current_team_map[driver_code]
+        elif not driver_history.empty:
+            constructor = driver_history["constructor"].iloc[-1]
+        else:
+            constructor = ""
+
+        if car_pace_rank_map and constructor in car_pace_rank_map:
+            driver_car_rank = float(car_pace_rank_map[constructor])
+        else:
+            driver_car_rank = float(car_pace_rank) if car_pace_rank is not None else 5.0
+
+        driver_name = driver_history["driver_name"].iloc[-1] if not driver_history.empty else driver_code
+        synthetic_needed = max(0, 3 - len(circuit_history))
+
+        # Generate synthetic rows for the missing prior years (e.g. 2023, 2024 if only 2025 exists).
+        # Trend: slightly worse in earlier years (est_pos + back * 0.5) → improving trajectory.
+        for back in range(synthetic_needed + 1, 1, -1):
+            hist_date = pd.Timestamp(f"{year - back}-06-15")
+            new_rows.append({
+                "unique_id": f"{driver_code}_{circuit_slug}",
+                "ds": hist_date,
+                "y": est_pos + float(back - 1) * 0.5,
+                "driver_code": driver_code,
+                "driver_name": driver_name,
+                "constructor": constructor,
+                "circuit_slug": circuit_slug,
+                "race_name": f"{year - back} {circuit_slug.replace('_', ' ').title()} Grand Prix",
+                "grid_position": np.nan,
+                "weather_enc": float(_WEATHER_DRY),
+                "strategy_stops": 2.0,
+                "car_pace_rank": driver_car_rank,
+                "year": year - back,
+                "status": "synthetic_second_year",
+                "points": 0.0,
+            })
+
     if not new_rows:
         return circuit_df
 
@@ -393,7 +453,7 @@ def add_current_race_covariates(
     # so the race forecaster doesn't extrapolate positions for retired/absent drivers.
     base_df = circuit_df
     if active_drivers is not None:
-        all_active = active_drivers | set(new_driver_entries or {})
+        all_active = active_drivers | set(new_driver_entries or {}) | set(_SECOND_YEAR_DRIVERS.keys())
         base_df = circuit_df[circuit_df["driver_code"].isin(all_active)].copy()
 
     result = pd.concat([base_df, new_df], ignore_index=True)
@@ -439,6 +499,11 @@ def _placeholder_row(
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _tier_to_est_pos(tier: str) -> float:
+    """Convert a performance tier string to a numeric estimated finishing position."""
+    return {"front": 8.0, "midfield": 12.0, "back": 15.0}.get(tier, 14.0)
+
 
 def _infer_strategy_stops(round_num: int, year: int) -> int:
     """
