@@ -3,33 +3,33 @@
   "race_name": "2026 China Grand Prix",
   "circuit_slug": "china",
   "year": 2026,
-  "timestamp": "2026-03-14T09:29:17.989388",
+  "timestamp": "2026-03-16T16:53:18.811890",
   "predicted_winner": {
-    "driver_code": "RUS",
+    "driver_code": "ANT",
     "constructor": "Mercedes",
-    "win_probability": 0.19996328656674991,
-    "predicted_position": 4.8
+    "win_probability": 0.26335174146204615,
+    "predicted_position": 2.925
   },
   "podium": [
     {
       "position": 1,
-      "driver_code": "RUS",
+      "driver_code": "ANT",
       "constructor": "Mercedes",
-      "probability": 0.19996328656674991
+      "probability": 0.26335174146204615
     },
     {
       "position": 2,
       "driver_code": "HAM",
       "constructor": "Ferrari",
-      "probability": 0.15510997803208207
+      "probability": 0.18436840440825344
     },
     {
       "position": 3,
-      "driver_code": "LEC",
-      "constructor": "Ferrari",
-      "probability": 0.12381494551190322
+      "driver_code": "RUS",
+      "constructor": "Mercedes",
+      "probability": 0.12672123412280126
     }
   ],
-  "key_insight": "RUS (P2 on grid) leads predictions at 20% win probability.",
+  "key_insight": "ANT starts from pole \u2014 strong favourite at 26% win probability.",
   "narrative": ""
 }

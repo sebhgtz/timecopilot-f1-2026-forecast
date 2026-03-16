@@ -1,33 +1,33 @@
 ## 🏎️ 2026 China Grand Prix — Final Pre-Race Prediction — After Qualifying
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 14, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 16, 2026*
 
 ---
 
-> 📊 **Pre-Race Pick (After Qualifying):** RUS · 20% win prob · 🏁 *Race not yet run*
+> 📊 **Pre-Race Pick (After Qualifying):** RUS · 20% win prob · 🏁 **Winner: ANT** · ❌ Wrong · finished P2
 
 ### 🏁 Race Prediction
 
 **Predicted Podium:**
-🥇 P1: **RUS** (Mercedes) — 20% probability
-🥈 P2: **HAM** (Ferrari) — 16% probability
-🥉 P3: **LEC** (Ferrari) — 12% probability
+🥇 P1: **ANT** (Mercedes) — 26% probability
+🥈 P2: **HAM** (Ferrari) — 18% probability
+🥉 P3: **RUS** (Mercedes) — 13% probability
 
 **Full Top 10 Prediction:**
 
 | Pos | Driver | Team | Win Probability |
 |-----|--------|------|-----------------|
-| 1 | RUS | Mercedes | 20% |
-| 2 | HAM | Ferrari | 16% |
-| 3 | LEC | Ferrari | 12% |
+| 1 | ANT | Mercedes | 26% |
+| 2 | HAM | Ferrari | 18% |
+| 3 | RUS | Mercedes | 13% |
 | 4 | PIA | McLaren | 10% |
-| 5 | NOR | McLaren | 8% |
-| 6 | GAS | Alpine | 7% |
-| 7 | VER | Red Bull Racing | 6% |
-| 8 | HUL | Audi | 4% |
-| 9 | OCO | Haas | 3% |
-| 10 | LIN | Racing Bulls | 2% |
+| 5 | NOR | McLaren | 5% |
+| 6 | LEC | Ferrari | 5% |
+| 7 | VER | Red Bull Racing | 3% |
+| 8 | BEA | Haas | 3% |
+| 9 | GAS | Alpine | 2% |
+| 10 | HAD | Red Bull Racing | 2% |
 
-💡 **Key Insight:** RUS (P2 on grid) leads predictions at 20% win probability.
+💡 **Key Insight:** ANT starts from pole — strong favourite at 26% win probability.
 
 **Strategy Outlook:** Historically, teams opt for a 2-stop strategy at this circuit. Safety car probability: 0%.
 
@@ -35,7 +35,7 @@
 
 | Stage | Predicted Winner | Confidence |
 |-------|-----------------|------------|
-| Qualifying | RUS | 20% |
+| Qualifying | ANT | 26% |
 | Sprint Qualifying | RUS | 9% |
 
 
