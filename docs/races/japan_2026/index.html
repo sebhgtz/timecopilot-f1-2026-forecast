@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abu Dhabi Grand Prix 2025 — F1 TimeCopilot</title>
+<title>Japan Grand Prix 2026 — F1 TimeCopilot</title>
 <style>
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
        background: #0f0f1a; color: #e0e0e0; margin: 0; padding: 0; }
@@ -51,57 +51,30 @@ a { color: #4a9eff; }
 <main>
 
 <h2 style="font-size:1.6rem; border:none; color:#fff;">
-  🏁 Abu Dhabi Grand Prix <span style="color:#888;font-size:1rem;">2025</span>
+  🏁 Japan Grand Prix <span style="color:#888;font-size:1rem;">2026</span>
 </h2>
-<div style="background:#1a3a1a; border:1px solid #2a6a2a; border-radius:8px;
-  padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
-  ✅ <strong>Result (After Qualifying):</strong>
-  Predicted <strong>VER</strong> · Actual winner <strong>VER</strong> (finished P1.0) · Correct
-</div><div class="stage-tabs"><a onclick="showTab('pre_weekend', this)" class="stage-tab" style="cursor:pointer;">Pre-Weekend</a><a onclick="showTab('fp1', this)" class="stage-tab" style="cursor:pointer;">After FP1</a><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('fp3', this)" class="stage-tab" style="cursor:pointer;">After FP3</a><a onclick="showTab('qualifying', this)" class="stage-tab" style="cursor:pointer;">After Qualifying</a><a onclick="showTab('post_race', this)" class="stage-tab active" style="cursor:pointer;">Post-Race</a></div>
+<div class="stage-tabs"><a onclick="showTab('pre_weekend', this)" class="stage-tab active" style="cursor:pointer;">Pre-Weekend</a></div>
 
-<section id="post_race" style="display:block;">
-  <h2>Post-Race</h2>
-  
-  
-  
-  <div class="chart-row"><img src="charts/championship_standings_post_race.png" alt="championship_standings_post_race" loading="lazy"></div>
-</section>
-
-<section id="qualifying" style="display:none;">
-  <h2>After Qualifying</h2>
-  
-  
-  
-  <div class="chart-row"><img src="charts/championship_standings_qualifying.png" alt="championship_standings_qualifying" loading="lazy"><img src="charts/race_probabilities_qualifying.png" alt="race_probabilities_qualifying" loading="lazy"></div>
-</section>
-
-<section id="fp3" style="display:none;">
-  <h2>After FP3</h2>
-  
-  
-  
-  <div class="chart-row"><img src="charts/championship_standings_fp3.png" alt="championship_standings_fp3" loading="lazy"><img src="charts/race_probabilities_fp3.png" alt="race_probabilities_fp3" loading="lazy"></div>
-</section>
-
-<section id="fp2" style="display:none;">
-  <h2>After FP2</h2>
-  
-  
-  
-  <div class="chart-row"><img src="charts/championship_standings_fp2.png" alt="championship_standings_fp2" loading="lazy"><img src="charts/race_probabilities_fp2.png" alt="race_probabilities_fp2" loading="lazy"></div>
-</section>
-
-<section id="fp1" style="display:none;">
-  <h2>After FP1</h2>
-  
-  
-  
-  <div class="chart-row"><img src="charts/championship_standings_fp1.png" alt="championship_standings_fp1" loading="lazy"><img src="charts/race_probabilities_fp1.png" alt="race_probabilities_fp1" loading="lazy"></div>
-</section>
-
-<section id="pre_weekend" style="display:none;">
+<section id="pre_weekend" style="display:block;">
   <h2>Pre-Weekend</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px;
+  padding:14px 18px; margin:0 0 16px; font-size:0.9rem;">
   
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🔮 Predicted (Pre-Weekend)
+      </div>
+      <span style="display:block; margin-bottom:3px;">P1: <strong>ALB</strong><span style="color:#888; font-size:0.78rem;"> (5%)</span></span><span style="display:block; margin-bottom:3px;">P2: <strong>ALO</strong><span style="color:#888; font-size:0.78rem;"> (5%)</span></span><span style="display:block; margin-bottom:3px;">P3: <strong>ANT</strong><span style="color:#888; font-size:0.78rem;"> (5%)</span></span>
+    </div>
+  
+    <div>
+      <div style="color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+        🏁 Actual Podium
+      </div>
+      <em style="color:#555;">Race not yet run</em>
+    </div>
+</div>
   
   
   <div class="chart-row"><img src="charts/championship_standings_pre_weekend.png" alt="championship_standings_pre_weekend" loading="lazy"><img src="charts/race_probabilities_pre_weekend.png" alt="race_probabilities_pre_weekend" loading="lazy"></div>
