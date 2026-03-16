@@ -1,0 +1,54 @@
+{
+  "entity": "driver",
+  "race_name": "Pre-Season",
+  "remaining_races": 22,
+  "timestamp": "2026-03-16T16:10:54.888138",
+  "predicted_champion": {
+    "name": "RUS",
+    "predicted_points": 51.0,
+    "current_points": 51.0
+  },
+  "top5": [
+    {
+      "unique_id": "driver_RUS",
+      "current_points": 51.0,
+      "championship_position": 1,
+      "current_position": 1,
+      "predicted_points": 51.0,
+      "predicted_position": 1
+    },
+    {
+      "unique_id": "driver_ANT",
+      "current_points": 47.0,
+      "championship_position": 2,
+      "current_position": 2,
+      "predicted_points": 47.0,
+      "predicted_position": 2
+    },
+    {
+      "unique_id": "driver_LEC",
+      "current_points": 34.0,
+      "championship_position": 3,
+      "current_position": 3,
+      "predicted_points": 34.0,
+      "predicted_position": 3
+    },
+    {
+      "unique_id": "driver_HAM",
+      "current_points": 33.0,
+      "championship_position": 4,
+      "current_position": 4,
+      "predicted_points": 33.0,
+      "predicted_position": 4
+    },
+    {
+      "unique_id": "driver_BEA",
+      "current_points": 17.0,
+      "championship_position": 5,
+      "current_position": 5,
+      "predicted_points": 17.0,
+      "predicted_position": 5
+    }
+  ],
+  "narrative": "Considering current standings and the fact that most drivers appear relatively stable with minor fluctuations, the likely winner of the 2026 F1 World Championship would be anticipated to maintain consistency. With 22 races left and a maximum of 26 points available per race, the margin of victory could be narrowed to just a few points between the top contenders. Realistic challengers can include any driver from the top five in points, contingent on their performance trajectory."
+}

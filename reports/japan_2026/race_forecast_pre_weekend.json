@@ -1,0 +1,35 @@
+{
+  "stage": "pre_weekend",
+  "race_name": "2026 Japan Grand Prix",
+  "circuit_slug": "japan",
+  "year": 2026,
+  "timestamp": "2026-03-16T16:06:02.791916",
+  "predicted_winner": {
+    "driver_code": "ALB",
+    "constructor": "Williams",
+    "win_probability": 0.04761904761904761,
+    "predicted_position": 10.0
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "ALB",
+      "constructor": "Williams",
+      "probability": 0.04761904761904761
+    },
+    {
+      "position": 2,
+      "driver_code": "ALO",
+      "constructor": "Aston Martin",
+      "probability": 0.04761904761904761
+    },
+    {
+      "position": 3,
+      "driver_code": "ANT",
+      "constructor": "Mercedes",
+      "probability": 0.04761904761904761
+    }
+  ],
+  "key_insight": "ALB predicted winner at 5% based on historical circuit performance.",
+  "narrative": ""
+}
