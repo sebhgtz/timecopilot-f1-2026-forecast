@@ -444,6 +444,70 @@ def add_current_race_covariates(
                 "points": 0.0,
             })
 
+    # --- Catch-all: active drivers with no circuit history at this track at all ---
+    # Handles partial-career drivers like COL (Colapinto, joined mid-2024) who have
+    # career data at other circuits but have never raced at this specific track.
+    # These drivers fall through both ROOKIES_2026 (need zero total history) and
+    # SECOND_YEAR_2026 (need history at this circuit). We use their overall career
+    # avg finish position as the base, then generate 3 synthetic rows so TimeCopilot
+    # has enough data points.
+    already_covered = (
+        set(new_driver_entries or {})          # true rookies (0 total history)
+        | set(_SECOND_YEAR_DRIVERS.keys())     # second-year drivers (handled above)
+        | historical_at_circuit                # drivers with real circuit history
+    )
+    if active_drivers is not None:
+        for driver_code in sorted(active_drivers - already_covered):
+            # Use full circuit_df (all circuits) for career avg — existing is filtered to
+            # this circuit only, so drivers with no history here would have empty rows.
+            career_history = circuit_df[circuit_df["driver_code"] == driver_code]
+            if career_history.empty:
+                continue  # truly no data anywhere — should have been in new_driver_entries
+
+            # Use overall career avg finish across all circuits as est_pos
+            overall_avg = career_history["y"].mean()
+            est_pos = float(overall_avg) if not np.isnan(overall_avg) else 12.0
+
+            if current_team_map and driver_code in current_team_map:
+                constructor = current_team_map[driver_code]
+            else:
+                constructor = career_history["constructor"].iloc[-1]
+
+            if car_pace_rank_map and constructor in car_pace_rank_map:
+                driver_car_rank = float(car_pace_rank_map[constructor])
+            else:
+                driver_car_rank = float(car_pace_rank) if car_pace_rank is not None else 5.0
+
+            driver_name = career_history["driver_name"].iloc[-1]
+
+            for back in (3, 2, 1):
+                hist_date = pd.Timestamp(f"{year - back}-06-15")
+                new_rows.append({
+                    "unique_id": f"{driver_code}_{circuit_slug}",
+                    "ds": hist_date,
+                    "y": est_pos + float(back - 2) * 0.5,
+                    "driver_code": driver_code,
+                    "driver_name": driver_name,
+                    "constructor": constructor,
+                    "circuit_slug": circuit_slug,
+                    "race_name": f"{year - back} {circuit_slug.replace('_', ' ').title()} Grand Prix",
+                    "grid_position": np.nan,
+                    "weather_enc": float(_WEATHER_DRY),
+                    "strategy_stops": 2.0,
+                    "car_pace_rank": driver_car_rank,
+                    "year": year - back,
+                    "status": "synthetic_no_circuit_history",
+                    "points": 0.0,
+                })
+
+            # Placeholder row for the forecast year
+            new_rows.append(_placeholder_row(
+                driver_code, circuit_slug, year, race_date,
+                constructor, driver_name,
+                grid_position, weather_enc, fp1_pace_rank, fp2_pace_rank,
+                fp2_long_run_rank, driver_car_rank,
+            ))
+
     if not new_rows:
         return circuit_df
 
