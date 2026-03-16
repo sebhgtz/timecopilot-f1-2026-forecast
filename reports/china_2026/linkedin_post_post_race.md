@@ -3,7 +3,7 @@
 
 ---
 
-> 📊 **Pre-Race Pick (After Qualifying):** RUS · 20% win prob · 🏁 **Winner: ANT** · ❌ Wrong · finished P2
+> 📊 **Pre-Race Pick (After Qualifying):** ANT · 26% win prob · 🏁 **Winner: ANT** · ✅ Correct · finished P1
 
 ### 🏁 Race Result — Chinese Grand Prix
 
@@ -34,7 +34,7 @@
 | DNS | BOR | Audi | 0 |
 | DNS | ALB | Williams | 0 |
 
-🔮 **Model predicted (After Qualifying): RUS** (20% win prob) → ❌ Wrong — RUS finished P2
+🔮 **Model predicted (After Qualifying): ANT** (26% win prob) → ✅ Correct! *(finished P1)*
 
 ### 🏆 Championship Prediction
 
@@ -56,7 +56,7 @@
 
 ### 🤖 TimeCopilot Analysis — Championship
 
-> Considering the current standings and the expected performance trajectories, driver ANT is positioned as a strong candidate for winning the 2026 F1 World Championship, with a realistic marginal possible win due to the significant point gaps from currently trailing competitors like BOR and HAD. However, consistent performances from established drivers like HAM and LEC could pose potential competition as well.
+> Considering the existing performances and forecasts, ANT potentially presents as a strong candidate for the championship win, especially if it consolidates its lead while keeping the margin manageable. However, close attention should be paid to recent trends from drivers like BOR and HAD, who could rise through the ranks, especially with increasing consistency. Given the competitive nature, a win for ANT could be by a margin of 10-20 points above the nearest challenger.
 
 
 ---
