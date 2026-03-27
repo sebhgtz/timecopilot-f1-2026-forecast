@@ -1,0 +1,35 @@
+{
+  "stage": "fp2",
+  "race_name": "2026 Japan Grand Prix",
+  "circuit_slug": "japan",
+  "year": 2026,
+  "timestamp": "2026-03-27T09:53:52.670728",
+  "predicted_winner": {
+    "driver_code": "PIA",
+    "constructor": "McLaren",
+    "win_probability": 0.06736849640820379,
+    "predicted_position": 8.2
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "PIA",
+      "constructor": "McLaren",
+      "probability": 0.06736849640820379
+    },
+    {
+      "position": 2,
+      "driver_code": "ANT",
+      "constructor": "Mercedes",
+      "probability": 0.06419866352731891
+    },
+    {
+      "position": 3,
+      "driver_code": "RUS",
+      "constructor": "Mercedes",
+      "probability": 0.06124739992546813
+    }
+  ],
+  "key_insight": "PIA predicted winner at 7% based on historical circuit performance.",
+  "narrative": ""
+}
