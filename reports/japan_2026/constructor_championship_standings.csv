@@ -1,0 +1,11 @@
+unique_id,current_points,championship_position,current_position,predicted_points,predicted_position
+constructor_mclaren,46.0,3,3,282.35956955480106,1
+constructor_red_bull_racing,16.0,6,6,263.1826343367169,2
+constructor_mercedes,135.0,1,1,262.44951206844206,3
+constructor_ferrari,90.0,2,2,231.69455497868017,4
+constructor_aston_martin,0.0,11,10,62.099904425564205,5
+constructor_williams,2.0,9,9,55.6665663932031,6
+constructor_racing_bulls,14.0,7,7,31.579090010619176,7
+constructor_haas,18.0,4,4,20.191967720616503,8
+constructor_alpine,16.0,5,5,19.735018285524,9
+constructor_audi,2.0,8,8,12.889988296186843,10
