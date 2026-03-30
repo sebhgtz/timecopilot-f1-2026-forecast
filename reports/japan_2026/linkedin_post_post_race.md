@@ -1,5 +1,5 @@
 ## 🏎️ Japanese Grand Prix — Post-Race Championship Update
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 29, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | March 30, 2026*
 
 ---
 
@@ -38,21 +38,25 @@
 
 ### 🏆 Championship Prediction
 
-**Predicted 2026 Driver Champion:** ANT (72 pts predicted final)
+**Predicted 2026 Driver Champion:** ANT (99 pts predicted final)
 
 **Predicted Final 2026 Driver Standings (Top 5):**
 
 | Pos | Driver | Current Pts | Predicted Final |
 |-----|--------|-------------|-----------------|
-| 1 | ANT | 72 | **72** |
-| 2 | RUS | 63 | **63** |
-| 3 | LEC | 49 | **49** |
-| 4 | HAM | 41 | **41** |
-| 5 | NOR | 25 | **25** |
+| 1 | ANT | 72 | **99** |
+| 2 | RUS | 63 | **76** |
+| 3 | PIA | 21 | **63** |
+| 4 | LEC | 49 | **56** |
+| 5 | NOR | 25 | **40** |
 
-**Predicted 2026 Constructor Champion:** McLaren (282 pts)
+**Predicted 2026 Constructor Champion:** McLaren (398 pts)
 
 *21 races remaining in the season.*
+
+### 🤖 TimeCopilot Analysis — Championship
+
+> ANT appears to be the most likely candidate for winning the 2026 F1 World Championship given current form and the points forecast along with potential to occupy a favorable position amidst the competition. Further analysis advises that scenarios involving drivers like PIA could act as realistic challengers in chase positions but require considerable performance sustenance in remaining race segments.
 
 
 ---
