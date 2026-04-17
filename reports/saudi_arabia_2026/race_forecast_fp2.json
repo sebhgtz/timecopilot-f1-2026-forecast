@@ -1,0 +1,35 @@
+{
+  "stage": "fp2",
+  "race_name": "2026 Saudi Arabia Grand Prix",
+  "circuit_slug": "saudi_arabia",
+  "year": 2026,
+  "timestamp": "2026-04-17T10:24:15.660362",
+  "predicted_winner": {
+    "driver_code": "VER",
+    "constructor": "Red Bull Racing",
+    "win_probability": 0.3681544239064104,
+    "predicted_position": 2.4800000000000004
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "VER",
+      "constructor": "Red Bull Racing",
+      "probability": 0.3681544239064104
+    },
+    {
+      "position": 2,
+      "driver_code": "LEC",
+      "constructor": "Ferrari",
+      "probability": 0.11082979133027189
+    },
+    {
+      "position": 3,
+      "driver_code": "PIA",
+      "constructor": "McLaren",
+      "probability": 0.07395366787322499
+    }
+  ],
+  "key_insight": "VER predicted winner at 37% based on historical circuit performance.",
+  "narrative": ""
+}
