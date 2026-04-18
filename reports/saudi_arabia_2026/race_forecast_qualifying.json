@@ -1,0 +1,35 @@
+{
+  "stage": "qualifying",
+  "race_name": "2026 Saudi Arabia Grand Prix",
+  "circuit_slug": "saudi_arabia",
+  "year": 2026,
+  "timestamp": "2026-04-18T09:44:46.802113",
+  "predicted_winner": {
+    "driver_code": "RUS",
+    "constructor": "Mercedes",
+    "win_probability": 0.2036674704030845,
+    "predicted_position": 3.38
+  },
+  "podium": [
+    {
+      "position": 1,
+      "driver_code": "RUS",
+      "constructor": "Mercedes",
+      "probability": 0.2036674704030845
+    },
+    {
+      "position": 2,
+      "driver_code": "ANT",
+      "constructor": "Mercedes",
+      "probability": 0.18205515370907122
+    },
+    {
+      "position": 3,
+      "driver_code": "LEC",
+      "constructor": "Ferrari",
+      "probability": 0.13575454788168906
+    }
+  ],
+  "key_insight": "RUS starts from pole \u2014 strong favourite at 20% win probability.",
+  "narrative": "Based on the historical data, the most likely finishing positions for the 2026 race are:\n- RUS: Likely to maintain his strong performance, predicted to finish in a top position.\n- ANT: As a second-year driver with good pacing in practice, may finish well, potentially on the podium.\n- HAD: Also in a strong position based on practice performance, standing as a good podium candidate. \n\nConsidering all factors, RUS could be expected to win given his historical consistency and current form."
+}
