@@ -53,9 +53,76 @@ a { color: #4a9eff; }
 <h2 style="font-size:1.6rem; border:none; color:#fff;">
   🏁 Saudi Arabia Grand Prix <span style="color:#888;font-size:1rem;">2026</span>
 </h2>
-<div class="stage-tabs"><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('qualifying', this)" class="stage-tab active" style="cursor:pointer;">After Qualifying</a></div>
+<div style="background:#3a1a1a; border:1px solid #6a2a2a; border-radius:8px;
+  padding:12px 18px; margin-bottom:16px; font-size:0.9rem;">
+  ❌ <strong>Result (After Qualifying):</strong>
+  Predicted <strong>RUS</strong> · Actual winner <strong>?</strong> · Wrong
+</div><div class="stage-tabs"><a onclick="showTab('fp2', this)" class="stage-tab" style="cursor:pointer;">After FP2</a><a onclick="showTab('qualifying', this)" class="stage-tab" style="cursor:pointer;">After Qualifying</a><a onclick="showTab('post_race', this)" class="stage-tab active" style="cursor:pointer;">Post-Race</a></div>
 
-<section id="qualifying" style="display:block;">
+<section id="post_race" style="display:block;">
+  <h2>Post-Race</h2>
+  
+  <div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
+  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+    📊 Race Prediction vs Result
+  </div>
+  <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+    <thead>
+      <tr>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">🔮 After Qualifying</th>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">Driver</th>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e;">🏁 Actual</th>
+        <th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; border-left:1px solid #2a2a4e; text-align:center;">Δ</th>
+      </tr>
+    </thead>
+    <tbody><tr><td style="padding:4px 10px; vertical-align:middle;">P1<span style="color:#888; font-size:0.8rem;"> (20%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>RUS</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P2<span style="color:#888; font-size:0.8rem;"> (18%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>ANT</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P3<span style="color:#888; font-size:0.8rem;"> (14%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>LEC</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P4<span style="color:#888; font-size:0.8rem;"> (7%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>PIA</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P5<span style="color:#888; font-size:0.8rem;"> (7%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>HAD</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P6<span style="color:#888; font-size:0.8rem;"> (6%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>SAI</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P7<span style="color:#888; font-size:0.8rem;"> (5%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>HAM</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P8<span style="color:#888; font-size:0.8rem;"> (5%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>NOR</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P9<span style="color:#888; font-size:0.8rem;"> (2%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>LIN</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P10<span style="color:#888; font-size:0.8rem;"> (2%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>BEA</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P11<span style="color:#888; font-size:0.8rem;"> (2%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>HUL</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P12<span style="color:#888; font-size:0.8rem;"> (2%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>OCO</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P13<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>BOR</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P14<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>GAS</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P15<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>VER</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P16<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>PER</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P17<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>ALB</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P18<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>ALO</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P19<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>COL</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P20<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>STR</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+<tr><td style="padding:4px 10px; vertical-align:middle;">P21<span style="color:#888; font-size:0.8rem;"> (1%)</span></td><td style="padding:4px 10px; vertical-align:middle;"><strong>BOT</strong></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e;"><span style="color:#555;">—</span></td><td style="padding:4px 10px; vertical-align:middle; border-left:1px solid #2a2a4e; text-align:center; white-space:nowrap;"></td></tr>
+</tbody>
+  </table>
+</div>
+  <div style="background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; padding:16px 20px; margin:0 0 16px;">
+  <div style="font-size:0.8rem; font-weight:600; color:#888; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+    🏗️ Constructor Championship Prediction
+  </div>
+  <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+    <thead><tr><th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">Pos</th><th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e;">Constructor</th><th style="padding:5px 10px; text-align:left; color:#aaa; font-weight:500; border-bottom:1px solid #2a2a4e; text-align:right;">Predicted Final</th></tr></thead>
+    <tbody><tr><td style="padding:5px 10px; vertical-align:top;">1</td><td style="padding:5px 10px; vertical-align:top;"><strong>McLaren</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">833</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">2</td><td style="padding:5px 10px; vertical-align:top;"><strong>Red Bull Racing</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">472</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">3</td><td style="padding:5px 10px; vertical-align:top;"><strong>Mercedes</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">469</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">4</td><td style="padding:5px 10px; vertical-align:top;"><strong>Ferrari</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">398</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">5</td><td style="padding:5px 10px; vertical-align:top;"><strong>Cadillac</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">152</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">6</td><td style="padding:5px 10px; vertical-align:top;"><strong>Williams</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">137</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">7</td><td style="padding:5px 10px; vertical-align:top;"><strong>Aston Martin</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">89</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">8</td><td style="padding:5px 10px; vertical-align:top;"><strong>Haas</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">79</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">9</td><td style="padding:5px 10px; vertical-align:top;"><strong>Audi</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">70</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">10</td><td style="padding:5px 10px; vertical-align:top;"><strong>Racing Bulls</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">38</td></tr>
+<tr><td style="padding:5px 10px; vertical-align:top;">11</td><td style="padding:5px 10px; vertical-align:top;"><strong>Alpine</strong></td><td style="padding:5px 10px; vertical-align:top; text-align:right;">22</td></tr>
+</tbody>
+  </table>
+</div>
+  <div class="chart-row"><img src="charts/championship_standings_post_race.png" alt="championship_standings_post_race" loading="lazy"></div>
+</section>
+
+<section id="qualifying" style="display:none;">
   <h2>After Qualifying</h2>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;
   background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px;
@@ -118,7 +185,7 @@ function showTab(id, el) {
 <footer>
   Generated by <a href="https://timecopilot.dev/">TimeCopilot</a> ·
   Data sources: FastF1, OpenF1, Jolpica-F1 ·
-  Updated 2026-04-18 09:44 UTC
+  Updated 2026-04-19 09:45 UTC
 </footer>
 </body>
 </html>
