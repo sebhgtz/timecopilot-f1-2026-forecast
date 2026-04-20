@@ -1,5 +1,5 @@
 ## 🏎️ Saudi Arabian Grand Prix — Post-Race Championship Update
-*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | April 19, 2026*
+*Powered by [TimeCopilot](https://timecopilot.dev/) — AI time series forecasting | April 20, 2026*
 
 ---
 
@@ -19,13 +19,9 @@
 | 4 | RUS | **319** |
 | 5 | LEC | **242** |
 
-**Predicted 2026 Constructor Champion:** Alpine (0 pts)
+**Predicted 2026 Constructor Champion:** Red Bull Racing (407 pts)
 
 *19 races remaining in the season.*
-
-### 🤖 TimeCopilot Analysis — Championship
-
-> With current points being void by Formula 1 regulations, and racing consistency heavily influencing outcomes as observed from anomalies, ANT has the potential to emerge as a prominent challenger if he can capitalize on strong performances. Given the configuration of points which prioritize consistent placements (with maximum scoring potential), the lead competition will likely boil down to drivers with ahistory of podium finishes like HAM, NOR, and HUL, while rookies such as LIN could dynamically challenge by exceeding expectations. The margin of victory remains contingent on each driver's ada...
 
 
 ---
